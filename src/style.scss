@@ -1,3 +1,33 @@
-.app {
-  color: red;
+@mixin flex($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-content: $align;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 2rem;
+}
+
+.btn {
+  font-size: 2rem;
+}
+
+main {
+  height: 100vh;
+  @include flex;
+  column-gap: 10rem;
+
+  aside {
+    @include flex;
+  }
+
+  .game {
+    @include flex(column);
+    row-gap: 3rem;
+  }
 }

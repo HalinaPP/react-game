@@ -5,7 +5,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 import { Configuration } from 'webpack';
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer';
-const ESLintPlugin = require('eslint-webpack-plugin');
+import ESLintPlugin from 'eslint-webpack-plugin';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import Dotenv from 'dotenv-webpack';
 
@@ -33,6 +33,7 @@ const formStylesRule = (useModules = false) => ({
         }),
       },
     },
+
     'sass-loader',
   ],
 });
@@ -94,6 +95,7 @@ const config: Configuration = {
     extensions: ['.js', '.json', '.mjs', '.jsx', '.d.ts', '.ts', '.tsx'],
     alias: {
       '@': resolve(__dirname, 'src'),
+      '@components': resolve(__dirname, 'src/components'),
     },
   },
   devServer: {

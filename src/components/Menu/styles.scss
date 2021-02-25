@@ -1,0 +1,30 @@
+.modal {
+  &-dialog {
+    width: 40rem;
+    max-width: 80%;
+  }
+
+  &-content {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: center;
+  }
+}
+.menu {
+  width: 100%;
+  max-width: 20rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  row-gap: 2rem;
+
+  button {
+    font-size: 2.2rem;
+    width: 20rem;
+    height: 5rem;
+  }
+}
