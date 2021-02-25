@@ -1,18 +1,11 @@
 import React, { FC, useState, useEffect } from 'react';
 import './styles.scss';
-import { MENU } from '@/constants/text';
-import { ButtonProps } from '@components/Button/Button.model';
 import FieldItem from '@components/FieldItem';
-import { useRowState } from 'react-table';
+import {createSudokuMatrix} from '@/utils/sudokuGenerator';
 
 const Field: FC = () => {
-  const size = 9;
-
-  const createSudokuMatrix = () => {
-    const row = new Array(size).fill('');
-    console.log('r=', row);
-    return row.map(() => new Array(size).fill(1));
-  };
+  const size = 3;
+  const maxElement = size * size;
 
   const [sudokuMatrix, setSudokuMatrix] = useState(createSudokuMatrix());
 
@@ -28,7 +21,7 @@ const Field: FC = () => {
       return (
         <div className="row" key={i}>
           {row.map((curr, j) => {
-            return <FieldItem key={`${i}${j}`} initValue={curr} />;
+            return <FieldItem key={`${i}${j}`} initValue={curr.toString()} />;
           })}
         </div>
       );
