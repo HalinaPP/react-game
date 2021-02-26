@@ -2,13 +2,16 @@ import React, { FC, useState, useEffect } from 'react';
 import './styles.scss';
 import { FieldItemProps } from '@components/FieldItem/FieldItem.model';
 
-const FieldItem: FC<FieldItemProps> = ({ initValue }) => {
+const FieldItem: FC<FieldItemProps> = ({ initValue,isEditable, bgClass='' }) => {
   const [value, setValue] = useState(initValue || '');
+  const [itemClassName, setItemClassName] = useState(`col ${bgClass}`);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    
+  }, []);
 
   return (
-    <div className="col" contentEditable>
+    <div className={itemClassName} contentEditable={isEditable}>
       {value}
     </div>
   );
