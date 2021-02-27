@@ -2,15 +2,14 @@ import React, { FC, useState, useEffect, useCallback } from 'react';
 import './styles.scss';
 import FieldItem from '@components/FieldItem';
 import { createSudokuMatrix, getBgColorClass } from '@/utils/sudokuGenerator';
-import {TYPE_LEVEL} from '@/constants/constants';
+import {FieldProps} from './Field.model';
 
-const Field: FC = () => {
+const Field: FC<FieldProps> = ({fieldBlockColorOn, difficultLevel}) => {
   const size = 3;
-  const currTypeLevel = 'middle';
 
-  const [sudokuMatrix, setSudokuMatrix] = useState(createSudokuMatrix(size,TYPE_LEVEL[currTypeLevel]));
-  const [isMonoColor, setIsMonoColor] = useState(false);
-
+  const [sudokuMatrix, setSudokuMatrix] = useState(
+    createSudokuMatrix(size, difficultLevel)
+  );
 
   const newGame = () => {
     console.log('new game');
@@ -25,20 +24,20 @@ const Field: FC = () => {
       return (
         <div className="row" key={i}>
           {row.map((curr, j) => {
-            let bgClass = isMonoColor ? '' : getBgColorClass(i, j, size);
+            let bgClass = fieldBlockColorOn ? getBgColorClass(i, j, size) : '';
             let isEditable = true;
             let cellValue;
-            if ((i + 1) % size === 0 && (i + 1) !== size * size) {
+            if ((i + 1) % size === 0 && i + 1 !== size * size) {
               bgClass += ' block_bottom-border';
             }
-            if ((j + 1) % size === 0 && (j + 1) !== size * size) {
+            if ((j + 1) % size === 0 && j + 1 !== size * size) {
               bgClass += ' block_right-border';
             }
-            if(curr){
+            if (curr) {
               isEditable = false;
               cellValue = curr.toString();
             }
-           
+
             return (
               <FieldItem
                 key={`${i}${j}`}

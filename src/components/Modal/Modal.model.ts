@@ -1,9 +1,14 @@
 import { ButtonProps } from '@components/Button/Button.model';
 
 export interface ModalProps {
+  isEmpty: boolean;
   header: string;
-  body?: string;
+  body?: any;
   buttons?: ButtonProps[];
-
-  // setShowModaViewEvent: (value: boolean) => void;
+  onSetShowModalSetting: (
+    isEmpty: boolean,
+    header: string,
+    body: JSX.Element,
+    buttons: ButtonProps[]
+  ) => void;
 }

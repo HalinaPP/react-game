@@ -4,8 +4,13 @@ import { MENU } from '@/constants/text';
 import { ButtonProps } from '@components/Button/Button.model';
 import Button from '@components/Button';
 import { useRowState } from 'react-table';
+import Modal, { showModal } from '@components/Modal';
+import { SettingsContainer } from '@/containers/Settings.container';
+import Help from '@components/Help';
+import { HELP_INFO } from '@/constants/text';
+import { MenuProps } from './Menu.model';
 
-const Menu: FC = () => {
+const Menu: FC<MenuProps> = ({ onSetShowModalSetting }) => {
   //const [buttons, setButtons] = useState([]);
 
   const newGame = () => {
@@ -14,14 +19,20 @@ const Menu: FC = () => {
 
   const settings = () => {
     console.log('settings');
+    onSetShowModalSetting(false, MENU.buttons.settings,<SettingsContainer />, []);
+    showModal();
   };
 
   const showHelp = () => {
     console.log('showHelp');
+    onSetShowModalSetting(false, MENU.buttons.help, <Help />, []);
+    showModal();
   };
 
   const showScore = () => {
     console.log('showScore');
+    onSetShowModalSetting(false, MENU.buttons.score,<React.Fragment></React.Fragment>, []);
+    showModal();
   };
 
   useEffect(() => {}, []);

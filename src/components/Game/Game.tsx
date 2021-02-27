@@ -3,7 +3,7 @@ import './styles.scss';
 import { GAME_INFO } from '@/constants/text';
 import Timer from '@components/Timer';
 import Button from '@components/Button';
-import Field from '@components/Field';
+import { FieldContainer } from '@/containers/Field.container';
 
 const Game: FC = () => {
   const [moves, setMoves] = useState(0);
@@ -24,7 +24,7 @@ const Game: FC = () => {
         <Button name={GAME_INFO.undo} handleClick={() => {}} />
         <Button name={GAME_INFO.clear} handleClick={() => {}} />
       </div>
-      <Field />
+      <FieldContainer />
     </React.Fragment>
   );
 };

@@ -93,21 +93,21 @@ const changeColsBlockMatrix = (matrix: number[][], size: number) => {
   return reverseMatrix(changeRows, size);
 };
 
-const hideNumbers = (matrix: number[][], size: number, difficultLevel:number) => {
+const hideNumbers = (matrix: number[][], size: number, difficultLevel: number) => {
   const maxElement = getMaxElement(size);
 
   const viewMatrixElement = new Array(maxElement).fill(0).map(() => new Array(maxElement).fill(0));
-  const cutMatrix = matrix.map((row) => [...row]);
+  const cutMatrix = matrix.map(row => [...row]);
 
   console.log('vi=', viewMatrixElement);
 
   let iterator = 0;
   const cellsNumber = size ** 4;
   let difficult = cellsNumber;
- 
-  const difficultLevelCount = Math.trunc(cellsNumber * difficultLevel/100)
-  
-  while (iterator < cellsNumber && difficult>difficultLevelCount) {
+
+  const difficultLevelCount = Math.trunc((cellsNumber * difficultLevel) / 100);
+
+  while (iterator < cellsNumber && difficult > difficultLevelCount) {
     const row = Math.trunc(Math.random() * maxElement);
     const col = Math.trunc(Math.random() * maxElement);
 
@@ -135,13 +135,12 @@ const hideNumbers = (matrix: number[][], size: number, difficultLevel:number) =>
         difficult += 1;
       }
     }
-   
   }
-  console.log('ite='+iterator+' s'+difficult);
+  console.log('ite=' + iterator + ' s' + difficult);
   return cutMatrix;
 };
 
-export const createSudokuMatrix = (size: number, difficultLevel:number) => {
+export const createSudokuMatrix = (size: number, difficultLevel: number) => {
   const changeMatrixFunc = [
     reverseMatrix,
     changeRowsMatrix,
@@ -155,6 +154,6 @@ export const createSudokuMatrix = (size: number, difficultLevel:number) => {
     let funcNum = Math.trunc(Math.random() * changeMatrixFunc.length);
     matrix = changeMatrixFunc[funcNum](matrix, size);
   }
-  matrix = hideNumbers(matrix, size,difficultLevel);
+  matrix = hideNumbers(matrix, size, difficultLevel);
   return matrix;
 };
