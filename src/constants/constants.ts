@@ -14,6 +14,6 @@ export const HOT_KEYS = {
 };
 
 export const FOOTER_COPYRIGHT = {
-    developer: `<span><a href='https://github.com/HalinaPP'>@halinapp</a> </span><span>2021</span>`,
-    rsLogo:`<a href='https://rs.school/js/'><img src="${imagesPath}/rs_school_js.svg" alt="RS SCHOOL"></a>`
-}
+  developer: `<span><a href='https://github.com/HalinaPP'>@halinapp</a> </span><span>2021</span>`,
+  rsLogo: `<a href='https://rs.school/js/'><img src="${imagesPath}/rs_school_js.svg" alt="RS SCHOOL"></a>`,
+};

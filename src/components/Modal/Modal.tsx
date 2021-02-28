@@ -2,7 +2,7 @@ import './styles.scss';
 import React, { FC, useCallback } from 'react';
 import { ModalProps } from './Modal.model';
 import { ButtonProps } from '@components/Button/Button.model';
-import Button from '@components/Button';
+import {ButtonContainer} from '@/containers/Button.container';
 import { BUTTON_OK } from '@/constants/text';
 
 export const showModal = () => {
@@ -25,12 +25,12 @@ const Modal: FC<ModalProps> = ({ isEmpty, header, body, buttons = [], onSetShowM
         (item: ButtonProps): JSX.Element => {
           console.log('item', item);
           return (
-            <Button key={item.name} id={item.id} name={item.name} handleClick={item.handleClick} />
+            <ButtonContainer key={item.name} id={item.id} name={item.name} handleClick={item.handleClick} />
           );
         }
       );
     }
-    return [<Button key={BUTTON_OK} id={BUTTON_OK} name={BUTTON_OK} handleClick={handleClose} />];
+    return [<ButtonContainer key={BUTTON_OK} id={BUTTON_OK} name={BUTTON_OK} handleClick={handleClose} />];
   }, []);
 
   return isEmpty ? (

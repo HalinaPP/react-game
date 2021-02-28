@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect, useCallback } from 'react';
 import './styles.scss';
 import { MENU } from '@/constants/text';
 import { ButtonProps } from '@components/Button/Button.model';
-import Button from '@components/Button';
+import {ButtonContainer} from '@/containers/Button.container';
 import { useRowState } from 'react-table';
 import Modal, { showModal } from '@components/Modal';
 import { SettingsContainer } from '@/containers/Settings.container';
@@ -71,7 +71,7 @@ const Menu: FC<MenuProps> = ({ onSetShowModalSetting }) => {
       (item: ButtonProps): JSX.Element => {
         console.log('item', item);
         return (
-          <Button key={item.name} id={item.id} name={item.name} handleClick={item.handleClick} />
+          <ButtonContainer key={item.name} id={item.id} name={item.name} handleClick={item.handleClick} />
         );
       }
     );

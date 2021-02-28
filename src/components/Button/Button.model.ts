@@ -3,5 +3,7 @@ export interface ButtonProps {
   name: string;
   btnClassName?: string;
   audioFileName?: string;
+  handleSoundOn:boolean;
+  handleSoundVolume:number;
   handleClick: () => void;
 }

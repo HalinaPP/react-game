@@ -32,7 +32,6 @@ export const clickBtn = (btnId: string): void => {
 };
 
 export const handleKeyPress = (event: KeyboardEvent) => {
-  console.log('k=', event.code);
   const hotKey = Object.entries(HOT_KEYS).find(item => item[1] === event.code);
   if (hotKey?.length) {
     clickBtn(hotKey[0]);

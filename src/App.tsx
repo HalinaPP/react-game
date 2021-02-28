@@ -30,7 +30,7 @@ export const App = () => {
             <MenuContainer />
           </aside>
         </main>
-        <Footer/>
+        <Footer />
         <ModalContainer />
       </React.Fragment>
     </Provider>

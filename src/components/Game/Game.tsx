@@ -2,7 +2,7 @@ import React, { FC, useState, useEffect } from 'react';
 import './styles.scss';
 import { GAME_INFO } from '@/constants/text';
 import Timer from '@components/Timer';
-import Button from '@components/Button';
+import {ButtonContainer} from '@/containers/Button.container';
 import { FieldContainer } from '@/containers/Field.container';
 import { SOUNDS } from '@/constants/sounds';
 import { playSound } from '@/utils/utils';
@@ -32,8 +32,11 @@ const Game: FC<GameProps> = ({ bgSoundOn, bgSoundVolume }) => {
   useEffect(() => {
     console.log('useAu');
     audioEl.volume = bgSoundVolume;
-
-    if (!bgSoundOn) {
+  
+    if (bgSoundOn) {
+      audioEl?.pause();
+      audioEl?.play();
+    } else {
       audioEl?.pause();
     }
   }, [bgSoundOn, bgSoundVolume]);
@@ -45,13 +48,13 @@ const Game: FC<GameProps> = ({ bgSoundOn, bgSoundVolume }) => {
         <div>
           {GAME_INFO.moves}: {moves}
         </div>
-        <Button
+        <ButtonContainer
           id={GAME_INFO.undo}
           name={GAME_INFO.undo}
           audioFileName={SOUNDS.undo}
           handleClick={() => {}}
         />
-        <Button
+        <ButtonContainer
           id={GAME_INFO.clear}
           name={GAME_INFO.clear}
           audioFileName={SOUNDS.clear}

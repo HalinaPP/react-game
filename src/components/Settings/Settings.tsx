@@ -38,6 +38,7 @@ const Settings: FC<SettingsProps> = ({
             <label htmlFor="bgSoundOnVolume">{SETTINGS_INFO.volume}</label>
             <input
               type="range"
+              value={bgSoundOn.volume * 100}
               className="custom-range"
               id="bgSoundOnVolume"
               onChange={event => {
@@ -66,6 +67,7 @@ const Settings: FC<SettingsProps> = ({
             <label htmlFor="handleSoundOnVolume">{SETTINGS_INFO.volume}</label>
             <input
               type="range"
+              value = {handleSoundOn.volume * 100}
               className="custom-range"
               id="handleSoundOnVolume"
               onChange={event => {
