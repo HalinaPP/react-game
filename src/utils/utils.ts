@@ -38,3 +38,7 @@ export const handleKeyPress = (event: KeyboardEvent) => {
     clickBtn(hotKey[0]);
   }
 };
+
+export const setInnerHtml = (text: string): { __html: string } => {
+  return { __html: text };
+};

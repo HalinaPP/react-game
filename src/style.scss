@@ -18,7 +18,7 @@ body {
 }
 
 main {
-  height: 100vh;
+  height: calc( 100vh - 8rem);
   @include flex;
   column-gap: 10rem;
 
@@ -29,5 +29,15 @@ main {
   .game {
     @include flex(column);
     row-gap: 3rem;
+  }
+}
+
+footer {
+  @include flex;
+  column-gap: 3rem;
+  margin:2rem;
+
+  img{
+    width: 10rem;
   }
 }

@@ -7,6 +7,7 @@ import { MenuContainer } from '@/containers/MenuContainer';
 import { GameContainer } from '@/containers/GameContainer';
 import { store } from './store';
 import { handleKeyPress } from '@/utils/utils';
+import Footer from '@components/Footer';
 
 export const App = () => {
   useEffect(() => {
@@ -29,6 +30,7 @@ export const App = () => {
             <MenuContainer />
           </aside>
         </main>
+        <Footer/>
         <ModalContainer />
       </React.Fragment>
     </Provider>
