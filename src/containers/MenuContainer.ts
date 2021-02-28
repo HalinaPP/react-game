@@ -3,23 +3,15 @@ import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { ButtonProps } from '@components/Button/Button.model';
 import Menu from '@components/Menu';
+import { StateModel } from '@/reducers/index';
 
-const mapStateToProps = () => {
-  return {};
-};
-
-/*export const setShowModalSetting = (header: string, body: JSX.Element, buttons: ButtonProps[]) => (
-  dispatch: Dispatch
-) => {
-  dispatch(setShowModalSettingA(header, body, buttons));
-};
-
-const mapDispatchToProps = (dispatch: any) => {
+const mapStateToProps = (state: StateModel) => {
   return {
-    setShowModalSettings: (header: string, body: JSX.Element, buttons: ButtonProps[]) =>
-      dispatch(setShowModalSetting(header, body, buttons)),
+    /* bgSoundOn: state.bgSoundOn.turnOn,
+    bgSoundVolume: state.bgSoundOn.volume,*/
   };
-};*/
+};
+
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     onSetShowModalSetting: (

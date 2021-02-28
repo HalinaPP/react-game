@@ -1,9 +1,8 @@
+import './styles.scss';
 import React, { FC, useCallback } from 'react';
 import { ModalProps } from './Modal.model';
 import { ButtonProps } from '@components/Button/Button.model';
 import Button from '@components/Button';
-import Menu from '@components/Menu';
-import './styles.scss';
 import { BUTTON_OK } from '@/constants/text';
 
 export const showModal = () => {
@@ -25,19 +24,22 @@ const Modal: FC<ModalProps> = ({ isEmpty, header, body, buttons = [], onSetShowM
       return buttons.map(
         (item: ButtonProps): JSX.Element => {
           console.log('item', item);
-          return <Button name={item.name} handleClick={item.handleClick} />;
+          return (
+            <Button key={item.name} id={item.id} name={item.name} handleClick={item.handleClick} />
+          );
         }
       );
     }
-    return [<Button name={BUTTON_OK} handleClick={handleClose} />];
+    return [<Button key={BUTTON_OK} id={BUTTON_OK} name={BUTTON_OK} handleClick={handleClose} />];
   }, []);
+
   return isEmpty ? (
     <div id="modalWindow" className="modal fade "></div>
   ) : (
     <div id="modalWindow" className="modal fade ">
       <div className="modal-dialog" role="document">
         <div className="modal-content">
-          <h2 className="card-header">{header}</h2>
+          <h2 className="card-header text-info">{header}</h2>
           {body && <div className="modal-body">{body}</div>}
           <div className="modal-footer">{buttonItems()}</div>
         </div>

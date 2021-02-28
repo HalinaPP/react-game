@@ -2,14 +2,12 @@ import React, { FC, useState, useEffect, useCallback } from 'react';
 import './styles.scss';
 import FieldItem from '@components/FieldItem';
 import { createSudokuMatrix, getBgColorClass } from '@/utils/sudokuGenerator';
-import {FieldProps} from './Field.model';
+import { FieldProps } from './Field.model';
 
-const Field: FC<FieldProps> = ({fieldBlockColorOn, difficultLevel}) => {
+const Field: FC<FieldProps> = ({ fieldBlockColorOn, difficultLevel }) => {
   const size = 3;
 
-  const [sudokuMatrix, setSudokuMatrix] = useState(
-    createSudokuMatrix(size, difficultLevel)
-  );
+  const [sudokuMatrix, setSudokuMatrix] = useState(createSudokuMatrix(size, difficultLevel));
 
   const newGame = () => {
     console.log('new game');

@@ -4,15 +4,39 @@ import { GAME_INFO } from '@/constants/text';
 import Timer from '@components/Timer';
 import Button from '@components/Button';
 import { FieldContainer } from '@/containers/Field.container';
+import { SOUNDS } from '@/constants/sounds';
+import { playSound } from '@/utils/utils';
+import { GameProps } from './Game.model';
 
-const Game: FC = () => {
+let i = 0;
+
+const Game: FC<GameProps> = ({ bgSoundOn, bgSoundVolume }) => {
   const [moves, setMoves] = useState(0);
-
+  const [audioEl, setAudioEl] = useState(new Audio());
   const newGame = () => {
     console.log('new game');
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    i++;
+    console.log('nnnn=', i);
+    audioEl?.pause();
+
+    setAudioEl(playSound(bgSoundOn, SOUNDS.bg, bgSoundVolume, true));
+    return function () {
+      console.log('end');
+      audioEl?.pause();
+    };
+  }, []);
+
+  useEffect(() => {
+    console.log('useAu');
+    audioEl.volume = bgSoundVolume;
+
+    if (!bgSoundOn) {
+      audioEl?.pause();
+    }
+  }, [bgSoundOn, bgSoundVolume]);
 
   return (
     <React.Fragment>
@@ -21,8 +45,18 @@ const Game: FC = () => {
         <div>
           {GAME_INFO.moves}: {moves}
         </div>
-        <Button name={GAME_INFO.undo} handleClick={() => {}} />
-        <Button name={GAME_INFO.clear} handleClick={() => {}} />
+        <Button
+          id={GAME_INFO.undo}
+          name={GAME_INFO.undo}
+          audioFileName={SOUNDS.undo}
+          handleClick={() => {}}
+        />
+        <Button
+          id={GAME_INFO.clear}
+          name={GAME_INFO.clear}
+          audioFileName={SOUNDS.clear}
+          handleClick={() => {}}
+        />
       </div>
       <FieldContainer />
     </React.Fragment>

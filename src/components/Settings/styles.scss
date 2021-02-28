@@ -16,8 +16,15 @@
   }
   .form-group {
     margin: 0rem 2rem;
+    .sound {
+      @include flex;
+      align-items: center;
+      column-gap: 2rem;
+    }
   }
-
+  fieldset.form-group {
+    margin: 2rem 0rem;
+  }
   .custom-control-label::before,
   .custom-control-label::after {
     width: 2rem;

@@ -3,8 +3,14 @@ import { ACTIONS } from '@/actions/constants';
 import { ButtonProps } from '@components/Button/Button.model';
 
 export interface StateModel {
-  bgSoundOn: boolean;
-  handleSoundOn: boolean;
+  bgSoundOn: {
+    turnOn: boolean;
+    volume: number;
+  };
+  handleSoundOn: {
+    turnOn: boolean;
+    volume: number;
+  };
   fieldBlockColorOn: boolean;
   difficultLevel: number;
   initialMatrix: number[][];
@@ -19,8 +25,14 @@ export interface StateModel {
 }
 
 const initialState: StateModel = {
-  bgSoundOn: true,
-  handleSoundOn: true,
+  bgSoundOn: {
+    turnOn: true,
+    volume: 1,
+  },
+  handleSoundOn: {
+    turnOn: true,
+    volume: 1,
+  },
   fieldBlockColorOn: true,
   difficultLevel: TYPE_LEVEL.easy,
   initialMatrix: [],
@@ -59,8 +71,17 @@ export const reducer = (state = initialState, action: any): StateModel => {
     case ACTIONS.soundMute:
       return {
         ...state,
-        bgSoundOn: action.payload.bgSoundOn,
-        handleSoundOn: action.payload.handleSoundOn,
+        bgSoundOn: { turnOn: action.payload.bgSoundOn, volume: state.bgSoundOn.volume },
+        handleSoundOn: { turnOn: action.payload.handleSoundOn, volume: state.handleSoundOn.volume },
+      };
+    case ACTIONS.updateSoundVolume:
+      return {
+        ...state,
+        bgSoundOn: { turnOn: state.bgSoundOn.turnOn, volume: action.payload.bgSoundVolume },
+        handleSoundOn: {
+          turnOn: state.handleSoundOn.turnOn,
+          volume: action.payload.handleSoundVolume,
+        },
       };
     case ACTIONS.updateFieldSettings:
       return {

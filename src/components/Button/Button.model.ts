@@ -1,6 +1,7 @@
 export interface ButtonProps {
+  id: string;
   name: string;
   btnClassName?: string;
-  value?: string;
+  audioFileName?: string;
   handleClick: () => void;
 }

@@ -15,3 +15,13 @@ export const setShowModalSetting = (
   type: ACTIONS.setShowModalSetting,
   payload: { isEmpty, header, body, buttons },
 });
+
+export const soundMute = (bgSoundOn: boolean, handleSoundOn: boolean) => ({
+  type: ACTIONS.soundMute,
+  payload: { bgSoundOn, handleSoundOn },
+});
+
+export const updateSoundVolume = (bgSoundVolume: number, handleSoundVolume: number) => ({
+  type: ACTIONS.updateSoundVolume,
+  payload: { bgSoundVolume: bgSoundVolume / 100, handleSoundVolume: handleSoundVolume / 100 },
+});
