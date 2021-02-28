@@ -86,7 +86,8 @@ export const reducer = (state = initialState, action: any): StateModel => {
     case ACTIONS.updateFieldSettings:
       return {
         ...state,
-        fieldBlockColorOn: action.payload,
+        fieldBlockColorOn: action.payload.colorOn,
+        difficultLevel: action.payload.level
       };
     case ACTIONS.setShowModalSetting:
       return {

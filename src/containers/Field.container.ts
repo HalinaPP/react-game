@@ -6,7 +6,7 @@ import Field from '@components/Field';
 const mapStateToProps = (state: StateModel) => {
   return {
     fieldBlockColorOn: state.fieldBlockColorOn,
-    difficultLevel: state.difficultLevel,
+    initialMatrix: state.initialMatrix,
   };
 };
 

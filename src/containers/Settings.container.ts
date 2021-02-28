@@ -1,8 +1,7 @@
-import { updateFieldSettingsA, updateSoundVolume, soundMute } from '@/actions/index';
+import { updateFieldSettings, updateSoundVolume, soundMute } from '@/actions/index';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { StateModel } from '@/reducers/index';
-
 import Settings from '@components/Settings';
 
 const mapStateToProps = (state: StateModel) => {
@@ -16,7 +15,8 @@ const mapStateToProps = (state: StateModel) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
-    updateFieldSettings: (value: boolean) => dispatch(updateFieldSettingsA(value)),
+    updateFieldSettings: (colorOn: boolean, level: number) =>
+      dispatch(updateFieldSettings(colorOn, level)),
     updateSoundVolume: (bgSoundVolume: number, handleSoundVolume: number) =>
       dispatch(updateSoundVolume(bgSoundVolume, handleSoundVolume)),
     soundMute: (bgSoundOn: boolean, handleSoundOn: boolean) =>

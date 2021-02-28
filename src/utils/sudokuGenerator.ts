@@ -1,8 +1,18 @@
 import { MATRIX_NUM_SHUFFLE } from '@/constants/constants';
 
-export const getBgColorClass = (row: number, col: number, size: number) => {
+export const getBgColorClass = (colorOn:boolean, row: number, col: number, size: number) => {
   const block = Math.trunc(col / size) + Math.trunc(row / size) * size + 1;
-  return `col_color-bg bg-${block}`;
+  
+  let bgClass = colorOn ? `col col_color-bg bg-${block}` : 'col';
+
+  if ((row + 1) % size === 0 && row + 1 !== size * size) {
+    bgClass += ' block_bottom-border';
+  }
+  if ((col + 1) % size === 0 && col + 1 !== size * size) {
+    bgClass += ' block_right-border';
+  }
+
+  return bgClass;
 };
 
 const getMaxElement = (size: number): number => {
@@ -99,7 +109,7 @@ const hideNumbers = (matrix: number[][], size: number, difficultLevel: number) =
   const viewMatrixElement = new Array(maxElement).fill(0).map(() => new Array(maxElement).fill(0));
   const cutMatrix = matrix.map(row => [...row]);
 
-  console.log('vi=', viewMatrixElement);
+  //console.log('vi=', viewMatrixElement);
 
   let iterator = 0;
   const cellsNumber = size ** 4;
@@ -155,5 +165,6 @@ export const createSudokuMatrix = (size: number, difficultLevel: number) => {
     matrix = changeMatrixFunc[funcNum](matrix, size);
   }
   matrix = hideNumbers(matrix, size, difficultLevel);
+  console.log('end generate matrix');
   return matrix;
 };

@@ -1,6 +1,6 @@
 export const MATRIX_NUM_SHUFFLE = 10;
-export const TYPE_LEVEL = { easy: 44, middle: 38, difficulr: 31 };
-
+export const TYPE_LEVEL = { easy: 44, middle: 38, difficult: 31 };
+export const size = 3;
 export const soundsPath = 'assets/sounds/';
 export const imagesPath = './assets/images';
 

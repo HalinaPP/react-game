@@ -3,17 +3,36 @@ import './styles.scss';
 import { TYPE_LEVEL } from '@/constants/constants';
 import { SETTINGS_INFO } from '@/constants/text';
 import { SettingsProps } from './Settings.model';
+import { playSound } from '@/utils/utils';
+import { SOUNDS } from '@/constants/sounds';
 
 const Settings: FC<SettingsProps> = ({
   bgSoundOn,
   handleSoundOn,
   fieldBlockColorOn,
   difficultLevel,
+  updateFieldSettings,
   updateSoundVolume,
   soundMute,
 }) => {
   const levels = Object.keys(TYPE_LEVEL);
-  useEffect(() => {}, []);
+  const [colorOn, setColorOn] = useState(fieldBlockColorOn);
+  const [currDifficultLevel, setCurrDifficultLevel] = useState(difficultLevel);
+
+  useEffect(() => {
+    
+    return function(){
+      console.log('sett del='+colorOn+' g='+currDifficultLevel);
+      
+    }
+  },  []);
+
+  useEffect(() => {
+      
+      console.log('sett ' +fieldBlockColorOn+' ыыыы='+colorOn+' ll='+difficultLevel+' g='+currDifficultLevel);
+      updateFieldSettings(colorOn,currDifficultLevel);
+   }, [colorOn,currDifficultLevel]);
+
 
   return (
     <div className="settings">
@@ -27,6 +46,7 @@ const Settings: FC<SettingsProps> = ({
               id="bgSoundOn"
               checked={bgSoundOn.turnOn}
               onChange={() => {
+                playSound(handleSoundOn.turnOn, SOUNDS.button,  handleSoundOn.volume);
                 soundMute(!bgSoundOn.turnOn, handleSoundOn.turnOn);
               }}
             />
@@ -56,6 +76,7 @@ const Settings: FC<SettingsProps> = ({
               id="handleSoundOn"
               checked={handleSoundOn.turnOn}
               onChange={() => {
+                playSound(handleSoundOn.turnOn, SOUNDS.button,  handleSoundOn.volume);
                 soundMute(bgSoundOn.turnOn, !handleSoundOn.turnOn);
               }}
             />
@@ -67,7 +88,7 @@ const Settings: FC<SettingsProps> = ({
             <label htmlFor="handleSoundOnVolume">{SETTINGS_INFO.volume}</label>
             <input
               type="range"
-              value = {handleSoundOn.volume * 100}
+              value={handleSoundOn.volume * 100}
               className="custom-range"
               id="handleSoundOnVolume"
               onChange={event => {
@@ -82,7 +103,11 @@ const Settings: FC<SettingsProps> = ({
             type="checkbox"
             className="custom-control-input"
             id="fieldBlockColorOn"
-            checked={fieldBlockColorOn}
+            checked={colorOn}
+            onChange={() => {
+              setColorOn(!colorOn);
+              playSound(handleSoundOn.turnOn, SOUNDS.button,  handleSoundOn.volume);
+            }}
           />
           <label className="custom-control-label" htmlFor="fieldBlockColorOn">
             {SETTINGS_INFO.fieldBlockColorOn}
@@ -100,7 +125,11 @@ const Settings: FC<SettingsProps> = ({
                     id={level}
                     name="difficultLevel"
                     className="custom-control-input"
-                    checked={difficultLevel === TYPE_LEVEL[level]}
+                    checked={currDifficultLevel === TYPE_LEVEL[level]}
+                    onChange={(event) => {
+                      setCurrDifficultLevel(TYPE_LEVEL[event.target.id]);
+                      playSound(handleSoundOn.turnOn, SOUNDS.button,  handleSoundOn.volume);
+                    }}
                   />
                   <label className="custom-control-label" htmlFor={level}>
                     {level}

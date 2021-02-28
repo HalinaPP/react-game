@@ -1,4 +1,5 @@
 export interface FieldProps {
   fieldBlockColorOn: boolean;
-  difficultLevel: number;
+  initialMatrix:number[][];
+  difficultLevel:number;
 }

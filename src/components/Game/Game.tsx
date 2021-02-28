@@ -2,24 +2,20 @@ import React, { FC, useState, useEffect } from 'react';
 import './styles.scss';
 import { GAME_INFO } from '@/constants/text';
 import Timer from '@components/Timer';
-import {ButtonContainer} from '@/containers/Button.container';
+import { ButtonContainer } from '@/containers/Button.container';
 import { FieldContainer } from '@/containers/Field.container';
 import { SOUNDS } from '@/constants/sounds';
 import { playSound } from '@/utils/utils';
 import { GameProps } from './Game.model';
+import { createSudokuMatrix } from '@/utils/sudokuGenerator';
+import { size } from '@/constants/constants';
 
-let i = 0;
-
-const Game: FC<GameProps> = ({ bgSoundOn, bgSoundVolume }) => {
+const Game: FC<GameProps> = ({ bgSoundOn, bgSoundVolume, difficultLevel, generateNewGame }) => {
   const [moves, setMoves] = useState(0);
   const [audioEl, setAudioEl] = useState(new Audio());
-  const newGame = () => {
-    console.log('new game');
-  };
-
+  //const [sudokuMatrix, setSudokuMatrix] = useState();
   useEffect(() => {
-    i++;
-    console.log('nnnn=', i);
+    console.log('nnnn=');
     audioEl?.pause();
 
     setAudioEl(playSound(bgSoundOn, SOUNDS.bg, bgSoundVolume, true));
@@ -30,9 +26,13 @@ const Game: FC<GameProps> = ({ bgSoundOn, bgSoundVolume }) => {
   }, []);
 
   useEffect(() => {
+    generateNewGame(createSudokuMatrix(size, difficultLevel));
+  }, [difficultLevel]);
+
+  useEffect(() => {
     console.log('useAu');
     audioEl.volume = bgSoundVolume;
-  
+
     if (bgSoundOn) {
       audioEl?.pause();
       audioEl?.play();
@@ -61,7 +61,7 @@ const Game: FC<GameProps> = ({ bgSoundOn, bgSoundVolume }) => {
           handleClick={() => {}}
         />
       </div>
-      <FieldContainer />
+      <FieldContainer difficultLevel={difficultLevel}/>
     </React.Fragment>
   );
 };
