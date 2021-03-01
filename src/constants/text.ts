@@ -15,7 +15,7 @@ export const GAME_INFO = {
   buttons: {
     clear: { name: 'Clear', id: 'clear' },
     undo: { name: 'Undo', id: 'undo' },
-  }
+  },
 };
 
 export const SETTINGS_INFO = {

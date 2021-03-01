@@ -53,7 +53,7 @@ const Field: FC<FieldProps> = ({
   }, [fieldBlockColorOn, initialMatrix]);
   useEffect(() => {
     console.log('clear matrix=');
-    setCells(getCells(initialMatrix, fieldBlockColorOn, matrixHistory.length));
+    setCells(getCells(currMatrix, fieldBlockColorOn, matrixHistory.length));
     /*if(!matrixHistory || (matrixHistory.length===1 && matrixHistory[0][0][0]===-2)){
       console.log('clear matrix22222=');
       

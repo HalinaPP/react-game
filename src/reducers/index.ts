@@ -95,10 +95,17 @@ export const reducer = (state = initialState, action: any): StateModel => {
 
     case ACTIONS.undo:
       const historyLength = state.matrixHistory.length;
-      newHistory = state.matrixHistory.slice(0, historyLength - 1);
-      newCurrMatrix = state.matrixHistory[historyLength - 2].map(row => [...row]);
+      newHistory = state.matrixHistory;
+      newCurrMatrix = state.currMatrix;
+
+      if (historyLength) {
+        newHistory = state.matrixHistory.slice(0, historyLength - 1);
+        newCurrMatrix = state.matrixHistory[historyLength - 1].map(row => [...row]);
+      }
+      
       localStorage.setItem('matrixHistory', JSON.stringify(newHistory));
       localStorage.setItem('currMatrix', JSON.stringify(newCurrMatrix));
+      
 
       return {
         ...state,

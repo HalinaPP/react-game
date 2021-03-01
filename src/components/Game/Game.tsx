@@ -16,6 +16,7 @@ const Game: FC<GameProps> = ({
   difficultLevel,
   generateNewGame,
   clearField,
+  undoMove
 }) => {
   const [moves, setMoves] = useState(0);
   const [audioEl, setAudioEl] = useState(new Audio());
@@ -56,15 +57,13 @@ const Game: FC<GameProps> = ({
           id={GAME_INFO.buttons.undo.id}
           name={GAME_INFO.buttons.undo.name}
           audioFileName={SOUNDS.undo}
-          handleClick={() => {}}
+          handleClick={undoMove}
         />
         <ButtonContainer
           id={GAME_INFO.buttons.clear.id}
           name={GAME_INFO.buttons.clear.name}
           audioFileName={SOUNDS.clear}
-          handleClick={() => {
-            clearField();
-          }}
+          handleClick={clearField}
         />
       </div>
       <FieldContainer difficultLevel={difficultLevel} />

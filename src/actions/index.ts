@@ -35,6 +35,10 @@ export const clearField = () => ({
   type: ACTIONS.clear,
 });
 
+export const undoMove = () => ({
+  type: ACTIONS.undo,
+});
+
 export const moveDone = (row: number, col: number, value: number) => ({
   type: ACTIONS.moveDone,
   payload: [col, row, value],

@@ -22,9 +22,9 @@ const FieldItem: FC<FieldItemProps> = ({
     // console.log('first field item');
     //
     console.log('fff=', isClear);
-    if (isClear === 0) {
-      setFieldValue('');
-    }
+    //if (isClear === 0) {
+      setFieldValue(initValue);
+   // }
     // const item = document.getElementById(inputRef.current?.id!);
     // item.value = initValue;
     //  console.log(inputRef.current?.id);

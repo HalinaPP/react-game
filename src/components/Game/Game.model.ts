@@ -4,4 +4,5 @@ export interface GameProps {
   difficultLevel: number;
   generateNewGame: (matrix: number[][]) => void;
   clearField: () => void;
+  undoMove: () => void;
 }
