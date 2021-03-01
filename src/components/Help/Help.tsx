@@ -9,7 +9,7 @@ const Help: FC = () => {
       <div className="help_hot-keys">
         <span className="text-info">{HELP_INFO.headerHotKeys}:</span>
         {HELP_INFO.hotKeys.map(key => (
-          <div key={key[0]}>
+          <div key={key[0].toString()}>
             <b className="text-info">{key[0]} - </b> {key[1]}{' '}
           </div>
         ))}

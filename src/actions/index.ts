@@ -31,13 +31,11 @@ export const generateNewGame = (initialMatrix: number[][]) => ({
   payload: initialMatrix,
 });
 
-
 export const clearField = () => ({
   type: ACTIONS.clear,
 });
 
-
-export const moveDone = (row:number,col:number, value:number) => ({
+export const moveDone = (row: number, col: number, value: number) => ({
   type: ACTIONS.moveDone,
   payload: [col, row, value],
 });

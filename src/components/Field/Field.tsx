@@ -12,13 +12,12 @@ const Field: FC<FieldProps> = ({
   initialMatrix,
   currMatrix,
   difficultLevel,
-  toClean,
   matrixHistory,
   moveDone,
 }) => {
-  const getCells = (matrix: number[][], colorOn: boolean, isClear:number=0) => {
-   // console.log('get cells color ON=', colorOn);
-    
+  const getCells = (matrix: number[][], colorOn: boolean, isClear: number = 0) => {
+    // console.log('get cells color ON=', colorOn);
+
     if (!matrix || matrix.length < 1) {
       console.log('empty');
       return;
@@ -27,7 +26,7 @@ const Field: FC<FieldProps> = ({
       return (
         <div className="row" key={i}>
           {row.map((curr, j) => {
-         // console.log('init ='+i+j+' ' +curr);
+            // console.log('init ='+i+j+' ' +curr);
             return (
               <FieldItem
                 key={`${i}${j}`}
@@ -39,7 +38,6 @@ const Field: FC<FieldProps> = ({
                 isClear={isClear}
               />
             );
-            
           })}
         </div>
       );
@@ -69,7 +67,7 @@ const Field: FC<FieldProps> = ({
       />]);
    }*/
   }, [matrixHistory]);
-  
+
   /*useEffect(() => {
     console.log('clear matrix=');
     if(!matrixHistory || (matrixHistory.length===1 && matrixHistory[0][0][0]===-2)){
@@ -83,7 +81,7 @@ const Field: FC<FieldProps> = ({
         onMoveDone={value => moveDone(1, 1, value)}
         isClear={false}
       />]);*/
- /*   }
+  /*   }
   }, [matrixHistory]);
   */
   return <div className="field">{cells}</div>;

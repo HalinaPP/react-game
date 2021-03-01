@@ -12,8 +12,10 @@ export const MENU = {
 export const GAME_INFO = {
   time: 'Time',
   moves: 'Moves',
-  clear: 'Clear',
-  undo: 'Undo',
+  buttons: {
+    clear: { name: 'Clear', id: 'clear' },
+    undo: { name: 'Undo', id: 'undo' },
+  }
 };
 
 export const SETTINGS_INFO = {
@@ -36,8 +38,8 @@ export const HELP_INFO = {
     ['N', MENU.buttons.newGame.name],
     ['S', MENU.buttons.settings.name],
     ['H', MENU.buttons.help.name],
-    ['U', GAME_INFO.undo],
-    ['C', GAME_INFO.clear],
+    ['U', GAME_INFO.buttons.undo.name],
+    ['C', GAME_INFO.buttons.clear.name],
     ['M', 'Mute'],
   ],
 };

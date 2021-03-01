@@ -4,6 +4,5 @@ export interface FieldProps {
   currMatrix: number[][];
   matrixHistory: number[][][];
   difficultLevel: number;
-  toClean: boolean;
   moveDone: (row: number, col: number, value: number) => void;
 }

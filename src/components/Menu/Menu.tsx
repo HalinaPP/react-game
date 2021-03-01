@@ -15,14 +15,11 @@ import { createSudokuMatrix } from '@/utils/sudokuGenerator';
 import { size } from '@/constants/constants';
 
 const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNewGame }) => {
-  
   const newGame = () => {
     console.log('new game');
     generateNewGame(createSudokuMatrix(size, difficultLevel));
     // const audio = playSound(bgSoundOn, SOUNDS.bg, bgSoundVolume, true);
     //localStorage.setItem('audioId', JSON.stringify(audio));
-
-    
   };
 
   const settings = () => {
@@ -43,7 +40,6 @@ const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNe
     showModal();
   };
 
-  
   const buttons = [
     {
       id: MENU.buttons.newGame.id,

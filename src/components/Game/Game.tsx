@@ -19,8 +19,8 @@ const Game: FC<GameProps> = ({
 }) => {
   const [moves, setMoves] = useState(0);
   const [audioEl, setAudioEl] = useState(new Audio());
-  const [toClean, setToClean] = useState(false);
-  
+  //const [toClean, setToClean] = useState(false);
+
   useEffect(() => {
     audioEl?.pause();
     setAudioEl(playSound(bgSoundOn, SOUNDS.bg, bgSoundVolume, true));
@@ -30,7 +30,7 @@ const Game: FC<GameProps> = ({
   }, []);
 
   useEffect(() => {
-    console.log('game generateNewGame'+difficultLevel);
+    console.log('game generateNewGame' + difficultLevel);
     generateNewGame(createSudokuMatrix(size, difficultLevel));
   }, [difficultLevel]);
 
@@ -53,22 +53,21 @@ const Game: FC<GameProps> = ({
           {GAME_INFO.moves}: {moves}
         </div>
         <ButtonContainer
-          id={GAME_INFO.undo}
-          name={GAME_INFO.undo}
+          id={GAME_INFO.buttons.undo.id}
+          name={GAME_INFO.buttons.undo.name}
           audioFileName={SOUNDS.undo}
           handleClick={() => {}}
         />
         <ButtonContainer
-          id={GAME_INFO.clear}
-          name={GAME_INFO.clear}
+          id={GAME_INFO.buttons.clear.id}
+          name={GAME_INFO.buttons.clear.name}
           audioFileName={SOUNDS.clear}
           handleClick={() => {
             clearField();
-           // setToClean(true);
           }}
         />
       </div>
-      <FieldContainer difficultLevel={difficultLevel} toClean={toClean} />
+      <FieldContainer difficultLevel={difficultLevel} />
     </React.Fragment>
   );
 };

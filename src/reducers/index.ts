@@ -85,7 +85,7 @@ export const reducer = (state = initialState, action: any): StateModel => {
     case ACTIONS.clear:
       localStorage.setItem('matrixHistory', JSON.stringify([]));
       localStorage.setItem('currMatrix', JSON.stringify(state.initialMatrix));
-      
+
       console.log('ini', state.initialMatrix);
       return {
         ...state,

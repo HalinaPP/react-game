@@ -1,6 +1,6 @@
 export const ACTIONS = {
   newGame: 'NEW_GAME',
-  moveDone:'MOVE_DONE',
+  moveDone: 'MOVE_DONE',
   undo: 'UNDO',
   clear: 'CLEAR',
   updateInputNumber: 'UPDATE_INPUT_NUMBER',

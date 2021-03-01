@@ -9,7 +9,7 @@ const mapStateToProps = (state: StateModel) => {
     fieldBlockColorOn: state.fieldBlockColorOn,
     initialMatrix: state.initialMatrix,
     currMatrix: state.currMatrix,
-    matrixHistory:  state.matrixHistory
+    matrixHistory: state.matrixHistory,
   };
 };
 

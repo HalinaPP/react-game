@@ -10,7 +10,7 @@ const FieldItem: FC<FieldItemProps> = ({
   pos,
   onMoveDone,
 }) => {
-  const inputRef:React.RefObject<HTMLInputElement> = React.createRef();
+  const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
   /*const [value, setValue] = useState(initValue || '');
   const [itemClassName, setItemClassName] = useState(`col ${bgClass}`);
 */
@@ -19,16 +19,15 @@ const FieldItem: FC<FieldItemProps> = ({
   const [needClear, setNeedClear] = useState(isClear);
 
   useEffect(() => {
-   // console.log('first field item');
-  //  
-    console.log('fff=',isClear);
-    if(isClear===0){
+    // console.log('first field item');
+    //
+    console.log('fff=', isClear);
+    if (isClear === 0) {
       setFieldValue('');
     }
-   // const item = document.getElementById(inputRef.current?.id!);
-   // item.value = initValue;
-  //  console.log(inputRef.current?.id); 
-    
+    // const item = document.getElementById(inputRef.current?.id!);
+    // item.value = initValue;
+    //  console.log(inputRef.current?.id);
   }, [isClear]);
 
   /*useEffect(() => {
@@ -47,19 +46,19 @@ const FieldItem: FC<FieldItemProps> = ({
       id={pos}
       ref={inputRef}
       type="text"
-    ///  maxLength="1"
+      ///  maxLength="1"
       className={bgClass + (!isEditable ? ' fixed' : '')}
       disabled={!isEditable}
-     // value={fieldValue ? fieldValue : ''}
-     value={initValue!=='' ? initValue : fieldValue} 
+      // value={fieldValue ? fieldValue : ''}
+      value={initValue !== '' ? initValue : fieldValue}
       onFocus={() => {
         //setFieldValue('');
       }}
       onBlur={() => {
         //setFieldValue('1');
-       // setNeedClear(false);
+        // setNeedClear(false);
         onMoveDone(+fieldValue);
-       //console.log('ref=',inputRef.current);
+        //console.log('ref=',inputRef.current);
       }}
       onChange={event => {
         //setIsSolved(true);
@@ -67,8 +66,7 @@ const FieldItem: FC<FieldItemProps> = ({
         console.log('onKeyUp=' + event.target.value);
         if ((+event.target.value <= 9 && +event.target.value >= 1) || event.target.value === '') {
           setFieldValue(event.target.value);
-        //  console.log('ref=',inputRef.current);
-          
+          //  console.log('ref=',inputRef.current);
         }
       }}
     />
