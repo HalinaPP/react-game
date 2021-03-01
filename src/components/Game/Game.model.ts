@@ -3,4 +3,5 @@ export interface GameProps {
   bgSoundVolume: number;
   difficultLevel: number;
   generateNewGame: (matrix: number[][]) => void;
+  clearField: () => void;
 }

@@ -1,8 +1,8 @@
 import { MATRIX_NUM_SHUFFLE } from '@/constants/constants';
 
-export const getBgColorClass = (colorOn:boolean, row: number, col: number, size: number) => {
+export const getBgColorClass = (colorOn: boolean, row: number, col: number, size: number) => {
   const block = Math.trunc(col / size) + Math.trunc(row / size) * size + 1;
-  
+
   let bgClass = colorOn ? `col col_color-bg bg-${block}` : 'col';
 
   if ((row + 1) % size === 0 && row + 1 !== size * size) {

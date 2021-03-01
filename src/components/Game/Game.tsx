@@ -10,27 +10,31 @@ import { GameProps } from './Game.model';
 import { createSudokuMatrix } from '@/utils/sudokuGenerator';
 import { size } from '@/constants/constants';
 
-const Game: FC<GameProps> = ({ bgSoundOn, bgSoundVolume, difficultLevel, generateNewGame }) => {
+const Game: FC<GameProps> = ({
+  bgSoundOn,
+  bgSoundVolume,
+  difficultLevel,
+  generateNewGame,
+  clearField,
+}) => {
   const [moves, setMoves] = useState(0);
   const [audioEl, setAudioEl] = useState(new Audio());
-  //const [sudokuMatrix, setSudokuMatrix] = useState();
+  const [toClean, setToClean] = useState(false);
+  
   useEffect(() => {
-    console.log('nnnn=');
     audioEl?.pause();
-
     setAudioEl(playSound(bgSoundOn, SOUNDS.bg, bgSoundVolume, true));
     return function () {
-      console.log('end');
       audioEl?.pause();
     };
   }, []);
 
   useEffect(() => {
+    console.log('game generateNewGame'+difficultLevel);
     generateNewGame(createSudokuMatrix(size, difficultLevel));
   }, [difficultLevel]);
 
   useEffect(() => {
-    console.log('useAu');
     audioEl.volume = bgSoundVolume;
 
     if (bgSoundOn) {
@@ -58,10 +62,13 @@ const Game: FC<GameProps> = ({ bgSoundOn, bgSoundVolume, difficultLevel, generat
           id={GAME_INFO.clear}
           name={GAME_INFO.clear}
           audioFileName={SOUNDS.clear}
-          handleClick={() => {}}
+          handleClick={() => {
+            clearField();
+           // setToClean(true);
+          }}
         />
       </div>
-      <FieldContainer difficultLevel={difficultLevel}/>
+      <FieldContainer difficultLevel={difficultLevel} toClean={toClean} />
     </React.Fragment>
   );
 };

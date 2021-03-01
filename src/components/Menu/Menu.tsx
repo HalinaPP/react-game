@@ -15,16 +15,14 @@ import { createSudokuMatrix } from '@/utils/sudokuGenerator';
 import { size } from '@/constants/constants';
 
 const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNewGame }) => {
-  //const [buttons, setButtons] = useState([]);
-
+  
   const newGame = () => {
     console.log('new game');
     generateNewGame(createSudokuMatrix(size, difficultLevel));
     // const audio = playSound(bgSoundOn, SOUNDS.bg, bgSoundVolume, true);
-
     //localStorage.setItem('audioId', JSON.stringify(audio));
 
-    //return audio.pause();
+    
   };
 
   const settings = () => {
@@ -45,7 +43,7 @@ const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNe
     showModal();
   };
 
-  //useEffect(() => {}, []);
+  
   const buttons = [
     {
       id: MENU.buttons.newGame.id,
@@ -72,7 +70,6 @@ const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNe
   const buttonItems = useCallback((): Array<JSX.Element> => {
     return buttons.map(
       (item: ButtonProps): JSX.Element => {
-        console.log('item', item);
         return (
           <ButtonContainer
             key={item.name}

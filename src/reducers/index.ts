@@ -26,7 +26,7 @@ export interface StateModel {
 
 const initialState: StateModel = {
   bgSoundOn: {
-    turnOn: true,
+    turnOn: false,
     volume: 1,
   },
   handleSoundOn: {
@@ -47,27 +47,65 @@ const initialState: StateModel = {
 };
 
 export const reducer = (state = initialState, action: any): StateModel => {
+  let newHistory;
+  let newCurrMatrix;
   switch (action.type) {
     case ACTIONS.newGame:
-      return {
-        ...state,
-        initialMatrix: action.payload,
-        currMatrix: action.payload,
-        matrixHistory: [],
-      };
-    case ACTIONS.clear:
-      return {
-        ...state,
-        currMatrix: state.initialMatrix.map(row => [...row]),
-      };
-    case ACTIONS.undo:
-      const historyLength = state.matrixHistory.length;
+      localStorage.setItem('currMatrix', JSON.stringify(action.payload));
+      localStorage.setItem('matrixHistory', JSON.stringify([]));
+      localStorage.setItem('currMatrix', JSON.stringify(action.payload));
 
       return {
         ...state,
-        matrixHistory: state.matrixHistory.slice(0, historyLength - 1),
-        currMatrix: state.matrixHistory[historyLength - 2].map(row => [...row]),
+        initialMatrix: [...action.payload.map((row: number[]) => [...row])],
+        currMatrix: [...action.payload.map((row: number[]) => [...row])],
+        matrixHistory: [],
       };
+
+    case ACTIONS.moveDone:
+      const [col, row, value] = action.payload;
+      /*console.log('on move r=' + row + ' c=' + col + ' v=' + value);
+      console.log('curr', state.currMatrix);
+      console.log('hist', state.matrixHistory);*/
+      newHistory = [...state.matrixHistory, state.currMatrix];
+      newCurrMatrix = [
+        ...state.currMatrix.slice(0, row),
+        [...state.currMatrix[row].slice(0, col), value, ...state.currMatrix[row].slice(col + 1)],
+        ...state.currMatrix.slice(row + 1),
+      ];
+      localStorage.setItem('matrixHistory', JSON.stringify(newHistory));
+      localStorage.setItem('currMatrix', JSON.stringify(newCurrMatrix));
+
+      return {
+        ...state,
+        matrixHistory: newHistory,
+        currMatrix: newCurrMatrix,
+      };
+
+    case ACTIONS.clear:
+      localStorage.setItem('matrixHistory', JSON.stringify([]));
+      localStorage.setItem('currMatrix', JSON.stringify(state.initialMatrix));
+      
+      console.log('ini', state.initialMatrix);
+      return {
+        ...state,
+        currMatrix: state.initialMatrix.map(row => [...row]),
+        matrixHistory: [],
+      };
+
+    case ACTIONS.undo:
+      const historyLength = state.matrixHistory.length;
+      newHistory = state.matrixHistory.slice(0, historyLength - 1);
+      newCurrMatrix = state.matrixHistory[historyLength - 2].map(row => [...row]);
+      localStorage.setItem('matrixHistory', JSON.stringify(newHistory));
+      localStorage.setItem('currMatrix', JSON.stringify(newCurrMatrix));
+
+      return {
+        ...state,
+        matrixHistory: newHistory,
+        currMatrix: newCurrMatrix,
+      };
+
     case ACTIONS.soundMute:
       return {
         ...state,
@@ -87,7 +125,7 @@ export const reducer = (state = initialState, action: any): StateModel => {
       return {
         ...state,
         fieldBlockColorOn: action.payload.colorOn,
-        difficultLevel: action.payload.level
+        difficultLevel: action.payload.level,
       };
     case ACTIONS.setShowModalSetting:
       return {

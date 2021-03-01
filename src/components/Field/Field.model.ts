@@ -1,5 +1,9 @@
 export interface FieldProps {
   fieldBlockColorOn: boolean;
-  initialMatrix:number[][];
-  difficultLevel:number;
+  initialMatrix: number[][];
+  currMatrix: number[][];
+  matrixHistory: number[][][];
+  difficultLevel: number;
+  toClean: boolean;
+  moveDone: (row: number, col: number, value: number) => void;
 }

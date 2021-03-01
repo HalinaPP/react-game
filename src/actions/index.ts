@@ -1,9 +1,9 @@
 import { ACTIONS } from '@/actions/constants';
 import { ButtonProps } from '@components/Button/Button.model';
 
-export const updateFieldSettings = (fieldBlockColorOn: boolean, difficultLevel:number) => ({
+export const updateFieldSettings = (fieldBlockColorOn: boolean, difficultLevel: number) => ({
   type: ACTIONS.updateFieldSettings,
-  payload: {colorOn:fieldBlockColorOn,level:difficultLevel},
+  payload: { colorOn: fieldBlockColorOn, level: difficultLevel },
 });
 
 export const setShowModalSetting = (
@@ -26,8 +26,18 @@ export const updateSoundVolume = (bgSoundVolume: number, handleSoundVolume: numb
   payload: { bgSoundVolume: bgSoundVolume / 100, handleSoundVolume: handleSoundVolume / 100 },
 });
 
-
 export const generateNewGame = (initialMatrix: number[][]) => ({
   type: ACTIONS.newGame,
   payload: initialMatrix,
+});
+
+
+export const clearField = () => ({
+  type: ACTIONS.clear,
+});
+
+
+export const moveDone = (row:number,col:number, value:number) => ({
+  type: ACTIONS.moveDone,
+  payload: [col, row, value],
 });
