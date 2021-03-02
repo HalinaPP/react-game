@@ -8,9 +8,11 @@ import { GameContainer } from '@/containers/GameContainer';
 import { store } from './store';
 import { handleKeyPress } from '@/utils/utils';
 import Footer from '@components/Footer';
+import  {initLocalStarage} from '@/utils/localStorage';
 
 export const App = () => {
   useEffect(() => {
+    initLocalStarage();
     document.addEventListener('keydown', handleKeyPress);
     //showModal();//<Modal header={MENU.name} body={MENU.choose} />
   }, []);

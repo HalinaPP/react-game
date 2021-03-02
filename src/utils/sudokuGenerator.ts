@@ -4,9 +4,9 @@ import { isSolvedCorrectly, solve } from './sudokuSolver';
 export const checkSolvedMatrix = (initialMatrix: number[][], solvedMatrix: number[][]): boolean => {
   const copyCutMatrixs = [...initialMatrix.map(row => [...row])];
   const initialSolvedMatrix = solve(copyCutMatrixs);
-console.log('init=',initialSolvedMatrix);
-console.log('solved',solvedMatrix);
-return isSolvedCorrectly(initialSolvedMatrix, solvedMatrix);
+  console.log('init=', initialSolvedMatrix);
+  console.log('solved', solvedMatrix);
+  return isSolvedCorrectly(initialSolvedMatrix, solvedMatrix);
 };
 
 export const getBgColorClass = (colorOn: boolean, row: number, col: number, size: number) => {
@@ -124,7 +124,8 @@ const hideNumbers = (matrix: number[][], size: number, difficultLevel: number) =
   const cellsNumber = size ** 4;
   let difficult = cellsNumber;
 
-  const difficultLevelCount = 75;//Math.trunc((cellsNumber * difficultLevel) / 100);
+  const difficultLevelCount = Math.trunc((cellsNumber * difficultLevel) / 100);
+  console.log('ddd=',difficultLevelCount);
   /*
   const a = [[7, 0, 4, 8, 0, 0, 0, 9, 3],
  [5, 8, 0, 6, 0, 0, 4, 0, 1],
@@ -153,19 +154,19 @@ const hideNumbers = (matrix: number[][], size: number, difficultLevel: number) =
       cutMatrix[row][col] = 0;
       difficult -= 1;
 
-     /* const copyCutMatrixs = [...cutMatrix.map(row => [...row])];
+      /* const copyCutMatrixs = [...cutMatrix.map(row => [...row])];
       const solvedMatrix = solve(copyCutMatrixs);*/
       /*console.log('sol=',solvedMatrix);
       console.log('matrix=',matrix);*/
 
-     // console.log('is=', isSolvedCorrectly(solvedMatrix, matrix));
-
+      // console.log('is=', isSolvedCorrectly(solvedMatrix, matrix));
 
       if (!checkSolvedMatrix(cutMatrix, matrix)) {
         console.log('is=fa');
         cutMatrix[row][col] = currElement;
         difficult += 1;
       }
+      console.log('diffic=',difficult);
     }
   }
   console.log('ite=' + iterator + ' s' + difficult);

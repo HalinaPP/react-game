@@ -1,7 +1,7 @@
 export const CHECK_SOLVE = {
-  check:'Check your solve',
-  correctSolve:  'You win!' ,
-  wrongSolve:  'You have mistakes!',
+  check: 'Check your solve',
+  correctSolve: 'You win!',
+  wrongSolve: 'You have mistakes!',
 };
 
 export const MENU = {
@@ -60,4 +60,16 @@ export const HELP_INFO = {
   },
 };
 
+export const LOCALSTORAGE_INFO = {
+  sudokuUserName: 'sudokuUserName',
+  matrixHistory: 'matrixHistory',
+  currMatrix: 'currMatrix',
+  moveNumber: 'moveNumber',
+  difficultLevel: 'difficultLevel',
+  fieldBlockColorOn: 'fieldBlockColorOn',
+  bgSoundOn:'bgSoundOn',
+  handleSoundOn:'handleSoundOn',
+  sudokuScoreTable:'sudokuScoreTable'
+
+};
 export const BUTTON_OK = 'OK';

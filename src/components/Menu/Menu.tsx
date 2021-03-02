@@ -3,7 +3,7 @@ import './styles.scss';
 import { MENU } from '@/constants/text';
 import { ButtonProps } from '@components/Button/Button.model';
 import { ButtonContainer } from '@/containers/Button.container';
-import  { showModal } from '@components/Modal';
+import { showModal } from '@components/Modal';
 import { SettingsContainer } from '@/containers/Settings.container';
 import Help from '@components/Help';
 import { MenuProps } from './Menu.model';
@@ -39,9 +39,9 @@ const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNe
     showModal();
   };
 
-  const autoplay = () =>{
+  const autoplay = () => {
     console.log('autoplay');
-  }
+  };
 
   const buttons = [
     {

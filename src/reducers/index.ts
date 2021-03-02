@@ -16,6 +16,7 @@ export interface StateModel {
   initialMatrix: number[][];
   currMatrix: number[][];
   matrixHistory: number[][][];
+  moveNumber: number;
   modalWindow: {
     isEmpty: boolean;
     header: string;
@@ -34,10 +35,11 @@ const initialState: StateModel = {
     volume: 1,
   },
   fieldBlockColorOn: true,
-  difficultLevel: TYPE_LEVEL.easy,
+  difficultLevel: TYPE_LEVEL.crossCheck,
   initialMatrix: [],
   currMatrix: [],
   matrixHistory: [],
+  moveNumber: 0,
   modalWindow: {
     isEmpty: true,
     header: '',
@@ -46,17 +48,25 @@ const initialState: StateModel = {
   },
 };
 
+
 export const reducer = (state = initialState, action: any): StateModel => {
   let newHistory;
   let newCurrMatrix;
+  let bgSoundOn;
+  let handleSoundOn;
+
   switch (action.type) {
     case ACTIONS.newGame:
-      localStorage.setItem('currMatrix', JSON.stringify(action.payload));
       localStorage.setItem('matrixHistory', JSON.stringify([]));
       localStorage.setItem('currMatrix', JSON.stringify(action.payload));
+      localStorage.setItem('moveNumber', '0');    
+      localStorage.setItem('difficultLevel', state.difficultLevel.toString());
+      localStorage.setItem('fieldBlockColorOn', state.fieldBlockColorOn.toString());
+      localStorage.setItem('fieldBlockColorOn', state.fieldBlockColorOn.toString());
 
       return {
         ...state,
+        moveNumber: 0,
         initialMatrix: [...action.payload.map((row: number[]) => [...row])],
         currMatrix: [...action.payload.map((row: number[]) => [...row])],
         matrixHistory: [],
@@ -73,11 +83,17 @@ export const reducer = (state = initialState, action: any): StateModel => {
         [...state.currMatrix[row].slice(0, col), value, ...state.currMatrix[row].slice(col + 1)],
         ...state.currMatrix.slice(row + 1),
       ];
+
+      const newMove =
+        state.currMatrix[row][col] === 0 && value === 0 ? state.moveNumber : state.moveNumber + 1;
+
       localStorage.setItem('matrixHistory', JSON.stringify(newHistory));
       localStorage.setItem('currMatrix', JSON.stringify(newCurrMatrix));
+      localStorage.setItem('moveNumber', newMove.toString());
 
       return {
         ...state,
+        moveNumber: newMove,
         matrixHistory: newHistory,
         currMatrix: newCurrMatrix,
       };
@@ -113,26 +129,47 @@ export const reducer = (state = initialState, action: any): StateModel => {
       };
 
     case ACTIONS.soundMute:
+      bgSoundOn = { turnOn: action.payload.bgSoundOn, volume: state.bgSoundOn.volume };
+      handleSoundOn = {
+        turnOn: action.payload.handleSoundOn,
+        volume: state.handleSoundOn.volume,
+      };
+
+      localStorage.setItem('bgSoundOn', JSON.stringify(bgSoundOn));
+      localStorage.setItem('handleSoundOn', JSON.stringify(handleSoundOn));
+
       return {
         ...state,
-        bgSoundOn: { turnOn: action.payload.bgSoundOn, volume: state.bgSoundOn.volume },
-        handleSoundOn: { turnOn: action.payload.handleSoundOn, volume: state.handleSoundOn.volume },
+        bgSoundOn: bgSoundOn,
+        handleSoundOn: handleSoundOn,
       };
+
     case ACTIONS.updateSoundVolume:
+      bgSoundOn = { turnOn: state.bgSoundOn.turnOn, volume: action.payload.bgSoundVolume };
+      handleSoundOn = {
+        turnOn: state.handleSoundOn.turnOn,
+        volume: action.payload.handleSoundVolume,
+      };
+
+      localStorage.setItem('bgSoundOn', JSON.stringify(bgSoundOn));
+      localStorage.setItem('handleSoundOn', JSON.stringify(handleSoundOn));
+
       return {
         ...state,
-        bgSoundOn: { turnOn: state.bgSoundOn.turnOn, volume: action.payload.bgSoundVolume },
-        handleSoundOn: {
-          turnOn: state.handleSoundOn.turnOn,
-          volume: action.payload.handleSoundVolume,
-        },
+        bgSoundOn: bgSoundOn,
+        handleSoundOn: handleSoundOn,
       };
+
     case ACTIONS.updateFieldSettings:
+      localStorage.setItem('fieldBlockColorOn', JSON.stringify(action.payload.colorOn));
+      localStorage.setItem('difficultLevel', JSON.stringify(action.payload.level));
+
       return {
         ...state,
         fieldBlockColorOn: action.payload.colorOn,
         difficultLevel: action.payload.level,
       };
+
     case ACTIONS.setShowModalSetting:
       return {
         ...state,

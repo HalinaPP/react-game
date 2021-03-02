@@ -7,13 +7,14 @@ import { generateNewGame, clearField, undoMove, setShowModalSetting } from '@/ac
 
 const mapStateToProps = (state: StateModel) => {
   return {
+    newMove: state.moveNumber,
     bgSoundOn: state.bgSoundOn.turnOn,
     bgSoundVolume: state.bgSoundOn.volume,
     handleSoundOn: state.handleSoundOn.turnOn,
     handleSoundVolume: state.handleSoundOn.volume,
     difficultLevel: state.difficultLevel,
     initialMatrix: state.initialMatrix,
-    currMatrix: state.currMatrix
+    currMatrix: state.currMatrix,
   };
 };
 

@@ -10,8 +10,11 @@ import { FieldContainer } from '@/containers/Field.container';
 import { playSound } from '@/utils/utils';
 import { createSudokuMatrix, checkSolvedMatrix } from '@/utils/sudokuGenerator';
 import { GameProps } from './Game.model';
+import {setScore} from '@/utils/localStorage';
+const time = new Date();
 
 const Game: FC<GameProps> = ({
+  newMove,
   bgSoundOn,
   bgSoundVolume,
   handleSoundOn,
@@ -56,11 +59,16 @@ const Game: FC<GameProps> = ({
     const isCorrect = checkSolvedMatrix(initialMatrix, currMatrix);
     const message = isCorrect ? CHECK_SOLVE.correctSolve : CHECK_SOLVE.wrongSolve;
     const audioFileName = isCorrect ? SOUNDS.correctSolve : SOUNDS.wrongSolve;
-
+    
     playSound(handleSoundOn, audioFileName, handleSoundVolume);
     onSetShowModalSetting(false, CHECK_SOLVE.check, <div>{message}</div>, []);
-
     showModal();
+
+    if(isCorrect){
+      setScore(newMove, time, difficultLevel);
+      generateNewGame(createSudokuMatrix(size, difficultLevel));
+    }
+  
   };
 
   return (
@@ -71,7 +79,7 @@ const Game: FC<GameProps> = ({
             <div className="game-info">
               <Timer />
               <div>
-                {GAME_INFO.moves}: {moves}
+                {GAME_INFO.moves}: {newMove}
               </div>
               <div className="game-info__button-container">
                 <ButtonContainer
