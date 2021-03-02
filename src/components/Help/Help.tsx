@@ -14,6 +14,16 @@ const Help: FC = () => {
           </div>
         ))}
       </div>
+      <div className="help_hot-keys">
+        <div>
+          <b className="text-info"> {HELP_INFO.fullscreen.openFullscreenButton} - </b>
+          {HELP_INFO.fullscreen.openFullscrean}
+        </div>
+        <div>
+          <b className="text-info"> {HELP_INFO.fullscreen.closeFullscreenButton} - </b>
+          {HELP_INFO.fullscreen.closeFullscreen}
+        </div>
+      </div>
     </div>
   );
 };

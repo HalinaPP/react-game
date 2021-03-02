@@ -1,3 +1,24 @@
 .card-header {
   font-size: 3rem;
 }
+.modal {
+  &-dialog {
+    width: 45rem;
+    max-width: 80%;
+  }
+
+  &-content {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: center;
+    
+    button{
+      width:10rem;
+    }
+  }
+  
+}

@@ -17,6 +17,10 @@ body {
   font-size: 2rem;
 }
 
+button{
+  cursor:pointer;
+}
+
 main {
   height: calc(100vh - 8rem);
   @include flex;

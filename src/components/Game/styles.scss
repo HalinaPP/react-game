@@ -1,5 +1,47 @@
 @import '@/style.scss';
 
+.game-wrap{
+  @include flex(column);
+  row-gap: 2rem;
+}
+
 .game-info {
   @include flex(row, space-between);
+  &__button-container{
+    @include flex;
+    column-gap: 3rem;
+    button{
+      width:8rem;
+    }
+  }
+}
+
+:-webkit-full-screen .game-wrap
+{
+  max-width: 80rem;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+:-webkit-full-screen {
+  background: white;
+}
+
+:-moz-full-screen {
+  background: white;
+}
+
+:-webkit-full-screen#game-container.fs_section {
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+:-moz-full-screen#game-container.fs_section {
+  width: 100%;
+  left: 0;
+}
+
+:-webkit-full-screen .field .col{
+  height: unset;
 }

@@ -6,6 +6,7 @@ export const MENU = {
     settings: { name: 'Settings', id: 'settings' },
     help: { name: 'Help', id: 'help' },
     score: { name: 'Score', id: 'score' },
+    fullscreen: { name: 'Fullscreen', id: 'fullscreen' },
   },
 };
 
@@ -42,6 +43,13 @@ export const HELP_INFO = {
     ['C', GAME_INFO.buttons.clear.name],
     ['M', 'Mute'],
   ],
+  fullscreen: {
+    title: 'Fullscreen mode',
+    openFullscreenButton: 'Fullscreen',
+    openFullscrean: 'open game in fullscreen mode',
+    closeFullscreenButton: 'ESC',
+    closeFullscreen: 'return to normal screen size',
+  },
 };
 
 export const BUTTON_OK = 'OK';

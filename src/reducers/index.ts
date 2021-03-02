@@ -102,10 +102,9 @@ export const reducer = (state = initialState, action: any): StateModel => {
         newHistory = state.matrixHistory.slice(0, historyLength - 1);
         newCurrMatrix = state.matrixHistory[historyLength - 1].map(row => [...row]);
       }
-      
+
       localStorage.setItem('matrixHistory', JSON.stringify(newHistory));
       localStorage.setItem('currMatrix', JSON.stringify(newCurrMatrix));
-      
 
       return {
         ...state,

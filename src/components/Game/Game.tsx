@@ -16,11 +16,10 @@ const Game: FC<GameProps> = ({
   difficultLevel,
   generateNewGame,
   clearField,
-  undoMove
+  undoMove,
 }) => {
   const [moves, setMoves] = useState(0);
   const [audioEl, setAudioEl] = useState(new Audio());
-  //const [toClean, setToClean] = useState(false);
 
   useEffect(() => {
     audioEl?.pause();
@@ -48,25 +47,33 @@ const Game: FC<GameProps> = ({
 
   return (
     <React.Fragment>
-      <div className="game-info">
-        <Timer />
-        <div>
-          {GAME_INFO.moves}: {moves}
+      <div id="fs-container">
+        <div className="fs_section" id="game-container">
+          <div className="game-wrap">
+            <div className="game-info">
+              <Timer />
+              <div>
+                {GAME_INFO.moves}: {moves}
+              </div>
+              <div className="game-info__button-container">
+                <ButtonContainer
+                  id={GAME_INFO.buttons.undo.id}
+                  name={GAME_INFO.buttons.undo.name}
+                  audioFileName={SOUNDS.undo}
+                  handleClick={undoMove}
+                />
+                <ButtonContainer
+                  id={GAME_INFO.buttons.clear.id}
+                  name={GAME_INFO.buttons.clear.name}
+                  audioFileName={SOUNDS.clear}
+                  handleClick={clearField}
+                />
+              </div>
+            </div>
+            <FieldContainer difficultLevel={difficultLevel} />
+          </div>
         </div>
-        <ButtonContainer
-          id={GAME_INFO.buttons.undo.id}
-          name={GAME_INFO.buttons.undo.name}
-          audioFileName={SOUNDS.undo}
-          handleClick={undoMove}
-        />
-        <ButtonContainer
-          id={GAME_INFO.buttons.clear.id}
-          name={GAME_INFO.buttons.clear.name}
-          audioFileName={SOUNDS.clear}
-          handleClick={clearField}
-        />
       </div>
-      <FieldContainer difficultLevel={difficultLevel} />
     </React.Fragment>
   );
 };

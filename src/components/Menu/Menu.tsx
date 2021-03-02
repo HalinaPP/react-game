@@ -13,6 +13,7 @@ import { SOUNDS } from '@/constants/sounds';
 import { playSound } from '@/utils/utils';
 import { createSudokuMatrix } from '@/utils/sudokuGenerator';
 import { size } from '@/constants/constants';
+import { enterFullscreen } from '@/utils/fullscreen';
 
 const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNewGame }) => {
   const newGame = () => {
@@ -51,15 +52,23 @@ const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNe
       name: MENU.buttons.settings.name,
       handleClick: settings,
     },
-    {
-      id: MENU.buttons.help.id,
-      name: MENU.buttons.help.name,
-      handleClick: showHelp,
-    },
+
     {
       id: MENU.buttons.score.id,
       name: MENU.buttons.score.name,
       handleClick: showScore,
+    },
+    {
+      id: MENU.buttons.fullscreen.id,
+      name: MENU.buttons.fullscreen.name,
+      handleClick: () => {
+        enterFullscreen('game-container');
+      },
+    },
+    {
+      id: MENU.buttons.help.id,
+      name: MENU.buttons.help.name,
+      handleClick: showHelp,
     },
   ];
 

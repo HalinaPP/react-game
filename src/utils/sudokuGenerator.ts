@@ -1,4 +1,5 @@
 import { MATRIX_NUM_SHUFFLE } from '@/constants/constants';
+import { isSolvedCorrectly, solve } from './sudokuSolver';
 
 export const getBgColorClass = (colorOn: boolean, row: number, col: number, size: number) => {
   const block = Math.trunc(col / size) + Math.trunc(row / size) * size + 1;
@@ -107,7 +108,7 @@ const hideNumbers = (matrix: number[][], size: number, difficultLevel: number) =
   const maxElement = getMaxElement(size);
 
   const viewMatrixElement = new Array(maxElement).fill(0).map(() => new Array(maxElement).fill(0));
-  const cutMatrix = matrix.map(row => [...row]);
+  const cutMatrix = [...matrix.map(row => [...row])];
 
   //console.log('vi=', viewMatrixElement);
 
@@ -116,6 +117,21 @@ const hideNumbers = (matrix: number[][], size: number, difficultLevel: number) =
   let difficult = cellsNumber;
 
   const difficultLevelCount = Math.trunc((cellsNumber * difficultLevel) / 100);
+  /*
+  const a = [[7, 0, 4, 8, 0, 0, 0, 9, 3],
+ [5, 8, 0, 6, 0, 0, 4, 0, 1],
+ [0, 0, 3, 0, 0, 0, 0, 8, 0],
+ [0, 2, 0, 0, 3, 0, 0, 0, 0],
+ [9, 0, 6, 1, 4, 0, 0, 0, 5],
+ [1, 0, 7, 0, 5, 0, 0, 3, 0],
+ [4, 7, 0, 0, 8, 0, 0, 0, 0],
+ [0, 6, 9, 0, 7, 1, 0, 5, 8],
+ [2, 0, 0, 0, 0, 0, 1, 4, 0]];
+
+ const solvedMatrix1 = solve(a);
+ console.log('sol=',solvedMatrix1);
+ console.log('matrix=',a);
+*/
 
   while (iterator < cellsNumber && difficult > difficultLevelCount) {
     const row = Math.trunc(Math.random() * maxElement);
@@ -129,19 +145,15 @@ const hideNumbers = (matrix: number[][], size: number, difficultLevel: number) =
       cutMatrix[row][col] = 0;
       difficult -= 1;
 
-      let numSolutions = 0;
-      /*const tableSolution = [];
-      for (let i = 0; i < maxElement; i++) {
-        tableSolution.push([...cutMatrix[i]]);
-      }
-   
-      //проверить сколько решений
-      /*
-        numSolutions = numSolvesSudoku(size, tableSolution);
-      */
+      const copyCutMatrixs = [...cutMatrix.map(row => [...row])];
+      const solvedMatrix = solve(copyCutMatrixs);
+      /*console.log('sol=',solvedMatrix);
+      console.log('matrix=',matrix);*/
 
-      if (numSolutions > 1) {
-        viewMatrixElement[row][col] = currElement;
+      console.log('is=', isSolvedCorrectly(solvedMatrix, matrix));
+      if (!isSolvedCorrectly(solvedMatrix, matrix)) {
+        console.log('is=fa');
+        cutMatrix[row][col] = currElement;
         difficult += 1;
       }
     }
