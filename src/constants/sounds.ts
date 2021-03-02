@@ -5,4 +5,6 @@ export const SOUNDS = {
   inputClick: 'cursor.wav',
   inputKeydown: 'key_down.wav',
   undo: 'undo.wav',
+  correctSolve: 'right-answer.mp3',
+  wrongSolve: 'wrong-answer.mp3',
 };

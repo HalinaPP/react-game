@@ -1,20 +1,26 @@
 import React, { FC, useState, useEffect } from 'react';
 import './styles.scss';
-import { GAME_INFO } from '@/constants/text';
+import { size } from '@/constants/constants';
+import { GAME_INFO, CHECK_SOLVE } from '@/constants/text';
+import { SOUNDS } from '@/constants/sounds';
 import Timer from '@components/Timer';
+import { showModal } from '@components/Modal';
 import { ButtonContainer } from '@/containers/Button.container';
 import { FieldContainer } from '@/containers/Field.container';
-import { SOUNDS } from '@/constants/sounds';
 import { playSound } from '@/utils/utils';
+import { createSudokuMatrix, checkSolvedMatrix } from '@/utils/sudokuGenerator';
 import { GameProps } from './Game.model';
-import { createSudokuMatrix } from '@/utils/sudokuGenerator';
-import { size } from '@/constants/constants';
 
 const Game: FC<GameProps> = ({
   bgSoundOn,
   bgSoundVolume,
+  handleSoundOn,
+  handleSoundVolume,
   difficultLevel,
+  initialMatrix,
+  currMatrix,
   generateNewGame,
+  onSetShowModalSetting,
   clearField,
   undoMove,
 }) => {
@@ -45,6 +51,18 @@ const Game: FC<GameProps> = ({
     }
   }, [bgSoundOn, bgSoundVolume]);
 
+  const checkFill = () => {
+    console.log('checkFill');
+    const isCorrect = checkSolvedMatrix(initialMatrix, currMatrix);
+    const message = isCorrect ? CHECK_SOLVE.correctSolve : CHECK_SOLVE.wrongSolve;
+    const audioFileName = isCorrect ? SOUNDS.correctSolve : SOUNDS.wrongSolve;
+
+    playSound(handleSoundOn, audioFileName, handleSoundVolume);
+    onSetShowModalSetting(false, CHECK_SOLVE.check, <div>{message}</div>, []);
+
+    showModal();
+  };
+
   return (
     <React.Fragment>
       <div id="fs-container">
@@ -67,6 +85,11 @@ const Game: FC<GameProps> = ({
                   name={GAME_INFO.buttons.clear.name}
                   audioFileName={SOUNDS.clear}
                   handleClick={clearField}
+                />
+                <ButtonContainer
+                  id={GAME_INFO.buttons.check.id}
+                  name={GAME_INFO.buttons.check.name}
+                  handleClick={checkFill}
                 />
               </div>
             </div>

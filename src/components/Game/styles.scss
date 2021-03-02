@@ -1,23 +1,22 @@
 @import '@/style.scss';
 
-.game-wrap{
+.game-wrap {
   @include flex(column);
   row-gap: 2rem;
 }
 
 .game-info {
   @include flex(row, space-between);
-  &__button-container{
+  &__button-container {
     @include flex;
-    column-gap: 3rem;
-    button{
-      width:8rem;
+    column-gap: 1rem;
+    button {
+      width: 8rem;
     }
   }
 }
 
-:-webkit-full-screen .game-wrap
-{
+:-webkit-full-screen .game-wrap {
   max-width: 80rem;
   height: 100vh;
   margin: 0 auto;
@@ -42,6 +41,6 @@
   left: 0;
 }
 
-:-webkit-full-screen .field .col{
+:-webkit-full-screen .field .col {
   height: unset;
 }

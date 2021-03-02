@@ -111,8 +111,6 @@ const isSolved = (board: number[][]) => {
   );
 };
 
-
-
 const solveOneValueNeed = (board: number[][]) => {
   let updated = board.reduce(
     (prevRow, row, i) =>
@@ -150,11 +148,10 @@ const solveOneValueNeed = (board: number[][]) => {
   return updated;
 };
 
-
 export const solve = (board3: number[][]) => {
   //console.log('board=', board3);
   let board2 = JSON.parse(JSON.stringify(board3));
- // console.log('mmm=', board2);
+  // console.log('mmm=', board2);
   let updated = true;
   let solved = false;
 
@@ -163,7 +160,7 @@ export const solve = (board3: number[][]) => {
     solved = isSolved(board2);
   }
   console.log('solved=', solved);
-  
+
   /*let board4 = JSON.parse(JSON.stringify(board3));
   console.log('board4=',board4);
   console.log('solved2=', solved);
@@ -179,5 +176,3 @@ export const isSolvedCorrectly = (solvedBoard: number[][], initBoard: number[][]
     true
   );
 };
-
-

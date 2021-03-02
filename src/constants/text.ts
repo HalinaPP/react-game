@@ -1,9 +1,16 @@
+export const CHECK_SOLVE = {
+  check:'Check your solve',
+  correctSolve:  'You win!' ,
+  wrongSolve:  'You have mistakes!',
+};
+
 export const MENU = {
   name: 'Меню',
   choose: 'Что будем делать?',
   buttons: {
     newGame: { name: 'New game', id: 'newGame' },
     settings: { name: 'Settings', id: 'settings' },
+    autoplay: { name: 'Autoplay', id: 'autoplay' },
     help: { name: 'Help', id: 'help' },
     score: { name: 'Score', id: 'score' },
     fullscreen: { name: 'Fullscreen', id: 'fullscreen' },
@@ -16,6 +23,7 @@ export const GAME_INFO = {
   buttons: {
     clear: { name: 'Clear', id: 'clear' },
     undo: { name: 'Undo', id: 'undo' },
+    check: { name: 'Check', id: 'check' },
   },
 };
 

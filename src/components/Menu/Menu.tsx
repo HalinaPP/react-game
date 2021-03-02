@@ -3,11 +3,9 @@ import './styles.scss';
 import { MENU } from '@/constants/text';
 import { ButtonProps } from '@components/Button/Button.model';
 import { ButtonContainer } from '@/containers/Button.container';
-import { useRowState } from 'react-table';
-import Modal, { showModal } from '@components/Modal';
+import  { showModal } from '@components/Modal';
 import { SettingsContainer } from '@/containers/Settings.container';
 import Help from '@components/Help';
-import { HELP_INFO } from '@/constants/text';
 import { MenuProps } from './Menu.model';
 import { SOUNDS } from '@/constants/sounds';
 import { playSound } from '@/utils/utils';
@@ -41,6 +39,10 @@ const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNe
     showModal();
   };
 
+  const autoplay = () =>{
+    console.log('autoplay');
+  }
+
   const buttons = [
     {
       id: MENU.buttons.newGame.id,
@@ -69,6 +71,11 @@ const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNe
       id: MENU.buttons.help.id,
       name: MENU.buttons.help.name,
       handleClick: showHelp,
+    },
+    {
+      id: MENU.buttons.autoplay.id,
+      name: MENU.buttons.autoplay.name,
+      handleClick: autoplay,
     },
   ];
 
