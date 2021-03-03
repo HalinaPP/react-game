@@ -1,10 +1,11 @@
-import React, { FC, useState, useEffect, useCallback } from 'react';
+import React, { FC, useState, useEffect, useCallback, MouseEvent } from 'react';
 import './styles.scss';
-import { TYPE_LEVEL } from '@/constants/constants';
+import { TYPE_LEVEL, size } from '@/constants/constants';
 import { SETTINGS_INFO } from '@/constants/text';
 import { SettingsProps } from './Settings.model';
 import { playSound } from '@/utils/utils';
 import { SOUNDS } from '@/constants/sounds';
+import { createSudokuMatrix } from '@/utils/sudokuGenerator';
 
 const Settings: FC<SettingsProps> = ({
   bgSoundOn,
@@ -14,6 +15,7 @@ const Settings: FC<SettingsProps> = ({
   updateFieldSettings,
   updateSoundVolume,
   soundMute,
+  generateNewGame
 }) => {
   const levels = Object.keys(TYPE_LEVEL);
   const [colorOn, setColorOn] = useState(fieldBlockColorOn);
@@ -26,18 +28,25 @@ const Settings: FC<SettingsProps> = ({
   }, []);
 
   useEffect(() => {
-    console.log(
-      'sett ' +
-        fieldBlockColorOn +
-        ' ыыыы=' +
-        colorOn +
-        ' ll=' +
-        difficultLevel +
-        ' g=' +
-        currDifficultLevel
-    );
+    console.log('gener');
+  
+  }, [difficultLevel]);
+ 
+  useEffect(() => {
     updateFieldSettings(colorOn, currDifficultLevel);
   }, [colorOn, currDifficultLevel]);
+
+  const changeFieldColor = () =>{
+    setColorOn(!colorOn);
+    playSound(handleSoundOn.turnOn, SOUNDS.button, handleSoundOn.volume);
+  }
+
+  const changeDifficultLevel = (event:React.ChangeEvent)=>{
+    const levelEl = event.target;
+    setCurrDifficultLevel(TYPE_LEVEL[levelEl.id]);
+    generateNewGame(createSudokuMatrix(size, TYPE_LEVEL[levelEl.id]));
+    playSound(handleSoundOn.turnOn, SOUNDS.button, handleSoundOn.volume);
+  }
 
   return (
     <div className="settings">
@@ -109,10 +118,7 @@ const Settings: FC<SettingsProps> = ({
             className="custom-control-input"
             id="fieldBlockColorOn"
             checked={colorOn}
-            onChange={() => {
-              setColorOn(!colorOn);
-              playSound(handleSoundOn.turnOn, SOUNDS.button, handleSoundOn.volume);
-            }}
+            onChange={changeFieldColor}
           />
           <label className="custom-control-label" htmlFor="fieldBlockColorOn">
             {SETTINGS_INFO.fieldBlockColorOn}
@@ -131,10 +137,7 @@ const Settings: FC<SettingsProps> = ({
                     name="difficultLevel"
                     className="custom-control-input"
                     checked={currDifficultLevel === TYPE_LEVEL[level]}
-                    onChange={event => {
-                      setCurrDifficultLevel(TYPE_LEVEL[event.target.id]);
-                      playSound(handleSoundOn.turnOn, SOUNDS.button, handleSoundOn.volume);
-                    }}
+                    onChange={changeDifficultLevel}
                   />
                   <label className="custom-control-label" htmlFor={level}>
                     {level}

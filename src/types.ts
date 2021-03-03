@@ -4,3 +4,5 @@ export interface scoreUserData {
   time: string;
   level: string;
 }
+
+export type moveDoneFunc = (row: number, col: number, value: number) => void;

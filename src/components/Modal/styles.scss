@@ -22,17 +22,15 @@
   }
 }
 @media screen and (max-width: 800px) {
- .modal-dialog-centered{
-   justify-content: center;
- }
-  .modal-content{
+  .modal-dialog-centered {
+    justify-content: center;
+  }
+  .modal-content {
     overflow-x: hidden;
     overflow-y: auto;
-    max-height:100vh;
-    
-}
-.modal-dialog {
-  width: 48rem;
-  
-}
+    max-height: 100vh;
+  }
+  .modal-dialog {
+    width: 48rem;
+  }
 }

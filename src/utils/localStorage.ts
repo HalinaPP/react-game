@@ -18,6 +18,7 @@ const initialState = {
   sudokuUserName: 'UserN',
   matrixHistory: '',
   currMatrix: '',
+  initialMatrix:'',
   moveNumber: '0',
   difficultLevel: TYPE_LEVEL.crossCheck.toString(),
   fieldBlockColorOn: 'true',
@@ -36,17 +37,16 @@ const initialState = {
 export const initLocalStarage = (): void => {
   Object.entries(initialState).forEach(item => {
     const el = localStorage.getItem(item[0]);
-    console.log('i=',item[0]);
-    console.log('v=',el);
+   // console.log('i=', item[0]);
+   // console.log('v=', el);
     if (el !== null && el !== '') {
-      console.log('from loc');
+    //  console.log('from loc');
       localStorage.setItem(item[0], el);
     } else {
       localStorage.setItem(item[0], item[1]);
     }
   });
 };
-
 
 export const setScore = (moves: number, time: string, level: number): void => {
   const userName = localStorage.getItem(sudokuUserName);

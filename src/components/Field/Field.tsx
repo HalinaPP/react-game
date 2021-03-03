@@ -47,10 +47,12 @@ const Field: FC<FieldProps> = ({
   const [cells, setCells] = useState(getCells(initialMatrix, fieldBlockColorOn));
 
   useEffect(() => {
-    /*console.log('field new render=', fieldBlockColorOn);
-    console.log('ini',initialMatrix);*/
+    console.log('field new render=', fieldBlockColorOn);
+   /* console.log('ini',initialMatrix);*/
+   console.log('initial matrix=',initialMatrix);
     setCells(getCells(initialMatrix, fieldBlockColorOn));
   }, [fieldBlockColorOn, initialMatrix]);
+
   useEffect(() => {
     console.log('clear matrix=');
     setCells(getCells(currMatrix, fieldBlockColorOn, matrixHistory.length));

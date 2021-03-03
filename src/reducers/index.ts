@@ -2,6 +2,7 @@ import { TYPE_LEVEL } from '@/constants/constants';
 import { ACTIONS } from '@/actions/constants';
 import { ButtonProps } from '@components/Button/Button.model';
 import { initLocalStarage } from '@/utils/localStorage';
+import { isConstructorDeclaration } from 'typescript';
 
 export interface StateModel {
   bgSoundOn: {
@@ -53,20 +54,20 @@ const initialState: StateModel = {
 
 Object.entries(initialState).forEach(item => {
   const el = localStorage.getItem(item[0]);
-  console.log('i=', item[0]);
-  console.log('v=', el);
+ // console.log('i=', item[0]);
+ // console.log('v=', el);
+ const objEl =['bgSoundOn' ,'handleSoundOn', 'matrixHistory','initialMatrix'];
   if (el !== null && el !== '') {
-    if(item[0]==='bgSoundOn' || item[0]==='handleSoundOn' || item[0] === 'matrixHistory' ){
+    if (objEl.includes(el)) {
       initialState[item[0]] = JSON.parse(el);
-    }else{
+    } else {
       initialState[item[0]] = JSON.parse(el);
     }
-    console.log('from loc');
-    
+    //console.log('from loc');
   }
 });
 
-console.log('state',initialState);
+console.log('state', initialState);
 
 export const reducer = (state = initialState, action: any): StateModel => {
   let newHistory;
@@ -77,19 +78,17 @@ export const reducer = (state = initialState, action: any): StateModel => {
   switch (action.type) {
     case ACTIONS.newGame:
       localStorage.setItem('matrixHistory', JSON.stringify([]));
-      localStorage.setItem('currMatrix', JSON.stringify(action.payload));
+      localStorage.setItem('currMatrix', JSON.stringify(action.payload.initialMatrix));
+      localStorage.setItem('initialMatrix', JSON.stringify(action.payload.initialMatrix));
       localStorage.setItem('moveNumber', '0');
-      localStorage.setItem('difficultLevel', state.difficultLevel.toString());
-      localStorage.setItem('fieldBlockColorOn', state.fieldBlockColorOn.toString());
-      localStorage.setItem('fieldBlockColorOn', state.fieldBlockColorOn.toString());
-      localStorage.setItem('sudokuStartTime', action.payload);
-
+      localStorage.setItem('sudokuStartTime', action.payload.startTime.toString());
+console.log('new gammmmmmmm');
       return {
         ...state,
         moveNumber: 0,
         startTime: new Date(),
-        initialMatrix: [...action.payload.map((row: number[]) => [...row])],
-        currMatrix: [...action.payload.map((row: number[]) => [...row])],
+        initialMatrix: [...action.payload.initialMatrix.map((row: number[]) => [...row])],
+        currMatrix: [...action.payload.initialMatrix.map((row: number[]) => [...row])],
         matrixHistory: [],
       };
 

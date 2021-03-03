@@ -50,14 +50,14 @@ footer {
 }
 
 @media screen and (max-width: 800px) {
-  main{
-    margin-top:5rem;
-    height:100%;
+  main {
+    margin-top: 5rem;
+    height: 100%;
     flex-direction: column;
     align-items: center;
     row-gap: 3rem;
   }
-  .game{
-    width:90%;
+  .game {
+    width: 90%;
   }
 }

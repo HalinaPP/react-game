@@ -73,4 +73,4 @@ export const LOCALSTORAGE_INFO = {
 };
 export const BUTTON_OK = { name: 'OK', id: 'ok' };
 
-export const SCORE_INFO = {userName:'player', moves:'Moves', time:'Time',level:'Level'};
+export const SCORE_INFO = { userName: 'player', moves: 'Moves', time: 'Time', level: 'Level' };

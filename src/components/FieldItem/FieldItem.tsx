@@ -21,7 +21,7 @@ const FieldItem: FC<FieldItemProps> = ({
   useEffect(() => {
     // console.log('first field item');
     //
-    console.log('fff=', isClear);
+    //console.log('fff=', isClear);
     //if (isClear === 0) {
     setFieldValue(initValue);
     // }

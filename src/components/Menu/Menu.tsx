@@ -9,40 +9,40 @@ import { MenuProps } from './Menu.model';
 import { ButtonProps } from '@components/Button/Button.model';
 import { ButtonContainer } from '@/containers/Button.container';
 import { SettingsContainer } from '@/containers/Settings.container';
-import { SOUNDS } from '@/constants/sounds';
-import { playSound } from '@/utils/utils';
 import { createSudokuMatrix } from '@/utils/sudokuGenerator';
 import { enterFullscreen } from '@/utils/fullscreen';
 import { getScore } from '@/utils/localStorage';
+import { solve } from '@/utils/sudokuSolver';
 
-const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNewGame }) => {
+const Menu: FC<MenuProps> = ({
+  initialMatrix,
+  onSetShowModalSetting,
+  difficultLevel,
+  generateNewGame,
+  moveDone,
+}) => {
   const newGame = () => {
     console.log('new game');
     generateNewGame(createSudokuMatrix(size, difficultLevel));
-    // const audio = playSound(bgSoundOn, SOUNDS.bg, bgSoundVolume, true);
-    //localStorage.setItem('audioId', JSON.stringify(audio));
   };
 
   const settings = () => {
-    console.log('settings');
     onSetShowModalSetting(false, MENU.buttons.settings.name, <SettingsContainer />, []);
     showModal();
   };
 
   const showHelp = () => {
-    console.log('showHelp');
     onSetShowModalSetting(false, MENU.buttons.help.name, <Help />, []);
     showModal();
   };
 
   const showScore = () => {
-    console.log('showScore');
     onSetShowModalSetting(false, MENU.buttons.score.name, <Score score={getScore()} />, []);
     showModal();
   };
 
   const autoplay = () => {
-    console.log('autoplay');
+    solve([], moveDone, true);
   };
 
   const buttons = [

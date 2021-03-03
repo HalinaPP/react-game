@@ -28,7 +28,7 @@ export const updateSoundVolume = (bgSoundVolume: number, handleSoundVolume: numb
 
 export const generateNewGame = (initialMatrix: number[][]) => ({
   type: ACTIONS.newGame,
-  payload: initialMatrix,
+  payload: { initialMatrix, startTime: new Date() },
 });
 
 export const clearField = () => ({
@@ -44,7 +44,7 @@ export const moveDone = (row: number, col: number, value: number) => ({
   payload: [col, row, value],
 });
 
-export const setStartTime = (time: Date) => ({
+export const setStartTime = (startTime: Date) => ({
   type: ACTIONS.setStartTime,
-  payload: time,
+  payload: startTime,
 });

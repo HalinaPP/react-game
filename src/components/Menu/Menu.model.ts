@@ -1,10 +1,10 @@
 import { ButtonProps } from '@components/Button/Button.model';
 
 export interface MenuProps {
-  /* bgSoundOn:boolean;
-  bgSoundVolume:number;*/
+  initialMatrix:number[][];
   difficultLevel: number;
   generateNewGame: (matrix: number[][]) => void;
+  moveDone: (row: number, col: number, value: number) => void;
   onSetShowModalSetting: (
     isEmpty: boolean,
     header: string,

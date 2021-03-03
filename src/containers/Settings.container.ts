@@ -1,4 +1,9 @@
-import { updateFieldSettings, updateSoundVolume, soundMute } from '@/actions/index';
+import {
+  updateFieldSettings,
+  updateSoundVolume,
+  soundMute,
+  generateNewGame,
+} from '@/actions/index';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { StateModel } from '@/reducers/index';
@@ -21,6 +26,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       dispatch(updateSoundVolume(bgSoundVolume, handleSoundVolume)),
     soundMute: (bgSoundOn: boolean, handleSoundOn: boolean) =>
       dispatch(soundMute(bgSoundOn, handleSoundOn)),
+    generateNewGame: (initialMatrix: number[][]) => dispatch(generateNewGame(initialMatrix)),
   };
 };
 

@@ -40,11 +40,6 @@ const Game: FC<GameProps> = ({
   }, []);
 
   useEffect(() => {
-    console.log('game generateNewGame' + difficultLevel);
-    generateNewGame(createSudokuMatrix(size, difficultLevel));
-  }, [difficultLevel]);
-
-  useEffect(() => {
     audioEl.volume = bgSoundVolume;
 
     if (bgSoundOn) {

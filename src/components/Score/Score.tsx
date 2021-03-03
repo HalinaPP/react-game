@@ -10,7 +10,7 @@ const Score: FC<ScoreProps> = ({ score }) => {
   const getScoreItems = (currScore: scoreUserData[]) => {
     return (
       <div>
-        <div  className="score-head score__row">
+        <div className="score-head score__row">
           <div></div>
           <div>{SCORE_INFO.userName}</div>
           <div>{SCORE_INFO.moves}</div>

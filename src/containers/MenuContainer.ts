@@ -1,4 +1,4 @@
-import { setShowModalSetting, generateNewGame } from '@/actions/index';
+import { setShowModalSetting, generateNewGame,moveDone } from '@/actions/index';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { ButtonProps } from '@components/Button/Button.model';
@@ -7,9 +7,8 @@ import { StateModel } from '@/reducers/index';
 
 const mapStateToProps = (state: StateModel) => {
   return {
-    /* bgSoundOn: state.bgSoundOn.turnOn,
-    bgSoundVolume: state.bgSoundOn.volume,*/
     difficultLevel: state.difficultLevel,
+    initialMatrix: state.initialMatrix
   };
 };
 
@@ -22,6 +21,7 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       buttons: ButtonProps[]
     ) => dispatch(setShowModalSetting(isEmpty, header, body, buttons)),
     generateNewGame: (initialMatrix: number[][]) => dispatch(generateNewGame(initialMatrix)),
+    moveDone: (row: number, col: number, value: number) => dispatch(moveDone(row, col, value)),
   };
 };
 

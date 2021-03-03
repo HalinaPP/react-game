@@ -1,4 +1,7 @@
-var squareCoordinates = [
+import { moveDoneFunc } from '@/types';
+import { size as mSize } from '@/constants/constants';
+
+const squareCoordinates = [
   [1, 1, 1, 2, 2, 2, 3, 3, 3],
   [1, 1, 1, 2, 2, 2, 3, 3, 3],
   [1, 1, 1, 2, 2, 2, 3, 3, 3],
@@ -9,7 +12,8 @@ var squareCoordinates = [
   [7, 7, 7, 8, 8, 8, 9, 9, 9],
   [7, 7, 7, 8, 8, 8, 9, 9, 9],
 ];
-const size = 9;
+
+const size = mSize * mSize;
 
 const getExpectedNumbers = (size: number) => {
   return new Array(size).fill(0).map((item, index) => index + 1);
@@ -37,7 +41,13 @@ const getSquare = (board: number[][], square: number) => {
   }, []);
 };
 
-const completeCell = (board: number[][], indexRow: number, indexCol: number) => {
+const completeCell = (
+  board: number[][],
+  indexRow: number,
+  indexCol: number,
+  moveDone: moveDoneFunc,
+  autoplay = false
+) => {
   const rangeCellValue = new Set([
     ...getRow(board, indexRow),
     ...getColumn(board, indexCol),
@@ -46,6 +56,9 @@ const completeCell = (board: number[][], indexRow: number, indexCol: number) => 
   const possibilities = getExpectedNumbers(size).filter(item => !rangeCellValue.has(item));
 
   if (possibilities.length === 1) {
+    if (autoplay && typeof moveDone === 'function') {
+      setTimeout(() => moveDone(indexRow, indexCol, possibilities[0]), 2000);
+    }
     board[indexRow][indexCol] = possibilities[0];
     return true;
   }
@@ -59,10 +72,11 @@ const isFindOne = (
   possibilities: number[],
   range: number[],
   indexRow: number,
-  indexCol: number
+  indexCol: number,
+  moveDone: moveDoneFunc,
+  autoplay = false
 ) => {
   let updated = false;
-
   possibilities.forEach(possibility => {
     let counter = 0;
 
@@ -78,6 +92,10 @@ const isFindOne = (
 
     if (counter === 1) {
       board[indexRow][indexCol] = possibility;
+      if (autoplay) {
+        setTimeout(() => moveDone(indexRow, indexCol, possibility), 2000);
+      }
+
       updated = true;
     }
   });
@@ -111,12 +129,12 @@ const isSolved = (board: number[][]) => {
   );
 };
 
-const solveOneValueNeed = (board: number[][]) => {
+const solveOneValueNeed = (board: number[][], moveDone: moveDoneFunc, autoplay = false) => {
   let updated = board.reduce(
     (prevRow, row, i) =>
       row.reduce((prev, col, j) => {
         if (col === 0) {
-          return completeCell(board, i, j) || prev;
+          return completeCell(board, i, j, moveDone, autoplay) || prev;
         }
         return prev;
       }, false) || prevRow,
@@ -130,11 +148,20 @@ const solveOneValueNeed = (board: number[][]) => {
           .toString()
           .split('')
           .map(item => Number(item));
+
         if (boardElArr.length > 1) {
           return (
-            isFindOne(board, boardElArr, getRow(board, i), i, j) ||
-            isFindOne(board, boardElArr, getColumn(board, j), i, j) ||
-            isFindOne(board, boardElArr, getSquare(board, squareCoordinates[i][j]), i, j) ||
+            isFindOne(board, boardElArr, getRow(board, i), i, j, moveDone, autoplay) ||
+            isFindOne(board, boardElArr, getColumn(board, j), i, j, moveDone, autoplay) ||
+            isFindOne(
+              board,
+              boardElArr,
+              getSquare(board, squareCoordinates[i][j]),
+              i,
+              j,
+              moveDone,
+              autoplay
+            ) ||
             prevCol
           );
         }
@@ -148,13 +175,22 @@ const solveOneValueNeed = (board: number[][]) => {
   return updated;
 };
 
-export const solve = (board3: number[][]) => {
-  let board2 = JSON.parse(JSON.stringify(board3));
+export const solve = (board3: number[][], moveDone: moveDoneFunc, autoplay = false) => {
+  let board2;
+
+  if (autoplay) {
+    const initialMatrix = localStorage.getItem('initialMatrix') || '';
+    const boiard5 = JSON.parse(initialMatrix);
+    board2 = JSON.parse(JSON.stringify(boiard5));
+  } else {
+    board2 = JSON.parse(JSON.stringify(board3));
+  }
+
   let updated = true;
   let solved = false;
 
   while (updated && !solved) {
-    updated = solveOneValueNeed(board2);
+    updated = solveOneValueNeed(board2, moveDone, autoplay);
     solved = isSolved(board2);
   }
 
