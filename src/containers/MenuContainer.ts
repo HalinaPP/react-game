@@ -1,4 +1,4 @@
-import { setShowModalSetting, generateNewGame,moveDone } from '@/actions/index';
+import { setShowModalSetting, generateNewGame, moveDone } from '@/actions/index';
 import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { ButtonProps } from '@components/Button/Button.model';
@@ -8,7 +8,7 @@ import { StateModel } from '@/reducers/index';
 const mapStateToProps = (state: StateModel) => {
   return {
     difficultLevel: state.difficultLevel,
-    initialMatrix: state.initialMatrix
+    initialMatrix: state.initialMatrix,
   };
 };
 

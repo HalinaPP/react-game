@@ -3,7 +3,10 @@ import { isSolvedCorrectly, solve } from './sudokuSolver';
 
 export const checkSolvedMatrix = (initialMatrix: number[][], solvedMatrix: number[][]): boolean => {
   const copyCutMatrixs = [...initialMatrix.map(row => [...row])];
-  const initialSolvedMatrix = solve(copyCutMatrixs,(row: number, col: number, value: number) => {});
+  const initialSolvedMatrix = solve(
+    copyCutMatrixs,
+    (row: number, col: number, value: number) => {}
+  );
 
   return isSolvedCorrectly(initialSolvedMatrix, solvedMatrix);
 };

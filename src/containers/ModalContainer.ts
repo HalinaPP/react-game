@@ -11,6 +11,7 @@ const mapStateToProps = (state: StateModel) => {
     header: state.modalWindow.header,
     body: state.modalWindow.body,
     buttons: state.modalWindow.buttons,
+    theme: state.theme,
   };
 };
 

@@ -1,7 +1,7 @@
 import { ButtonProps } from '@components/Button/Button.model';
 
 export interface MenuProps {
-  initialMatrix:number[][];
+  initialMatrix: number[][];
   difficultLevel: number;
   generateNewGame: (matrix: number[][]) => void;
   moveDone: (row: number, col: number, value: number) => void;

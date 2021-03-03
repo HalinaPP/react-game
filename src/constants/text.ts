@@ -33,6 +33,8 @@ export const SETTINGS_INFO = {
   handleSound: 'Active Sounds',
   handleOn: 'Sound On',
   fieldBlockColorOn: 'Color field block',
+  lightTheme: 'Light theme',
+  darkTheme: 'Dark theme',
   difficultLevel: 'Level',
   volume: 'Volume',
 };

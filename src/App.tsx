@@ -1,41 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect} from 'react';
 import { Provider } from 'react-redux';
-import styled, { ThemeProvider } from 'styled-components';
 import 'bootswatch/dist/sketchy/bootstrap.min.css';
-//import {light_theme, dark_theme} from './theme_style.scss';
 import './style.scss';
-import { ModalContainer } from '@/containers/ModalContainer';
-import { MenuContainer } from '@/containers/MenuContainer';
-import { GameContainer } from '@/containers/GameContainer';
+import {MainContainer} from '@/containers/MainContainer';
 import { store } from './store';
 import { handleKeyPress } from '@/utils/utils';
-import Footer from '@components/Footer';
 import { initLocalStarage } from '@/utils/localStorage';
+import {LangContext} from '@/utils/langContext';
 
 export const App = () => {
+  
   useEffect(() => {
     initLocalStarage();
     document.addEventListener('keydown', handleKeyPress);
-    //showModal();//<Modal header={MENU.name} body={MENU.choose} />
   }, []);
-
-  /* const {
-    modalWindow: { header, body, buttons },
-  } = store.getState();
-*/
+ 
   return (
     <Provider store={store}>
       <React.Fragment>
-        <main>
-          <aside className="game">
-            <GameContainer />
-          </aside>
-          <aside>
-            <MenuContainer />
-          </aside>
-        </main>
-        <Footer />
-        <ModalContainer />
+        <LangContext.Provider value={store.getState().theme}>
+          <MainContainer/>
+        </LangContext.Provider>
       </React.Fragment>
     </Provider>
   );

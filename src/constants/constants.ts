@@ -18,3 +18,19 @@ export const FOOTER_COPYRIGHT = {
   developer: `<span><a href='https://github.com/HalinaPP'>@halinapp</a> </span><span>2021</span>`,
   rsLogo: `<a href='https://rs.school/js/'><img src="${imagesPath}/rs_school_js.svg" alt="RS SCHOOL"></a>`,
 };
+
+export const themes = {
+  light: {
+    foreground: "#000000",
+    background: "#fff",
+    middle:"#fff",
+    info:"#aca9a9"
+
+  },
+  dark: {
+    foreground: "#ffffff",
+    background: "#222222",
+    middle:"#555454",
+    info:"#aca9a9"
+  }
+};

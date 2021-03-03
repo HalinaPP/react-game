@@ -40,6 +40,12 @@ export const clickBtn = (btnId: string): void => {
 
 export const handleKeyPress = (event: KeyboardEvent) => {
   const hotKey = Object.entries(HOT_KEYS).find(item => item[1] === event.code);
+  console.log('eve=', event.code);
+  if (event.code === 'Escape') {
+    const modalWindow = document.getElementById('modalWindow');
+    modalWindow?.classList.remove('show');
+    modalWindow?.classList.remove('modal-dialog-centered');
+  }
   if (hotKey?.length) {
     clickBtn(hotKey[0]);
   }

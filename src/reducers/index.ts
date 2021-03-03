@@ -1,8 +1,7 @@
 import { TYPE_LEVEL } from '@/constants/constants';
 import { ACTIONS } from '@/actions/constants';
 import { ButtonProps } from '@components/Button/Button.model';
-import { initLocalStarage } from '@/utils/localStorage';
-import { isConstructorDeclaration } from 'typescript';
+import {themes} from '@/constants/constants';
 
 export interface StateModel {
   bgSoundOn: {
@@ -26,6 +25,8 @@ export interface StateModel {
     body?: HTMLElement;
     buttons: ButtonProps[];
   };
+  theme: any,
+  lightTheme:boolean
 }
 
 const initialState: StateModel = {
@@ -50,22 +51,24 @@ const initialState: StateModel = {
     body: undefined,
     buttons: [],
   },
+  theme: themes.dark,
+  lightTheme:true
 };
 
 Object.entries(initialState).forEach(item => {
   const el = localStorage.getItem(item[0]);
- // console.log('i=', item[0]);
- // console.log('v=', el);
- const objEl =['bgSoundOn' ,'handleSoundOn', 'matrixHistory','initialMatrix'];
+  const objEl = ['bgSoundOn', 'handleSoundOn', 'matrixHistory', 'initialMatrix'];
+  
   if (el !== null && el !== '') {
     if (objEl.includes(el)) {
       initialState[item[0]] = JSON.parse(el);
     } else {
       initialState[item[0]] = JSON.parse(el);
     }
-    //console.log('from loc');
+    
   }
 });
+initialState.theme =  initialState.lightTheme ? themes.light : themes.dark;
 
 console.log('state', initialState);
 
@@ -82,7 +85,7 @@ export const reducer = (state = initialState, action: any): StateModel => {
       localStorage.setItem('initialMatrix', JSON.stringify(action.payload.initialMatrix));
       localStorage.setItem('moveNumber', '0');
       localStorage.setItem('sudokuStartTime', action.payload.startTime.toString());
-console.log('new gammmmmmmm');
+      console.log('new gammmmmmmm');
       return {
         ...state,
         moveNumber: 0,
@@ -187,15 +190,18 @@ console.log('new gammmmmmmm');
     case ACTIONS.updateFieldSettings:
       localStorage.setItem('fieldBlockColorOn', JSON.stringify(action.payload.colorOn));
       localStorage.setItem('difficultLevel', JSON.stringify(action.payload.level));
-
+      localStorage.setItem('lightTheme', JSON.stringify(action.payload.lightTheme));
+      const theme = action.payload.lightTheme ? themes.light : themes.dark;
       return {
         ...state,
         fieldBlockColorOn: action.payload.colorOn,
         difficultLevel: action.payload.level,
+        lightTheme: action.payload.lightTheme,
+        theme: theme
       };
 
     case ACTIONS.setShowModalSetting:
-      console.log('b_info2', action.payload.buttons);
+      
       return {
         ...state,
         modalWindow: {

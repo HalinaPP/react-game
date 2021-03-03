@@ -17,7 +17,7 @@ const Score: FC<ScoreProps> = ({ score }) => {
           <div>{SCORE_INFO.time}</div>
           <div>{SCORE_INFO.level}</div>
         </div>
-        {currScore.map((item: scoreUserData, index: number) => {
+        {currScore ? currScore.map((item: scoreUserData, index: number) => {
           return (
             <div key={index} className="score__row">
               <div>{index + 1}</div>
@@ -27,7 +27,7 @@ const Score: FC<ScoreProps> = ({ score }) => {
               <div>{item.level}</div>
             </div>
           );
-        })}
+        }) : null}
       </div>
     );
   };

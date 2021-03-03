@@ -4,25 +4,18 @@ import { scoreUserData } from '@/types';
 
 const {
   sudokuUserName,
-  matrixHistory,
-  currMatrix,
-  moveNumber,
-  difficultLevel,
-  fieldBlockColorOn,
-  bgSoundOn,
-  handleSoundOn,
   sudokuScoreTable,
 } = LOCALSTORAGE_INFO;
 
 const initialState = {
-  sudokuUserName: 'UserN',
+  sudokuUserName: 'Player',
   matrixHistory: '',
   currMatrix: '',
-  initialMatrix:'',
+  initialMatrix: '',
   moveNumber: '0',
   difficultLevel: TYPE_LEVEL.crossCheck.toString(),
   fieldBlockColorOn: 'true',
-
+  lightTheme:'true',
   bgSoundOn: JSON.stringify({
     turnOn: false,
     volume: 1,
@@ -37,10 +30,7 @@ const initialState = {
 export const initLocalStarage = (): void => {
   Object.entries(initialState).forEach(item => {
     const el = localStorage.getItem(item[0]);
-   // console.log('i=', item[0]);
-   // console.log('v=', el);
     if (el !== null && el !== '') {
-    //  console.log('from loc');
       localStorage.setItem(item[0], el);
     } else {
       localStorage.setItem(item[0], item[1]);

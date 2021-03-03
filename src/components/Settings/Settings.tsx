@@ -11,42 +11,41 @@ const Settings: FC<SettingsProps> = ({
   bgSoundOn,
   handleSoundOn,
   fieldBlockColorOn,
+  lightThemeOn,
+  theme,
   difficultLevel,
   updateFieldSettings,
   updateSoundVolume,
   soundMute,
-  generateNewGame
+  generateNewGame,
 }) => {
   const levels = Object.keys(TYPE_LEVEL);
   const [colorOn, setColorOn] = useState(fieldBlockColorOn);
+  const [isLightTheme, setIsLightTheme] = useState(lightThemeOn);
   const [currDifficultLevel, setCurrDifficultLevel] = useState(difficultLevel);
 
   useEffect(() => {
-    return function () {
-      console.log('sett del=' + colorOn + ' g=' + currDifficultLevel);
-    };
-  }, []);
+    updateFieldSettings(colorOn, currDifficultLevel,isLightTheme);
+    console.log('themeeeeeee',theme);
+  }, [colorOn, currDifficultLevel,isLightTheme]);
 
-  useEffect(() => {
-    console.log('gener');
-  
-  }, [difficultLevel]);
- 
-  useEffect(() => {
-    updateFieldSettings(colorOn, currDifficultLevel);
-  }, [colorOn, currDifficultLevel]);
-
-  const changeFieldColor = () =>{
+  const changeFieldColor = () => {
     setColorOn(!colorOn);
+    playSound(handleSoundOn.turnOn, SOUNDS.button, handleSoundOn.volume);
+  };
+
+  const changeTheme = () =>{
+    setIsLightTheme(!isLightTheme);
     playSound(handleSoundOn.turnOn, SOUNDS.button, handleSoundOn.volume);
   }
 
-  const changeDifficultLevel = (event:React.ChangeEvent)=>{
+
+  const changeDifficultLevel = (event: React.ChangeEvent) => {
     const levelEl = event.target;
     setCurrDifficultLevel(TYPE_LEVEL[levelEl.id]);
     generateNewGame(createSudokuMatrix(size, TYPE_LEVEL[levelEl.id]));
     playSound(handleSoundOn.turnOn, SOUNDS.button, handleSoundOn.volume);
-  }
+  };
 
   return (
     <div className="settings">
@@ -122,6 +121,19 @@ const Settings: FC<SettingsProps> = ({
           />
           <label className="custom-control-label" htmlFor="fieldBlockColorOn">
             {SETTINGS_INFO.fieldBlockColorOn}
+          </label>
+        </div>
+        <div className="custom-control custom-switch">
+          <span className="theme-pad">{SETTINGS_INFO.darkTheme}</span>
+          <input
+            type="checkbox"
+            className="custom-control-input"
+            id="isLightTheme"
+            checked={isLightTheme}
+            onChange={changeTheme}
+          />
+          <label className="custom-control-label" htmlFor="isLightTheme">
+            {SETTINGS_INFO.lightTheme}
           </label>
         </div>
         <hr />

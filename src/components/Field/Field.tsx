@@ -48,8 +48,8 @@ const Field: FC<FieldProps> = ({
 
   useEffect(() => {
     console.log('field new render=', fieldBlockColorOn);
-   /* console.log('ini',initialMatrix);*/
-   console.log('initial matrix=',initialMatrix);
+    /* console.log('ini',initialMatrix);*/
+    console.log('initial matrix=', initialMatrix);
     setCells(getCells(initialMatrix, fieldBlockColorOn));
   }, [fieldBlockColorOn, initialMatrix]);
 

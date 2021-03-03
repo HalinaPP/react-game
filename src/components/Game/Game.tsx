@@ -102,8 +102,9 @@ const Game: FC<GameProps> = ({
 
   return (
     <React.Fragment>
+    
       <div id="fs-container">
-        <div className="fs_section" id="game-container">
+         <div className="fs_section" id="game-container">
           <div className="game-wrap">
             <div className="game-info">
               <Timer startTime={startTime} />
