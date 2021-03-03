@@ -1,32 +1,30 @@
 @import '@/style.scss';
-.score{
+.score {
   font-size: 2.2rem;
   text-align: left;
 
-  &__row{
+  &__row {
     @include flex(row, flex-start);
     column-gap: 1rem;
-    padding:1rem 0.5rem;
+    padding: 1rem 0.5rem;
 
-    div{ 
-      width:10rem;
+    div {
+      width: 10rem;
     }
-    div:first-child{
-      width: 3rem;
-      
-    }
-    div:nth-child(3){
+    div:first-child {
       width: 3rem;
     }
-    div:nth-child(4){
+    div:nth-child(3) {
+      width: 3rem;
+    }
+    div:nth-child(4) {
       width: 15rem;
     }
   }
-  &__row:nth-child(2n+1){
+  &__row:nth-child(2n + 1) {
     background-color: #bee5eb;
   }
-  &__row:nth-child(2n){
-   background-color: #ffeeba;
-  
+  &__row:nth-child(2n) {
+    background-color: #ffeeba;
   }
 }

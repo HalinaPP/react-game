@@ -4,8 +4,7 @@ import { isSolvedCorrectly, solve } from './sudokuSolver';
 export const checkSolvedMatrix = (initialMatrix: number[][], solvedMatrix: number[][]): boolean => {
   const copyCutMatrixs = [...initialMatrix.map(row => [...row])];
   const initialSolvedMatrix = solve(copyCutMatrixs);
-  console.log('init=', initialSolvedMatrix);
-  console.log('solved', solvedMatrix);
+
   return isSolvedCorrectly(initialSolvedMatrix, solvedMatrix);
 };
 
@@ -118,29 +117,12 @@ const hideNumbers = (matrix: number[][], size: number, difficultLevel: number) =
   const viewMatrixElement = new Array(maxElement).fill(0).map(() => new Array(maxElement).fill(0));
   const cutMatrix = [...matrix.map(row => [...row])];
 
-  //console.log('vi=', viewMatrixElement);
-
   let iterator = 0;
   const cellsNumber = size ** 4;
   let difficult = cellsNumber;
 
   const difficultLevelCount = Math.trunc((cellsNumber * difficultLevel) / 100);
   console.log('ddd=', difficultLevelCount);
-  /*
-  const a = [[7, 0, 4, 8, 0, 0, 0, 9, 3],
- [5, 8, 0, 6, 0, 0, 4, 0, 1],
- [0, 0, 3, 0, 0, 0, 0, 8, 0],
- [0, 2, 0, 0, 3, 0, 0, 0, 0],
- [9, 0, 6, 1, 4, 0, 0, 0, 5],
- [1, 0, 7, 0, 5, 0, 0, 3, 0],
- [4, 7, 0, 0, 8, 0, 0, 0, 0],
- [0, 6, 9, 0, 7, 1, 0, 5, 8],
- [2, 0, 0, 0, 0, 0, 1, 4, 0]];
-
- const solvedMatrix1 = solve(a);
- console.log('sol=',solvedMatrix1);
- console.log('matrix=',a);
-*/
 
   while (iterator < cellsNumber && difficult > difficultLevelCount) {
     const row = Math.trunc(Math.random() * maxElement);
@@ -154,22 +136,13 @@ const hideNumbers = (matrix: number[][], size: number, difficultLevel: number) =
       cutMatrix[row][col] = 0;
       difficult -= 1;
 
-      /* const copyCutMatrixs = [...cutMatrix.map(row => [...row])];
-      const solvedMatrix = solve(copyCutMatrixs);*/
-      /*console.log('sol=',solvedMatrix);
-      console.log('matrix=',matrix);*/
-
-      // console.log('is=', isSolvedCorrectly(solvedMatrix, matrix));
-
       if (!checkSolvedMatrix(cutMatrix, matrix)) {
-        console.log('is=fa');
         cutMatrix[row][col] = currElement;
         difficult += 1;
       }
-      console.log('diffic=', difficult);
     }
   }
-  console.log('ite=' + iterator + ' s' + difficult);
+
   return cutMatrix;
 };
 

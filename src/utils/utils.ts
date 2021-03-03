@@ -5,6 +5,14 @@ export const addZero = (n: string): string => {
   return (parseInt(n, 10) < 10 ? '0' : '') + n;
 };
 
+export const showTime = (currTime: Date): string => {
+  const now: Date = new Date();
+  const delta = Math.trunc((+now - +currTime) / 1000);
+ // console.log('delta', getMinSecTime(delta));
+  return getMinSecTime(delta);
+
+};
+
 export const getMinSecTime = (time: number): string => {
   const sec = time % 60;
   const min = Math.trunc(time / 60);

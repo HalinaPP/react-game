@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
-import styled, { ThemeProvider } from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components';
 import 'bootswatch/dist/sketchy/bootstrap.min.css';
 //import {light_theme, dark_theme} from './theme_style.scss';
 import './style.scss';
@@ -26,7 +26,6 @@ export const App = () => {
   return (
     <Provider store={store}>
       <React.Fragment>
-
         <main>
           <aside className="game">
             <GameContainer />
@@ -37,7 +36,6 @@ export const App = () => {
         </main>
         <Footer />
         <ModalContainer />
-       
       </React.Fragment>
     </Provider>
   );

@@ -16,6 +16,7 @@ export interface StateModel {
   initialMatrix: number[][];
   currMatrix: number[][];
   matrixHistory: number[][][];
+  startTime: Date;
   moveNumber: number;
   modalWindow: {
     isEmpty: boolean;
@@ -39,6 +40,7 @@ const initialState: StateModel = {
   initialMatrix: [],
   currMatrix: [],
   matrixHistory: [],
+  startTime: new Date(),
   moveNumber: 0,
   modalWindow: {
     isEmpty: true,
@@ -62,14 +64,20 @@ export const reducer = (state = initialState, action: any): StateModel => {
       localStorage.setItem('difficultLevel', state.difficultLevel.toString());
       localStorage.setItem('fieldBlockColorOn', state.fieldBlockColorOn.toString());
       localStorage.setItem('fieldBlockColorOn', state.fieldBlockColorOn.toString());
+      localStorage.setItem('sudokuStartTime', action.payload);
 
       return {
         ...state,
         moveNumber: 0,
+        startTime: new Date(),
         initialMatrix: [...action.payload.map((row: number[]) => [...row])],
         currMatrix: [...action.payload.map((row: number[]) => [...row])],
         matrixHistory: [],
       };
+
+    case ACTIONS.setStartTime:
+      localStorage.setItem('sudokuStartTime', action.payload);
+      return { ...state, startTime: action.payload };
 
     case ACTIONS.moveDone:
       const [col, row, value] = action.payload;
@@ -170,13 +178,14 @@ export const reducer = (state = initialState, action: any): StateModel => {
       };
 
     case ACTIONS.setShowModalSetting:
+      console.log('b_info2',action.payload.buttons);
       return {
         ...state,
         modalWindow: {
           isEmpty: action.payload.isEmpty,
           header: action.payload.header,
           body: action.payload.body,
-          buttons: action.payload.buttons,
+          buttons: [...action.payload.buttons],
         },
       };
     default:

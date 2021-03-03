@@ -1,25 +1,28 @@
-import React, { FC } from 'react';
-import { getMinSecTime } from '@/utils/utils';
+import React, { FC, useState, useEffect } from 'react';
+import { TimerProps } from './Timer.model';
+import { showTime } from '@/utils/utils';
 import { GAME_INFO } from '@/constants/text';
+import './styles.scss';
 
-const startTime = new Date();
+const Timer: FC<TimerProps> = ({ startTime }) => {
 
-const Timer: FC = () => {
-  const showTime = (currTime: Date): string => {
-    const now: Date = new Date();
-    const delta = Math.trunc((+now - +currTime) / 1000);
+  const [time, setTime] = useState('00:00');
+  
+  useEffect(() => {
+    const timer = () =>
+      setTimeout(() => {
+        setTime(showTime(startTime));
+      }, 1000);
 
-    return getMinSecTime(delta);
-
-    /* localStorage.setItem(
-      'timeId',
-      setTimeout(() => showTime(currTime), 1000)
-    );*/
-  };
-
+    const timerId = timer();
+    return () => {
+      clearTimeout(timerId);
+    };
+  });
+ 
   return (
-    <div>
-      {GAME_INFO.time}: {showTime(startTime)}
+    <div className="game-info__timer">
+      {GAME_INFO.time}: <span className="text-info">{time}</span>
     </div>
   );
 };

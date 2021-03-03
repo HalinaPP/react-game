@@ -43,3 +43,8 @@ export const moveDone = (row: number, col: number, value: number) => ({
   type: ACTIONS.moveDone,
   payload: [col, row, value],
 });
+
+export const setStartTime = (time: Date) => ({
+  type: ACTIONS.setStartTime,
+  payload: time,
+});

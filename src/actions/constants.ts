@@ -1,6 +1,7 @@
 export const ACTIONS = {
   newGame: 'NEW_GAME',
   moveDone: 'MOVE_DONE',
+  setStartTime: 'SET_START_TIME',
   undo: 'UNDO',
   clear: 'CLEAR',
   updateInputNumber: 'UPDATE_INPUT_NUMBER',

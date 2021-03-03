@@ -49,7 +49,7 @@ export const HELP_INFO = {
     ['H', MENU.buttons.help.name],
     ['U', GAME_INFO.buttons.undo.name],
     ['C', GAME_INFO.buttons.clear.name],
-  //  ['M', 'Mute'],
+    //  ['M', 'Mute'],
   ],
   fullscreen: {
     title: 'Fullscreen mode',
@@ -71,4 +71,4 @@ export const LOCALSTORAGE_INFO = {
   handleSoundOn: 'handleSoundOn',
   sudokuScoreTable: 'sudokuScoreTable',
 };
-export const BUTTON_OK = 'OK';
+export const BUTTON_OK = { name: 'OK', id: 'ok' };

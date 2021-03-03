@@ -11,6 +11,12 @@ export const showModal = () => {
   modalWindow?.classList.add('modal-dialog-centered');
 };
 
+export const hideModal = () => {
+  const modalWindow = document.getElementById('modalWindow');
+  modalWindow?.classList.remove('show');
+  modalWindow?.classList.remove('modal-dialog-centered');
+};
+
 const Modal: FC<ModalProps> = ({ isEmpty, header, body, buttons = [], onSetShowModalSetting }) => {
   const handleClose = useCallback(() => {
     const modalWindow = document.getElementById('modalWindow');
@@ -23,7 +29,6 @@ const Modal: FC<ModalProps> = ({ isEmpty, header, body, buttons = [], onSetShowM
     if (buttons.length > 0) {
       return buttons.map(
         (item: ButtonProps): JSX.Element => {
-          console.log('item', item);
           return (
             <ButtonContainer
               key={item.name}
@@ -36,9 +41,14 @@ const Modal: FC<ModalProps> = ({ isEmpty, header, body, buttons = [], onSetShowM
       );
     }
     return [
-      <ButtonContainer key={BUTTON_OK} id={BUTTON_OK} name={BUTTON_OK} handleClick={handleClose} />,
+      <ButtonContainer
+        key={BUTTON_OK.id}
+        id={BUTTON_OK.id}
+        name={BUTTON_OK.name}
+        handleClick={handleClose}
+      />,
     ];
-  }, []);
+  }, [buttons]);
 
   return isEmpty ? (
     <div id="modalWindow" className="modal fade "></div>

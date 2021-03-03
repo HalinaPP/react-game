@@ -14,7 +14,7 @@ const {
   sudokuScoreTable,
 } = LOCALSTORAGE_INFO;
 
-export const initLocalStarage = ():void => {
+export const initLocalStarage = (): void => {
   localStorage.setItem(sudokuUserName, 'UserN');
   localStorage.setItem(matrixHistory, '');
   localStorage.setItem(currMatrix, '');
@@ -37,7 +37,7 @@ export const initLocalStarage = ():void => {
   );
 };
 
-export const setScore = (moves: number, time: Date, level: number):void => {
+export const setScore = (moves: number, time: string, level: number): void => {
   const userName = localStorage.getItem(sudokuUserName);
   const scoreTable = JSON.parse(String(localStorage.getItem(sudokuScoreTable)));
   const levelName = Object.entries(TYPE_LEVEL).find(item => item[1] === level)?.[0];
@@ -54,13 +54,13 @@ export const setScore = (moves: number, time: Date, level: number):void => {
     newScoreTable = [
       ...scoreTable.slice(0, position),
       userScoreData,
-      ...scoreTable.slice(position, SCORE_MAX_LENGTH-1),
+      ...scoreTable.slice(position, SCORE_MAX_LENGTH - 1),
     ];
   }
 
   localStorage.setItem(sudokuScoreTable, JSON.stringify(newScoreTable));
 };
 
-export const getScore = () =>{
-    return JSON.parse(String(localStorage.getItem(sudokuScoreTable)));
-}
+export const getScore = () => {
+  return JSON.parse(String(localStorage.getItem(sudokuScoreTable)));
+};

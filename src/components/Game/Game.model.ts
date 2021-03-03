@@ -9,6 +9,7 @@ export interface GameProps {
   difficultLevel: number;
   initialMatrix: number[][];
   currMatrix: number[][];
+  startTime: Date;
   generateNewGame: (matrix: number[][]) => void;
   onSetShowModalSetting: (
     isEmpty: boolean,

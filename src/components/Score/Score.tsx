@@ -1,13 +1,12 @@
 import React, { FC } from 'react';
 import './styles.scss';
-import { HELP_INFO } from '@/constants/text';
 import { ScoreProps } from './Score.model';
-import {scoreUserData} from '@/types';
+import { scoreUserData } from '@/types';
 
 const Score: FC<ScoreProps> = ({ score }) => {
   console.log('SCORE+', score);
 
-  const getScoreItems = (currScore:scoreUserData[]) => {
+  const getScoreItems = (currScore: scoreUserData[]) => {
     const options = {
       year: 'numeric',
       month: 'numeric',
@@ -19,9 +18,7 @@ const Score: FC<ScoreProps> = ({ score }) => {
 
     return (
       <div>
-        {currScore.map((item:scoreUserData, index: number) => {
-          console.log('t=', item.time);
-          console.log();
+        {currScore.map((item: scoreUserData, index: number) => {
           return (
             <div key={index} className="score__row">
               <div>{index + 1}</div>
@@ -35,7 +32,6 @@ const Score: FC<ScoreProps> = ({ score }) => {
       </div>
     );
   };
-
 
   return <div className="score">{getScoreItems(score)}</div>;
 };

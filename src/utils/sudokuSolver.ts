@@ -149,9 +149,7 @@ const solveOneValueNeed = (board: number[][]) => {
 };
 
 export const solve = (board3: number[][]) => {
-  //console.log('board=', board3);
   let board2 = JSON.parse(JSON.stringify(board3));
-  // console.log('mmm=', board2);
   let updated = true;
   let solved = false;
 
@@ -159,14 +157,7 @@ export const solve = (board3: number[][]) => {
     updated = solveOneValueNeed(board2);
     solved = isSolved(board2);
   }
-  console.log('solved=', solved);
-
-  /*let board4 = JSON.parse(JSON.stringify(board3));
-  console.log('board4=',board4);
-  console.log('solved2=', solved);
-  console.log('sooooo=', board2);
-*/
-
+  
   return board2;
 };
 

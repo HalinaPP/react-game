@@ -1,17 +1,16 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC, useState, useEffect, useCallback } from 'react';
 import './styles.scss';
 import { size } from '@/constants/constants';
-import { GAME_INFO, CHECK_SOLVE } from '@/constants/text';
+import { GAME_INFO, CHECK_SOLVE, BUTTON_OK, MENU } from '@/constants/text';
 import { SOUNDS } from '@/constants/sounds';
 import Timer from '@components/Timer';
-import { showModal } from '@components/Modal';
+import { showModal, hideModal } from '@components/Modal';
 import { ButtonContainer } from '@/containers/Button.container';
 import { FieldContainer } from '@/containers/Field.container';
-import { playSound } from '@/utils/utils';
+import { playSound, showTime } from '@/utils/utils';
 import { createSudokuMatrix, checkSolvedMatrix } from '@/utils/sudokuGenerator';
 import { GameProps } from './Game.model';
 import { setScore } from '@/utils/localStorage';
-const time = new Date();
 
 const Game: FC<GameProps> = ({
   newMove,
@@ -22,6 +21,7 @@ const Game: FC<GameProps> = ({
   difficultLevel,
   initialMatrix,
   currMatrix,
+  startTime,
   generateNewGame,
   onSetShowModalSetting,
   clearField,
@@ -31,16 +31,13 @@ const Game: FC<GameProps> = ({
   const [message, setMessage] = useState('');
   const [messageClass, setMessageClass] = useState('checkMessage-fullscreen');
 
-  useEffect(() => {
-    console.log('message');
-  }, [message]);
-
-  useEffect(() => {
+ useEffect(() => {
     audioEl?.pause();
     setAudioEl(playSound(bgSoundOn, SOUNDS.bg, bgSoundVolume, true));
     return function () {
       audioEl?.pause();
     };
+
   }, []);
 
   useEffect(() => {
@@ -59,34 +56,57 @@ const Game: FC<GameProps> = ({
     }
   }, [bgSoundOn, bgSoundVolume]);
 
-  const closeAlert = (event:React.MouseEvent) =>{
+  const closeAlert = () => {
     setMessageClass('checkMessage-fullscreen');
-  }
+  };
 
+  const winBtnClick = () => {
+    generateNewGame(createSudokuMatrix(size, difficultLevel));
+    hideModal();
+  };
 
-  const checkFill = () => {
-    console.log('checkFill');
+  const checkFill = useCallback(() => {
     const isCorrect = checkSolvedMatrix(initialMatrix, currMatrix);
 
     const resultMessage = isCorrect ? CHECK_SOLVE.correctSolve : CHECK_SOLVE.wrongSolve;
     setMessage(resultMessage);
 
-    const mesClass = isCorrect
-      ? 'checkMessage-fullscreen alert alert-dismissible  alert-success'
-      : 'checkMessage-fullscreen alert alert-dismissible alert-danger';
-    setMessageClass(mesClass);
+    const statusClass = isCorrect ? `success` : `danger`;
+
+    const textClass = `text-${statusClass}`;
+    const alertClass = `checkMessage-fullscreen alert alert-dismissible  alert-${statusClass}`;
+    setMessageClass(alertClass);
 
     const audioFileName = isCorrect ? SOUNDS.correctSolve : SOUNDS.wrongSolve;
 
     playSound(handleSoundOn, audioFileName, handleSoundVolume);
-    onSetShowModalSetting(false, CHECK_SOLVE.check, <div>{resultMessage}</div>, []);
+    
+    const btnInfo = isCorrect
+      ? [
+          {
+            id: MENU.buttons.newGame.id,
+            name: MENU.buttons.newGame.name,
+            handleSoundOn,
+            handleSoundVolume,
+            handleClick: winBtnClick,
+          },
+        ]
+      : [];
+
+    onSetShowModalSetting(
+      false,
+      CHECK_SOLVE.check,
+      <div className={textClass}>{resultMessage}</div>,
+      btnInfo
+    );
     showModal();
 
     if (isCorrect) {
-      setScore(newMove, time, difficultLevel);
-      generateNewGame(createSudokuMatrix(size, difficultLevel));
+      setScore(newMove, showTime(startTime), difficultLevel);
+ 
     }
-  };
+  }, [initialMatrix, currMatrix, handleSoundOn, handleSoundVolume, difficultLevel, newMove]);
+
 
   return (
     <React.Fragment>
@@ -94,9 +114,9 @@ const Game: FC<GameProps> = ({
         <div className="fs_section" id="game-container">
           <div className="game-wrap">
             <div className="game-info">
-              <Timer />
-              <div>
-                {GAME_INFO.moves}: {newMove}
+              <Timer startTime={startTime}/>
+              <div className="game-inf">
+                {GAME_INFO.moves}: <span className="text-info">{newMove}</span>
               </div>
               <div className="game-info__button-container">
                 <ButtonContainer
@@ -119,7 +139,7 @@ const Game: FC<GameProps> = ({
               </div>
             </div>
             <div className={messageClass}>
-              <button type="button" className="close" data-dismiss="alert" onClick = {closeAlert}>
+              <button type="button" className="close" data-dismiss="alert" onClick={closeAlert}>
                 &times;
               </button>
               {message}

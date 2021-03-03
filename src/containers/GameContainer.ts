@@ -15,6 +15,7 @@ const mapStateToProps = (state: StateModel) => {
     difficultLevel: state.difficultLevel,
     initialMatrix: state.initialMatrix,
     currMatrix: state.currMatrix,
+    startTime: state.startTime,
   };
 };
 

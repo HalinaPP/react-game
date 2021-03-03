@@ -1,5 +1,5 @@
-import {scoreUserData} from '@/types';
+import { scoreUserData } from '@/types';
 
-export interface ScoreProps{
-    score:scoreUserData[];
+export interface ScoreProps {
+  score: scoreUserData[];
 }
