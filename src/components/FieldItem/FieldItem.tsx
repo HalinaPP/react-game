@@ -49,6 +49,7 @@ const FieldItem: FC<FieldItemProps> = ({
       ///  maxLength="1"
       className={bgClass + (!isEditable ? ' fixed' : '')}
       disabled={!isEditable}
+      autoComplete="off"
       // value={fieldValue ? fieldValue : ''}
       value={initValue !== '' ? initValue : fieldValue}
       onFocus={() => {

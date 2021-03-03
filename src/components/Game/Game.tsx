@@ -10,7 +10,7 @@ import { FieldContainer } from '@/containers/Field.container';
 import { playSound } from '@/utils/utils';
 import { createSudokuMatrix, checkSolvedMatrix } from '@/utils/sudokuGenerator';
 import { GameProps } from './Game.model';
-import {setScore} from '@/utils/localStorage';
+import { setScore } from '@/utils/localStorage';
 const time = new Date();
 
 const Game: FC<GameProps> = ({
@@ -27,8 +27,13 @@ const Game: FC<GameProps> = ({
   clearField,
   undoMove,
 }) => {
-  const [moves, setMoves] = useState(0);
   const [audioEl, setAudioEl] = useState(new Audio());
+  const [message, setMessage] = useState('');
+  const [messageClass, setMessageClass] = useState('checkMessage-fullscreen');
+
+  useEffect(() => {
+    console.log('message');
+  }, [message]);
 
   useEffect(() => {
     audioEl?.pause();
@@ -54,21 +59,33 @@ const Game: FC<GameProps> = ({
     }
   }, [bgSoundOn, bgSoundVolume]);
 
+  const closeAlert = (event:React.MouseEvent) =>{
+    setMessageClass('checkMessage-fullscreen');
+  }
+
+
   const checkFill = () => {
     console.log('checkFill');
     const isCorrect = checkSolvedMatrix(initialMatrix, currMatrix);
-    const message = isCorrect ? CHECK_SOLVE.correctSolve : CHECK_SOLVE.wrongSolve;
+
+    const resultMessage = isCorrect ? CHECK_SOLVE.correctSolve : CHECK_SOLVE.wrongSolve;
+    setMessage(resultMessage);
+
+    const mesClass = isCorrect
+      ? 'checkMessage-fullscreen alert alert-dismissible  alert-success'
+      : 'checkMessage-fullscreen alert alert-dismissible alert-danger';
+    setMessageClass(mesClass);
+
     const audioFileName = isCorrect ? SOUNDS.correctSolve : SOUNDS.wrongSolve;
-    
+
     playSound(handleSoundOn, audioFileName, handleSoundVolume);
-    onSetShowModalSetting(false, CHECK_SOLVE.check, <div>{message}</div>, []);
+    onSetShowModalSetting(false, CHECK_SOLVE.check, <div>{resultMessage}</div>, []);
     showModal();
 
-    if(isCorrect){
+    if (isCorrect) {
       setScore(newMove, time, difficultLevel);
       generateNewGame(createSudokuMatrix(size, difficultLevel));
     }
-  
   };
 
   return (
@@ -101,6 +118,13 @@ const Game: FC<GameProps> = ({
                 />
               </div>
             </div>
+            <div className={messageClass}>
+              <button type="button" className="close" data-dismiss="alert" onClick = {closeAlert}>
+                &times;
+              </button>
+              {message}
+            </div>
+
             <FieldContainer difficultLevel={difficultLevel} />
           </div>
         </div>

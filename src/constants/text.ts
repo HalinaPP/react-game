@@ -49,7 +49,7 @@ export const HELP_INFO = {
     ['H', MENU.buttons.help.name],
     ['U', GAME_INFO.buttons.undo.name],
     ['C', GAME_INFO.buttons.clear.name],
-    ['M', 'Mute'],
+  //  ['M', 'Mute'],
   ],
   fullscreen: {
     title: 'Fullscreen mode',
@@ -67,9 +67,8 @@ export const LOCALSTORAGE_INFO = {
   moveNumber: 'moveNumber',
   difficultLevel: 'difficultLevel',
   fieldBlockColorOn: 'fieldBlockColorOn',
-  bgSoundOn:'bgSoundOn',
-  handleSoundOn:'handleSoundOn',
-  sudokuScoreTable:'sudokuScoreTable'
-
+  bgSoundOn: 'bgSoundOn',
+  handleSoundOn: 'handleSoundOn',
+  sudokuScoreTable: 'sudokuScoreTable',
 };
 export const BUTTON_OK = 'OK';

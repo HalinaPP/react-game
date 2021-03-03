@@ -1,6 +1,8 @@
 import React, { useEffect } from 'react';
 import { Provider } from 'react-redux';
+import styled, { ThemeProvider } from 'styled-components'
 import 'bootswatch/dist/sketchy/bootstrap.min.css';
+//import {light_theme, dark_theme} from './theme_style.scss';
 import './style.scss';
 import { ModalContainer } from '@/containers/ModalContainer';
 import { MenuContainer } from '@/containers/MenuContainer';
@@ -8,7 +10,7 @@ import { GameContainer } from '@/containers/GameContainer';
 import { store } from './store';
 import { handleKeyPress } from '@/utils/utils';
 import Footer from '@components/Footer';
-import  {initLocalStarage} from '@/utils/localStorage';
+import { initLocalStarage } from '@/utils/localStorage';
 
 export const App = () => {
   useEffect(() => {
@@ -24,6 +26,7 @@ export const App = () => {
   return (
     <Provider store={store}>
       <React.Fragment>
+
         <main>
           <aside className="game">
             <GameContainer />
@@ -34,6 +37,7 @@ export const App = () => {
         </main>
         <Footer />
         <ModalContainer />
+       
       </React.Fragment>
     </Provider>
   );

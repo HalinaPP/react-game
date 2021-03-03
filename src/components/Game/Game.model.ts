@@ -1,7 +1,7 @@
 import { ButtonProps } from '@components/Button/Button.model';
 
 export interface GameProps {
-  newMove:number;
+  newMove: number;
   bgSoundOn: boolean;
   bgSoundVolume: number;
   handleSoundOn: boolean;

@@ -48,7 +48,6 @@ const initialState: StateModel = {
   },
 };
 
-
 export const reducer = (state = initialState, action: any): StateModel => {
   let newHistory;
   let newCurrMatrix;
@@ -59,7 +58,7 @@ export const reducer = (state = initialState, action: any): StateModel => {
     case ACTIONS.newGame:
       localStorage.setItem('matrixHistory', JSON.stringify([]));
       localStorage.setItem('currMatrix', JSON.stringify(action.payload));
-      localStorage.setItem('moveNumber', '0');    
+      localStorage.setItem('moveNumber', '0');
       localStorage.setItem('difficultLevel', state.difficultLevel.toString());
       localStorage.setItem('fieldBlockColorOn', state.fieldBlockColorOn.toString());
       localStorage.setItem('fieldBlockColorOn', state.fieldBlockColorOn.toString());

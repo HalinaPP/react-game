@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect } from 'react';
+import React, { FC } from 'react';
 import './styles.scss';
 import { HELP_INFO } from '@/constants/text';
 

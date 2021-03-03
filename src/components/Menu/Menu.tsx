@@ -1,17 +1,19 @@
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import './styles.scss';
+import { size } from '@/constants/constants';
 import { MENU } from '@/constants/text';
-import { ButtonProps } from '@components/Button/Button.model';
-import { ButtonContainer } from '@/containers/Button.container';
 import { showModal } from '@components/Modal';
-import { SettingsContainer } from '@/containers/Settings.container';
+import Score from '@components/Score';
 import Help from '@components/Help';
 import { MenuProps } from './Menu.model';
+import { ButtonProps } from '@components/Button/Button.model';
+import { ButtonContainer } from '@/containers/Button.container';
+import { SettingsContainer } from '@/containers/Settings.container';
 import { SOUNDS } from '@/constants/sounds';
 import { playSound } from '@/utils/utils';
 import { createSudokuMatrix } from '@/utils/sudokuGenerator';
-import { size } from '@/constants/constants';
 import { enterFullscreen } from '@/utils/fullscreen';
+import { getScore } from '@/utils/localStorage';
 
 const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNewGame }) => {
   const newGame = () => {
@@ -35,7 +37,7 @@ const Menu: FC<MenuProps> = ({ onSetShowModalSetting, difficultLevel, generateNe
 
   const showScore = () => {
     console.log('showScore');
-    onSetShowModalSetting(false, MENU.buttons.score.name, <React.Fragment></React.Fragment>, []);
+    onSetShowModalSetting(false, MENU.buttons.score.name, <Score score={getScore()} />, []);
     showModal();
   };
 

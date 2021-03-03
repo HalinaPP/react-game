@@ -15,7 +15,10 @@
     }
   }
 }
-
+.checkMessage-fullscreen{
+  font-size:2.2rem;
+  display:none;
+}
 :-webkit-full-screen .game-wrap {
   max-width: 80rem;
   height: 100vh;
@@ -30,6 +33,7 @@
   background: white;
 }
 
+
 :-webkit-full-screen#game-container.fs_section {
   width: 100%;
   left: 0;
@@ -43,4 +47,18 @@
 
 :-webkit-full-screen .field .col {
   height: unset;
+}
+:-webkit-full-screen .checkMessage-fullscreen{
+  
+  button{
+    display:none;
+  }
+  &.alert{
+    display: block;
+    padding-left: 4rem;
+    max-width: 25rem;
+    button{
+      display:block;
+    }
+  }
 }
