@@ -14,28 +14,39 @@ const {
   sudokuScoreTable,
 } = LOCALSTORAGE_INFO;
 
-export const initLocalStarage = (): void => {
-  localStorage.setItem(sudokuUserName, 'UserN');
-  localStorage.setItem(matrixHistory, '');
-  localStorage.setItem(currMatrix, '');
-  localStorage.setItem(moveNumber, '0');
-  localStorage.setItem(difficultLevel, TYPE_LEVEL.crossCheck.toString());
-  localStorage.setItem(fieldBlockColorOn, 'true');
-  localStorage.setItem(
-    bgSoundOn,
-    JSON.stringify({
-      turnOn: false,
-      volume: 1,
-    })
-  );
-  localStorage.setItem(
-    handleSoundOn,
-    JSON.stringify({
-      turnOn: true,
-      volume: 1,
-    })
-  );
+const initialState = {
+  sudokuUserName: 'UserN',
+  matrixHistory: '',
+  currMatrix: '',
+  moveNumber: '0',
+  difficultLevel: TYPE_LEVEL.crossCheck.toString(),
+  fieldBlockColorOn: 'true',
+
+  bgSoundOn: JSON.stringify({
+    turnOn: false,
+    volume: 1,
+  }),
+
+  handleSoundOn: JSON.stringify({
+    turnOn: true,
+    volume: 1,
+  }),
 };
+
+export const initLocalStarage = (): void => {
+  Object.entries(initialState).forEach(item => {
+    const el = localStorage.getItem(item[0]);
+    console.log('i=',item[0]);
+    console.log('v=',el);
+    if (el !== null && el !== '') {
+      console.log('from loc');
+      localStorage.setItem(item[0], el);
+    } else {
+      localStorage.setItem(item[0], item[1]);
+    }
+  });
+};
+
 
 export const setScore = (moves: number, time: string, level: number): void => {
   const userName = localStorage.getItem(sudokuUserName);

@@ -1,6 +1,6 @@
 export interface scoreUserData {
   userName: string;
   moves: number;
-  time: Date;
+  time: string;
   level: string;
 }

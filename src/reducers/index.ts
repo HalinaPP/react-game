@@ -1,6 +1,7 @@
 import { TYPE_LEVEL } from '@/constants/constants';
 import { ACTIONS } from '@/actions/constants';
 import { ButtonProps } from '@components/Button/Button.model';
+import { initLocalStarage } from '@/utils/localStorage';
 
 export interface StateModel {
   bgSoundOn: {
@@ -49,6 +50,23 @@ const initialState: StateModel = {
     buttons: [],
   },
 };
+
+Object.entries(initialState).forEach(item => {
+  const el = localStorage.getItem(item[0]);
+  console.log('i=', item[0]);
+  console.log('v=', el);
+  if (el !== null && el !== '') {
+    if(item[0]==='bgSoundOn' || item[0]==='handleSoundOn' || item[0] === 'matrixHistory' ){
+      initialState[item[0]] = JSON.parse(el);
+    }else{
+      initialState[item[0]] = JSON.parse(el);
+    }
+    console.log('from loc');
+    
+  }
+});
+
+console.log('state',initialState);
 
 export const reducer = (state = initialState, action: any): StateModel => {
   let newHistory;
@@ -178,7 +196,7 @@ export const reducer = (state = initialState, action: any): StateModel => {
       };
 
     case ACTIONS.setShowModalSetting:
-      console.log('b_info2',action.payload.buttons);
+      console.log('b_info2', action.payload.buttons);
       return {
         ...state,
         modalWindow: {

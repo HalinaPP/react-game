@@ -31,13 +31,12 @@ const Game: FC<GameProps> = ({
   const [message, setMessage] = useState('');
   const [messageClass, setMessageClass] = useState('checkMessage-fullscreen');
 
- useEffect(() => {
+  useEffect(() => {
     audioEl?.pause();
     setAudioEl(playSound(bgSoundOn, SOUNDS.bg, bgSoundVolume, true));
     return function () {
       audioEl?.pause();
     };
-
   }, []);
 
   useEffect(() => {
@@ -80,7 +79,7 @@ const Game: FC<GameProps> = ({
     const audioFileName = isCorrect ? SOUNDS.correctSolve : SOUNDS.wrongSolve;
 
     playSound(handleSoundOn, audioFileName, handleSoundVolume);
-    
+
     const btnInfo = isCorrect
       ? [
           {
@@ -103,10 +102,8 @@ const Game: FC<GameProps> = ({
 
     if (isCorrect) {
       setScore(newMove, showTime(startTime), difficultLevel);
- 
     }
   }, [initialMatrix, currMatrix, handleSoundOn, handleSoundVolume, difficultLevel, newMove]);
-
 
   return (
     <React.Fragment>
@@ -114,7 +111,7 @@ const Game: FC<GameProps> = ({
         <div className="fs_section" id="game-container">
           <div className="game-wrap">
             <div className="game-info">
-              <Timer startTime={startTime}/>
+              <Timer startTime={startTime} />
               <div className="game-inf">
                 {GAME_INFO.moves}: <span className="text-info">{newMove}</span>
               </div>

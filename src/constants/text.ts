@@ -72,3 +72,5 @@ export const LOCALSTORAGE_INFO = {
   sudokuScoreTable: 'sudokuScoreTable',
 };
 export const BUTTON_OK = { name: 'OK', id: 'ok' };
+
+export const SCORE_INFO = {userName:'player', moves:'Moves', time:'Time',level:'Level'};

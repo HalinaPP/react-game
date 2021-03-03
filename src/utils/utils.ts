@@ -8,9 +8,8 @@ export const addZero = (n: string): string => {
 export const showTime = (currTime: Date): string => {
   const now: Date = new Date();
   const delta = Math.trunc((+now - +currTime) / 1000);
- // console.log('delta', getMinSecTime(delta));
+  // console.log('delta', getMinSecTime(delta));
   return getMinSecTime(delta);
-
 };
 
 export const getMinSecTime = (time: number): string => {

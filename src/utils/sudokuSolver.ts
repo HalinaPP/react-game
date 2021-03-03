@@ -157,7 +157,7 @@ export const solve = (board3: number[][]) => {
     updated = solveOneValueNeed(board2);
     solved = isSolved(board2);
   }
-  
+
   return board2;
 };
 
