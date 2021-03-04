@@ -1,9 +1,13 @@
 import { ACTIONS } from '@/actions/constants';
 import { ButtonProps } from '@components/Button/Button.model';
 
-export const updateFieldSettings = (fieldBlockColorOn: boolean, difficultLevel: number,lightTheme:boolean) => ({
+export const updateFieldSettings = (
+  fieldBlockColorOn: boolean,
+  difficultLevel: number,
+  lightTheme: boolean
+) => ({
   type: ACTIONS.updateFieldSettings,
-  payload: { lightTheme,colorOn: fieldBlockColorOn, level: difficultLevel },
+  payload: { lightTheme, colorOn: fieldBlockColorOn, level: difficultLevel },
 });
 
 export const setShowModalSetting = (

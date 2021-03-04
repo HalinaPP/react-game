@@ -4,7 +4,7 @@ import { ModalProps } from './Modal.model';
 import { ButtonProps } from '@components/Button/Button.model';
 import { ButtonContainer } from '@/containers/Button.container';
 import { BUTTON_OK } from '@/constants/text';
-import {LangContext} from '@/utils/langContext';
+import { LangContext } from '@/utils/langContext';
 export const showModal = () => {
   const modalWindow = document.getElementById('modalWindow');
   modalWindow?.classList.add('show');
@@ -17,7 +17,14 @@ export const hideModal = () => {
   modalWindow?.classList.remove('modal-dialog-centered');
 };
 
-const Modal: FC<ModalProps> = ({ isEmpty, header, body, theme, buttons = [], onSetShowModalSetting }) => {
+const Modal: FC<ModalProps> = ({
+  isEmpty,
+  header,
+  body,
+  theme,
+  buttons = [],
+  onSetShowModalSetting,
+}) => {
   const handleClose = useCallback(() => {
     const modalWindow = document.getElementById('modalWindow');
     modalWindow?.classList.remove('show');
@@ -53,9 +60,12 @@ const Modal: FC<ModalProps> = ({ isEmpty, header, body, theme, buttons = [], onS
   return isEmpty ? (
     <div id="modalWindow" className="modal fade "></div>
   ) : (
-    <div id="modalWindow" className="modal fade " >
-      <div className="modal-dialog" role="document" >
-        <div className="modal-content"  style={{ background: theme.middle, color: theme.foreground} }>
+    <div id="modalWindow" className="modal fade ">
+      <div className="modal-dialog" role="document">
+        <div
+          className="modal-content"
+          style={{ background: theme.middle, color: theme.foreground }}
+        >
           <h2 className="card-header text-info">{header}</h2>
           {body && <div className="modal-body">{body}</div>}
           <div className="modal-footer">{buttonItems()}</div>

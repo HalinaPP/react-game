@@ -17,17 +17,19 @@ const Score: FC<ScoreProps> = ({ score }) => {
           <div>{SCORE_INFO.time}</div>
           <div>{SCORE_INFO.level}</div>
         </div>
-        {currScore ? currScore.map((item: scoreUserData, index: number) => {
-          return (
-            <div key={index} className="score__row">
-              <div>{index + 1}</div>
-              <div>{item.userName}</div>
-              <div>{item.moves}</div>
-              <div>{item.time}</div>
-              <div>{item.level}</div>
-            </div>
-          );
-        }) : null}
+        {currScore
+          ? currScore.map((item: scoreUserData, index: number) => {
+              return (
+                <div key={index} className="score__row">
+                  <div>{index + 1}</div>
+                  <div>{item.userName}</div>
+                  <div>{item.moves}</div>
+                  <div>{item.time}</div>
+                  <div>{item.level}</div>
+                </div>
+              );
+            })
+          : null}
       </div>
     );
   };

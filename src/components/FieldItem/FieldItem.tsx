@@ -1,9 +1,11 @@
 import React, { FC, useState, useEffect } from 'react';
 import './styles.scss';
 import { FieldItemProps } from '@components/FieldItem/FieldItem.model';
+import {size} from '@/constants/constants';
 
 const FieldItem: FC<FieldItemProps> = ({
   initValue = '',
+  currValue='',
   isEditable,
   bgClass = '',
   isClear,
@@ -11,63 +13,38 @@ const FieldItem: FC<FieldItemProps> = ({
   onMoveDone,
 }) => {
   const inputRef: React.RefObject<HTMLInputElement> = React.createRef();
-  /*const [value, setValue] = useState(initValue || '');
-  const [itemClassName, setItemClassName] = useState(`col ${bgClass}`);
-*/
-  const [fieldValue, setFieldValue] = useState('');
-  const [isSolved, setIsSolved] = useState(false);
-  const [needClear, setNeedClear] = useState(isClear);
+  const [fieldValue, setFieldValue] = useState(currValue);
 
   useEffect(() => {
-    // console.log('first field item');
-    //
-    //console.log('fff=', isClear);
-    //if (isClear === 0) {
     setFieldValue(initValue);
-    // }
-    // const item = document.getElementById(inputRef.current?.id!);
-    // item.value = initValue;
-    //  console.log(inputRef.current?.id);
+    console.log('isClear');
   }, [isClear]);
 
-  /*useEffect(() => {
-    console.log('first field item2');
-    setFieldValue(initValue);
-    return function(){
-      console.log('delete field item2');
-    }
-  }, [isClear]);*/
-
-  //console.log('needClear',isClear);
-  //console.log('init=', initValue);
-  //console.log('fieldValue=', fieldValue);
   return (
     <input
       id={pos}
       ref={inputRef}
       type="text"
-      ///  maxLength="1"
       className={bgClass + (!isEditable ? ' fixed' : '')}
       disabled={!isEditable}
       autoComplete="off"
-      // value={fieldValue ? fieldValue : ''}
-      value={initValue !== '' ? initValue : fieldValue}
-      onFocus={() => {
-        //setFieldValue('');
-      }}
+     
+      value={initValue!='' ? initValue : (fieldValue!=''? fieldValue: currValue)}
       onBlur={() => {
-        //setFieldValue('1');
-        // setNeedClear(false);
-        onMoveDone(+fieldValue);
-        //console.log('ref=',inputRef.current);
-      }}
+           onMoveDone(+fieldValue);
+       }}
+       onClick = {()=>{
+         console.log('focus');
+         setFieldValue('');
+        document.getElementById(pos).value=''}
+        }
+
       onChange={event => {
-        //setIsSolved(true);
-        //setNeedClear(false);
-        console.log('onKeyUp=' + event.target.value);
-        if ((+event.target.value <= 9 && +event.target.value >= 1) || event.target.value === '') {
+        console.log('event target =',event.target);
+        if ((+event.target.value <= size*size && +event.target.value >= 1) || event.target.value === '') {
+         console.log('set');
+         document.getElementById(pos).value=event.target.value;
           setFieldValue(event.target.value);
-          //  console.log('ref=',inputRef.current);
         }
       }}
     />

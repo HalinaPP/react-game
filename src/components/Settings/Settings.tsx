@@ -25,20 +25,19 @@ const Settings: FC<SettingsProps> = ({
   const [currDifficultLevel, setCurrDifficultLevel] = useState(difficultLevel);
 
   useEffect(() => {
-    updateFieldSettings(colorOn, currDifficultLevel,isLightTheme);
-    console.log('themeeeeeee',theme);
-  }, [colorOn, currDifficultLevel,isLightTheme]);
+    updateFieldSettings(colorOn, currDifficultLevel, isLightTheme);
+    console.log('themeeeeeee', theme);
+  }, [colorOn, currDifficultLevel, isLightTheme]);
 
   const changeFieldColor = () => {
     setColorOn(!colorOn);
     playSound(handleSoundOn.turnOn, SOUNDS.button, handleSoundOn.volume);
   };
 
-  const changeTheme = () =>{
+  const changeTheme = () => {
     setIsLightTheme(!isLightTheme);
     playSound(handleSoundOn.turnOn, SOUNDS.button, handleSoundOn.volume);
-  }
-
+  };
 
   const changeDifficultLevel = (event: React.ChangeEvent) => {
     const levelEl = event.target;
@@ -110,7 +109,7 @@ const Settings: FC<SettingsProps> = ({
             />
           </div>
         </fieldset>
-        <hr />
+      
         <div className="custom-control custom-switch">
           <input
             type="checkbox"
@@ -123,7 +122,8 @@ const Settings: FC<SettingsProps> = ({
             {SETTINGS_INFO.fieldBlockColorOn}
           </label>
         </div>
-        <div className="custom-control custom-switch">
+        <hr />
+        <div className="custom-control custom-switch switch-theme">
           <span className="theme-pad">{SETTINGS_INFO.darkTheme}</span>
           <input
             type="checkbox"

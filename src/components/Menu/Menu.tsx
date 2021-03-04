@@ -1,5 +1,5 @@
 import React, { FC, useContext, useCallback } from 'react';
-import {LangContext} from '@/utils/langContext';
+import { LangContext } from '@/utils/langContext';
 
 import './styles.scss';
 import { size } from '@/constants/constants';
@@ -24,7 +24,6 @@ const Menu: FC<MenuProps> = ({
   generateNewGame,
   moveDone,
 }) => {
-  
   const themes = useContext(LangContext);
 
   const newGame = () => {
@@ -102,7 +101,7 @@ const Menu: FC<MenuProps> = ({
     );
   }, []);
 
-  return <nav className="menu" >{buttonItems()}</nav>;
+  return <nav className="menu">{buttonItems()}</nav>;
 };
 
 export default Menu;

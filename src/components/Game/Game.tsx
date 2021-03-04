@@ -100,11 +100,12 @@ const Game: FC<GameProps> = ({
     }
   }, [initialMatrix, currMatrix, handleSoundOn, handleSoundVolume, difficultLevel, newMove]);
 
-  return (
-    <React.Fragment>
-    
+  if (initialMatrix.length < 1) {
+    return null;
+  } else {
+   return (<aside className="game">
       <div id="fs-container">
-         <div className="fs_section" id="game-container">
+        <div className="fs_section" id="game-container">
           <div className="game-wrap">
             <div className="game-info">
               <Timer startTime={startTime} />
@@ -142,8 +143,8 @@ const Game: FC<GameProps> = ({
           </div>
         </div>
       </div>
-    </React.Fragment>
-  );
+    </aside>)
+  }
 };
 
 export default Game;

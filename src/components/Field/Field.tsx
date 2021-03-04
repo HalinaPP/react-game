@@ -3,8 +3,7 @@ import './styles.scss';
 import FieldItem from '@components/FieldItem';
 import { getBgColorClass } from '@/utils/sudokuGenerator';
 import { FieldProps } from './Field.model';
-import { FieldItemProps } from '@components/FieldItem/FieldItem.model';
-//import {getCellsEmpty} from '@/utils/utils';
+import { isEqualMatrix } from '@/utils/utils';
 import { size } from '@/constants/constants';
 
 const Field: FC<FieldProps> = ({
@@ -15,7 +14,12 @@ const Field: FC<FieldProps> = ({
   matrixHistory,
   moveDone,
 }) => {
-  const getCells = (matrix: number[][], colorOn: boolean, isClear: number = 0) => {
+  const getCells = (
+    init: number[][],
+    matrix: number[][],
+    colorOn: boolean,
+    isClear: number = 0
+  ) => {
     // console.log('get cells color ON=', colorOn);
 
     if (!matrix || matrix.length < 1) {
@@ -26,13 +30,14 @@ const Field: FC<FieldProps> = ({
       return (
         <div className="row" key={i}>
           {row.map((curr, j) => {
-            // console.log('init ='+i+j+' ' +curr);
+            //   console.log('init ='+i+j,init);
             return (
               <FieldItem
                 key={`${i}${j}`}
                 pos={`${i}${j}`}
-                initValue={(curr && curr.toString()) || ''}
-                isEditable={!curr}
+                initValue={(init[i][j] && init[i][j].toString()) || ''}
+                currValue={(curr && curr.toString()) || ''}
+                isEditable={!init[i][j]}
                 bgClass={getBgColorClass(colorOn, i, j, size)}
                 onMoveDone={value => moveDone(i, j, value)}
                 isClear={isClear}
@@ -44,48 +49,27 @@ const Field: FC<FieldProps> = ({
     });
   };
 
-  const [cells, setCells] = useState(getCells(initialMatrix, fieldBlockColorOn));
+  const [cells, setCells] = useState(getCells(initialMatrix,initialMatrix, fieldBlockColorOn));
 
   useEffect(() => {
     console.log('field new render=', fieldBlockColorOn);
-    /* console.log('ini',initialMatrix);*/
     console.log('initial matrix=', initialMatrix);
-    setCells(getCells(initialMatrix, fieldBlockColorOn));
-  }, [fieldBlockColorOn, initialMatrix]);
+    setCells(getCells(initialMatrix, currMatrix, fieldBlockColorOn));
+  }, [fieldBlockColorOn, currMatrix]);
+
+  useEffect(() => {
+    console.log('initial matrix+curr');
+    if (isEqualMatrix(initialMatrix, currMatrix)) {
+      console.log('equal=====');
+      setCells(getCells(initialMatrix, currMatrix, fieldBlockColorOn, Math.random()));
+    }
+  }, [currMatrix, initialMatrix]);
 
   useEffect(() => {
     console.log('clear matrix=');
-    setCells(getCells(currMatrix, fieldBlockColorOn, matrixHistory.length));
-    /*if(!matrixHistory || (matrixHistory.length===1 && matrixHistory[0][0][0]===-2)){
-      console.log('clear matrix22222=');
-      
-      /*setCells([<FieldItem
-        key="12"
-        initValue='1'
-        isEditable={true}
-        bgClass={getBgColorClass(fieldBlockColorOn, 1, 1, size)}
-        onMoveDone={value => moveDone(1, 1, value)}
-        isClear={false}
-      />]);
-   }*/
+     setCells(getCells(initialMatrix,currMatrix, fieldBlockColorOn, Math.random()));
   }, [matrixHistory]);
 
-  /*useEffect(() => {
-    console.log('clear matrix=');
-    if(!matrixHistory || (matrixHistory.length===1 && matrixHistory[0][0][0]===-2)){
-      console.log('clear matrix22222=');
-      setCells(getCells(initialMatrix, fieldBlockColorOn, true));
-      /*setCells([<FieldItem
-        key="12"
-        initValue='1'
-        isEditable={true}
-        bgClass={getBgColorClass(fieldBlockColorOn, 1, 1, size)}
-        onMoveDone={value => moveDone(1, 1, value)}
-        isClear={false}
-      />]);*/
-  /*   }
-  }, [matrixHistory]);
-  */
   return <div className="field">{cells}</div>;
 };
 

@@ -3,7 +3,7 @@ import { ButtonProps } from '@components/Button/Button.model';
 export interface ModalProps {
   isEmpty: boolean;
   header: string;
-  theme:any,
+  theme: any;
   body?: any;
   buttons?: ButtonProps[];
   onSetShowModalSetting: (

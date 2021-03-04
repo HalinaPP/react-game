@@ -1,6 +1,6 @@
 export const MATRIX_NUM_SHUFFLE = 10;
 export const SCORE_MAX_LENGTH = 10;
-export const TYPE_LEVEL = { easy: 99, middle: 38, difficult: 31, crossCheck: 95 };
+export const TYPE_LEVEL = { easy: 44, middle: 38, difficult: 31, crossCheck: 95 };
 export const size = 3;
 export const soundsPath = 'assets/sounds/';
 export const imagesPath = './assets/images';
@@ -21,16 +21,15 @@ export const FOOTER_COPYRIGHT = {
 
 export const themes = {
   light: {
-    foreground: "#000000",
-    background: "#fff",
-    middle:"#fff",
-    info:"#aca9a9"
-
+    foreground: '#000000',
+    background: '#fff',
+    middle: '#fff',
+    info: '#aca9a9',
   },
   dark: {
-    foreground: "#ffffff",
-    background: "#222222",
-    middle:"#555454",
-    info:"#aca9a9"
-  }
+    foreground: '#ffffff',
+    background: '#222222',
+    middle: '#555454',
+    info: '#aca9a9',
+  },
 };

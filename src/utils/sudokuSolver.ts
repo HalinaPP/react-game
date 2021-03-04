@@ -197,9 +197,3 @@ export const solve = (board3: number[][], moveDone: moveDoneFunc, autoplay = fal
   return board2;
 };
 
-export const isSolvedCorrectly = (solvedBoard: number[][], initBoard: number[][]) => {
-  return solvedBoard.reduce(
-    (prev, row, i) => prev && row.every((cell, j) => cell === initBoard[i][j]),
-    true
-  );
-};

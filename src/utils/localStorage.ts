@@ -2,20 +2,17 @@ import { size, TYPE_LEVEL, SCORE_MAX_LENGTH } from '@/constants/constants';
 import { LOCALSTORAGE_INFO } from '@/constants/text';
 import { scoreUserData } from '@/types';
 
-const {
-  sudokuUserName,
-  sudokuScoreTable,
-} = LOCALSTORAGE_INFO;
+const { sudokuUserName, sudokuScoreTable } = LOCALSTORAGE_INFO;
 
 const initialState = {
   sudokuUserName: 'Player',
-  matrixHistory: '',
-  currMatrix: '',
-  initialMatrix: '',
+  matrixHistory: '[]',
+  currMatrix: '[]',
+  initialMatrix: '[]',
   moveNumber: '0',
   difficultLevel: TYPE_LEVEL.crossCheck.toString(),
   fieldBlockColorOn: 'true',
-  lightTheme:'true',
+  lightTheme: 'true',
   bgSoundOn: JSON.stringify({
     turnOn: false,
     volume: 1,

@@ -1,7 +1,7 @@
 import { TYPE_LEVEL } from '@/constants/constants';
 import { ACTIONS } from '@/actions/constants';
 import { ButtonProps } from '@components/Button/Button.model';
-import {themes} from '@/constants/constants';
+import { themes } from '@/constants/constants';
 
 export interface StateModel {
   bgSoundOn: {
@@ -25,13 +25,13 @@ export interface StateModel {
     body?: HTMLElement;
     buttons: ButtonProps[];
   };
-  theme: any,
-  lightTheme:boolean
+  theme: any;
+  lightTheme: boolean;
 }
 
 const initialState: StateModel = {
   bgSoundOn: {
-    turnOn: false,
+    turnOn: true,
     volume: 1,
   },
   handleSoundOn: {
@@ -52,23 +52,27 @@ const initialState: StateModel = {
     buttons: [],
   },
   theme: themes.dark,
-  lightTheme:true
+  lightTheme: true,
 };
 
 Object.entries(initialState).forEach(item => {
   const el = localStorage.getItem(item[0]);
-  const objEl = ['bgSoundOn', 'handleSoundOn', 'matrixHistory', 'initialMatrix'];
-  
+  const objEl = ['bgSoundOn', 'handleSoundOn'];
+  const arjEl = [ 'matrixHistory', 'initialMatrix'];
+ 
   if (el !== null && el !== '') {
     if (objEl.includes(el)) {
       initialState[item[0]] = JSON.parse(el);
-    } else {
+    } else if(arjEl.includes(el)){
+      console.log('m='+item[0],JSON.parse(el));
+      initialState[item[0]] = JSON.parse(el);
+    }else {
       initialState[item[0]] = JSON.parse(el);
     }
-    
   }
 });
-initialState.theme =  initialState.lightTheme ? themes.light : themes.dark;
+
+initialState.theme = initialState.lightTheme ? themes.light : themes.dark;
 
 console.log('state', initialState);
 
@@ -101,9 +105,6 @@ export const reducer = (state = initialState, action: any): StateModel => {
 
     case ACTIONS.moveDone:
       const [col, row, value] = action.payload;
-      /*console.log('on move r=' + row + ' c=' + col + ' v=' + value);
-      console.log('curr', state.currMatrix);
-      console.log('hist', state.matrixHistory);*/
       newHistory = [...state.matrixHistory, state.currMatrix];
       newCurrMatrix = [
         ...state.currMatrix.slice(0, row),
@@ -197,11 +198,10 @@ export const reducer = (state = initialState, action: any): StateModel => {
         fieldBlockColorOn: action.payload.colorOn,
         difficultLevel: action.payload.level,
         lightTheme: action.payload.lightTheme,
-        theme: theme
+        theme: theme,
       };
 
     case ACTIONS.setShowModalSetting:
-      
       return {
         ...state,
         modalWindow: {

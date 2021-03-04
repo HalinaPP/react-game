@@ -54,3 +54,10 @@ export const handleKeyPress = (event: KeyboardEvent) => {
 export const setInnerHtml = (text: string): { __html: string } => {
   return { __html: text };
 };
+
+export const isEqualMatrix = (first: number[][], second: number[][]) => {
+  return first.reduce(
+    (prev, row, i) => prev && row.every((cell, j) => cell === second[i][j]),
+    true
+  );
+};

@@ -11,14 +11,12 @@ const Main: FC<MainProps> = ({ theme }) => {
   return (
     <React.Fragment>
       <main style={{ background: theme.background, color: theme.info }}>
-        <aside className="game">
-          <GameContainer />
-        </aside>
+        <GameContainer />
         <aside>
           <MenuContainer />
         </aside>
       </main>
-      <Footer theme={theme}/>
+      <Footer theme={theme} />
       <ModalContainer />
     </React.Fragment>
   );

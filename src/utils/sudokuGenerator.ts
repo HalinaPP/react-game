@@ -1,5 +1,6 @@
 import { MATRIX_NUM_SHUFFLE } from '@/constants/constants';
-import { isSolvedCorrectly, solve } from './sudokuSolver';
+import { solve } from './sudokuSolver';
+import { isEqualMatrix } from './utils';
 
 export const checkSolvedMatrix = (initialMatrix: number[][], solvedMatrix: number[][]): boolean => {
   const copyCutMatrixs = [...initialMatrix.map(row => [...row])];
@@ -8,7 +9,7 @@ export const checkSolvedMatrix = (initialMatrix: number[][], solvedMatrix: numbe
     (row: number, col: number, value: number) => {}
   );
 
-  return isSolvedCorrectly(initialSolvedMatrix, solvedMatrix);
+  return isEqualMatrix(initialSolvedMatrix, solvedMatrix);
 };
 
 export const getBgColorClass = (colorOn: boolean, row: number, col: number, size: number) => {

@@ -3,13 +3,11 @@ document.cancelFullScreen = document.cancelFullScreen || document.webkitCancelFu
 
 export const enterFullscreen = id => {
   const el = document.getElementById(id);
- 
+
   if (el.webkitRequestFullScreen) {
     el.webkitRequestFullScreen(Element.ALLOW_KEYBOARD_INPUT);
   }
 };
-
-
 
 const exitFullscreen = id => {
   const modalWindow = document.getElementById('modalWindow');
@@ -21,19 +19,20 @@ const exitFullscreen = id => {
   };
 };
 
-
-
 document.addEventListener('fullscreenchange', exitHandler);
 document.addEventListener('webkitfullscreenchange', exitHandler);
 document.addEventListener('mozfullscreenchange', exitHandler);
 document.addEventListener('MSFullscreenChange', exitHandler);
 
 function exitHandler() {
-    if (!document.fullscreenElement && !document.webkitIsFullScreen && !document.mozFullScreen && !document.msFullscreenElement) {
-      const modalWindow = document.getElementById('modalWindow');
-      modalWindow?.classList.remove('show');
-      modalWindow?.classList.remove('modal-dialog-centered');
-      
-      
-    }
-}  
+  if (
+    !document.fullscreenElement &&
+    !document.webkitIsFullScreen &&
+    !document.mozFullScreen &&
+    !document.msFullscreenElement
+  ) {
+    const modalWindow = document.getElementById('modalWindow');
+    modalWindow?.classList.remove('show');
+    modalWindow?.classList.remove('modal-dialog-centered');
+  }
+}
