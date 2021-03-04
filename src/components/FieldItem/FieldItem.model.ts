@@ -1,6 +1,6 @@
 export interface FieldItemProps {
   initValue: string;
-  currValue:string;
+  currValue: string;
   isEditable: boolean;
   bgClass?: string;
   isClear: number;

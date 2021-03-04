@@ -8,7 +8,6 @@ export const addZero = (n: string): string => {
 export const showTime = (currTime: Date): string => {
   const now: Date = new Date();
   const delta = Math.trunc((+now - +currTime) / 1000);
-  // console.log('delta', getMinSecTime(delta));
   return getMinSecTime(delta);
 };
 
@@ -40,7 +39,7 @@ export const clickBtn = (btnId: string): void => {
 
 export const handleKeyPress = (event: KeyboardEvent) => {
   const hotKey = Object.entries(HOT_KEYS).find(item => item[1] === event.code);
-  console.log('eve=', event.code);
+  
   if (event.code === 'Escape') {
     const modalWindow = document.getElementById('modalWindow');
     modalWindow?.classList.remove('show');

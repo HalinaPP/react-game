@@ -196,4 +196,3 @@ export const solve = (board3: number[][], moveDone: moveDoneFunc, autoplay = fal
 
   return board2;
 };
-

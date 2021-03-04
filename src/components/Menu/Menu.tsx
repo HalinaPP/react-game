@@ -1,10 +1,8 @@
 import React, { FC, useContext, useCallback } from 'react';
 import { LangContext } from '@/utils/langContext';
-
 import './styles.scss';
 import { size } from '@/constants/constants';
 import { MENU } from '@/constants/text';
-
 import { showModal } from '@components/Modal';
 import Score from '@components/Score';
 import Help from '@components/Help';
@@ -27,7 +25,6 @@ const Menu: FC<MenuProps> = ({
   const themes = useContext(LangContext);
 
   const newGame = () => {
-    console.log('new game');
     generateNewGame(createSudokuMatrix(size, difficultLevel));
   };
 

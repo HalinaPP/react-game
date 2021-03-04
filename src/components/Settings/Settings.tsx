@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useCallback, MouseEvent } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import './styles.scss';
 import { TYPE_LEVEL, size } from '@/constants/constants';
 import { SETTINGS_INFO } from '@/constants/text';
@@ -26,7 +26,6 @@ const Settings: FC<SettingsProps> = ({
 
   useEffect(() => {
     updateFieldSettings(colorOn, currDifficultLevel, isLightTheme);
-    console.log('themeeeeeee', theme);
   }, [colorOn, currDifficultLevel, isLightTheme]);
 
   const changeFieldColor = () => {
@@ -109,7 +108,7 @@ const Settings: FC<SettingsProps> = ({
             />
           </div>
         </fieldset>
-      
+
         <div className="custom-control custom-switch">
           <input
             type="checkbox"

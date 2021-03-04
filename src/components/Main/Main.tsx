@@ -1,11 +1,10 @@
 import './styles.scss';
-import React, { FC, useContext, useCallback } from 'react';
+import React, { FC} from 'react';
 import { MainProps } from './Main.model';
 import { ModalContainer } from '@/containers/ModalContainer';
 import { MenuContainer } from '@/containers/MenuContainer';
 import { GameContainer } from '@/containers/GameContainer';
 import Footer from '@components/Footer';
-import { themes } from '@/constants/constants';
 
 const Main: FC<MainProps> = ({ theme }) => {
   return (

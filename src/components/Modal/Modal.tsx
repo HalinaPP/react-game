@@ -4,7 +4,6 @@ import { ModalProps } from './Modal.model';
 import { ButtonProps } from '@components/Button/Button.model';
 import { ButtonContainer } from '@/containers/Button.container';
 import { BUTTON_OK } from '@/constants/text';
-import { LangContext } from '@/utils/langContext';
 export const showModal = () => {
   const modalWindow = document.getElementById('modalWindow');
   modalWindow?.classList.add('show');

@@ -1,7 +1,7 @@
 import React, { FC, useState, useEffect, useCallback } from 'react';
 import './styles.scss';
 import { size } from '@/constants/constants';
-import { GAME_INFO, CHECK_SOLVE, BUTTON_OK, MENU } from '@/constants/text';
+import { GAME_INFO, CHECK_SOLVE, MENU } from '@/constants/text';
 import { SOUNDS } from '@/constants/sounds';
 import Timer from '@components/Timer';
 import { showModal, hideModal } from '@components/Modal';
@@ -103,47 +103,49 @@ const Game: FC<GameProps> = ({
   if (initialMatrix.length < 1) {
     return null;
   } else {
-   return (<aside className="game">
-      <div id="fs-container">
-        <div className="fs_section" id="game-container">
-          <div className="game-wrap">
-            <div className="game-info">
-              <Timer startTime={startTime} />
-              <div className="game-inf">
-                {GAME_INFO.moves}: <span className="text-info">{newMove}</span>
+    return (
+      <aside className="game">
+        <div id="fs-container">
+          <div className="fs_section" id="game-container">
+            <div className="game-wrap">
+              <div className="game-info">
+                <Timer startTime={startTime} />
+                <div className="game-inf">
+                  {GAME_INFO.moves}: <span className="text-info">{newMove}</span>
+                </div>
+                <div className="game-info__button-container">
+                  <ButtonContainer
+                    id={GAME_INFO.buttons.undo.id}
+                    name={GAME_INFO.buttons.undo.name}
+                    audioFileName={SOUNDS.undo}
+                    handleClick={undoMove}
+                  />
+                  <ButtonContainer
+                    id={GAME_INFO.buttons.clear.id}
+                    name={GAME_INFO.buttons.clear.name}
+                    audioFileName={SOUNDS.clear}
+                    handleClick={clearField}
+                  />
+                  <ButtonContainer
+                    id={GAME_INFO.buttons.check.id}
+                    name={GAME_INFO.buttons.check.name}
+                    handleClick={checkFill}
+                  />
+                </div>
               </div>
-              <div className="game-info__button-container">
-                <ButtonContainer
-                  id={GAME_INFO.buttons.undo.id}
-                  name={GAME_INFO.buttons.undo.name}
-                  audioFileName={SOUNDS.undo}
-                  handleClick={undoMove}
-                />
-                <ButtonContainer
-                  id={GAME_INFO.buttons.clear.id}
-                  name={GAME_INFO.buttons.clear.name}
-                  audioFileName={SOUNDS.clear}
-                  handleClick={clearField}
-                />
-                <ButtonContainer
-                  id={GAME_INFO.buttons.check.id}
-                  name={GAME_INFO.buttons.check.name}
-                  handleClick={checkFill}
-                />
+              <div className={messageClass}>
+                <button type="button" className="close" data-dismiss="alert" onClick={closeAlert}>
+                  &times;
+                </button>
+                {message}
               </div>
-            </div>
-            <div className={messageClass}>
-              <button type="button" className="close" data-dismiss="alert" onClick={closeAlert}>
-                &times;
-              </button>
-              {message}
-            </div>
 
-            <FieldContainer difficultLevel={difficultLevel} />
+              <FieldContainer difficultLevel={difficultLevel} />
+            </div>
           </div>
         </div>
-      </div>
-    </aside>)
+      </aside>
+    );
   }
 };
 

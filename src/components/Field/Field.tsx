@@ -1,4 +1,4 @@
-import React, { FC, useState, useEffect, useCallback } from 'react';
+import React, { FC, useState, useEffect } from 'react';
 import './styles.scss';
 import FieldItem from '@components/FieldItem';
 import { getBgColorClass } from '@/utils/sudokuGenerator';
@@ -20,17 +20,14 @@ const Field: FC<FieldProps> = ({
     colorOn: boolean,
     isClear: number = 0
   ) => {
-    // console.log('get cells color ON=', colorOn);
-
+    
     if (!matrix || matrix.length < 1) {
-      console.log('empty');
       return;
     }
     return matrix.map((row, i) => {
       return (
         <div className="row" key={i}>
           {row.map((curr, j) => {
-            //   console.log('init ='+i+j,init);
             return (
               <FieldItem
                 key={`${i}${j}`}
@@ -49,25 +46,20 @@ const Field: FC<FieldProps> = ({
     });
   };
 
-  const [cells, setCells] = useState(getCells(initialMatrix,initialMatrix, fieldBlockColorOn));
+  const [cells, setCells] = useState(getCells(initialMatrix, initialMatrix, fieldBlockColorOn));
 
   useEffect(() => {
-    console.log('field new render=', fieldBlockColorOn);
-    console.log('initial matrix=', initialMatrix);
-    setCells(getCells(initialMatrix, currMatrix, fieldBlockColorOn));
+     setCells(getCells(initialMatrix, currMatrix, fieldBlockColorOn));
   }, [fieldBlockColorOn, currMatrix]);
 
   useEffect(() => {
-    console.log('initial matrix+curr');
     if (isEqualMatrix(initialMatrix, currMatrix)) {
-      console.log('equal=====');
       setCells(getCells(initialMatrix, currMatrix, fieldBlockColorOn, Math.random()));
     }
   }, [currMatrix, initialMatrix]);
 
   useEffect(() => {
-    console.log('clear matrix=');
-     setCells(getCells(initialMatrix,currMatrix, fieldBlockColorOn, Math.random()));
+    setCells(getCells(initialMatrix, currMatrix, fieldBlockColorOn, Math.random()));
   }, [matrixHistory]);
 
   return <div className="field">{cells}</div>;

@@ -5,8 +5,7 @@ import { scoreUserData } from '@/types';
 import { SCORE_INFO } from '@/constants/text';
 
 const Score: FC<ScoreProps> = ({ score }) => {
-  console.log('SCORE+', score);
-
+  
   const getScoreItems = (currScore: scoreUserData[]) => {
     return (
       <div>

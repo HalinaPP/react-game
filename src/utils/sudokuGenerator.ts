@@ -126,8 +126,7 @@ const hideNumbers = (matrix: number[][], size: number, difficultLevel: number) =
   let difficult = cellsNumber;
 
   const difficultLevelCount = Math.trunc((cellsNumber * difficultLevel) / 100);
-  console.log('ddd=', difficultLevelCount);
-
+ 
   while (iterator < cellsNumber && difficult > difficultLevelCount) {
     const row = Math.trunc(Math.random() * maxElement);
     const col = Math.trunc(Math.random() * maxElement);
@@ -165,6 +164,5 @@ export const createSudokuMatrix = (size: number, difficultLevel: number) => {
     matrix = changeMatrixFunc[funcNum](matrix, size);
   }
   matrix = hideNumbers(matrix, size, difficultLevel);
-  console.log('end generate matrix');
   return matrix;
 };

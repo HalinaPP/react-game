@@ -1,11 +1,11 @@
 import React, { FC, useState, useEffect } from 'react';
 import './styles.scss';
 import { FieldItemProps } from '@components/FieldItem/FieldItem.model';
-import {size} from '@/constants/constants';
+import { size } from '@/constants/constants';
 
 const FieldItem: FC<FieldItemProps> = ({
   initValue = '',
-  currValue='',
+  currValue = '',
   isEditable,
   bgClass = '',
   isClear,
@@ -17,7 +17,6 @@ const FieldItem: FC<FieldItemProps> = ({
 
   useEffect(() => {
     setFieldValue(initValue);
-    console.log('isClear');
   }, [isClear]);
 
   return (
@@ -28,22 +27,20 @@ const FieldItem: FC<FieldItemProps> = ({
       className={bgClass + (!isEditable ? ' fixed' : '')}
       disabled={!isEditable}
       autoComplete="off"
-     
-      value={initValue!='' ? initValue : (fieldValue!=''? fieldValue: currValue)}
+      value={initValue != '' ? initValue : fieldValue != '' ? fieldValue : currValue}
       onBlur={() => {
-           onMoveDone(+fieldValue);
-       }}
-       onClick = {()=>{
-         console.log('focus');
-         setFieldValue('');
-        document.getElementById(pos).value=''}
-        }
-
+        onMoveDone(+fieldValue);
+      }}
+      onClick={() => {
+        setFieldValue('');
+        inputRef.current!.value = '';
+      }}
       onChange={event => {
-        console.log('event target =',event.target);
-        if ((+event.target.value <= size*size && +event.target.value >= 1) || event.target.value === '') {
-         console.log('set');
-         document.getElementById(pos).value=event.target.value;
+        if (
+          (+event.target.value <= size * size && +event.target.value >= 1) ||
+          event.target.value === ''
+        ) {
+          inputRef.current!.value = event.target.value;
           setFieldValue(event.target.value);
         }
       }}
@@ -52,59 +49,3 @@ const FieldItem: FC<FieldItemProps> = ({
 };
 
 export default FieldItem;
-/*
-
-    <div
-      className={bgClass}
-      contentEditable={isEditable}
-      onBlur={() => {
-        console.log('blue');
-      }}
-      onChange={() => {
-        console.log('change');
-      }}
-      onFocus={() => {
-        
-        console.log('onFocus');
-      }}
-      onKeyDown={(event:React.KeyboardEvent) => {
-       
-        if(+event.key > 9 || +event.key<1){
-          setFieldValue('');
-        }
-        console.log('onKeyDown='+event.key);
-      }}
-
-      onKeyUp={(event:React.KeyboardEvent) => {
-       
-        if(+event.key > 9 || +event.key<1){
-          setFieldValue('');
-        }
-        console.log('onKeyUp='+parseInt(event.key));
-      }}
-    >
-      {fieldValue}
-    </div>
-    */
-/*
-   <input
-        type="text"
-        maxLength="1"
-        className={bgClass}
-				disabled={!isEditable}
-      	value={fieldValue ? fieldValue : ''}
-        onFocus = {()=>{
-          //setFieldValue('');
-        }}
-        onBlur = {()=>{
-          //setFieldValue('1');
-        }}
-				onChange={(event)=>{
-          //setIsSolved(true);
-          console.log('onKeyUp='+event.target.value);
-          if(+event.target.value <= 9 && +event.target.value>=1 || event.target.value===''){
-            setFieldValue(event.target.value)
-          }
-         
-        }}
-			/>*/

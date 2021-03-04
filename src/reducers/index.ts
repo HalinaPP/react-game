@@ -31,7 +31,7 @@ export interface StateModel {
 
 const initialState: StateModel = {
   bgSoundOn: {
-    turnOn: true,
+    turnOn: false,
     volume: 1,
   },
   handleSoundOn: {
@@ -58,23 +58,20 @@ const initialState: StateModel = {
 Object.entries(initialState).forEach(item => {
   const el = localStorage.getItem(item[0]);
   const objEl = ['bgSoundOn', 'handleSoundOn'];
-  const arjEl = [ 'matrixHistory', 'initialMatrix'];
- 
+  const arjEl = ['matrixHistory', 'initialMatrix'];
+
   if (el !== null && el !== '') {
     if (objEl.includes(el)) {
       initialState[item[0]] = JSON.parse(el);
-    } else if(arjEl.includes(el)){
-      console.log('m='+item[0],JSON.parse(el));
+    } else if (arjEl.includes(el)) {
       initialState[item[0]] = JSON.parse(el);
-    }else {
+    } else {
       initialState[item[0]] = JSON.parse(el);
     }
   }
 });
 
 initialState.theme = initialState.lightTheme ? themes.light : themes.dark;
-
-console.log('state', initialState);
 
 export const reducer = (state = initialState, action: any): StateModel => {
   let newHistory;
@@ -89,7 +86,6 @@ export const reducer = (state = initialState, action: any): StateModel => {
       localStorage.setItem('initialMatrix', JSON.stringify(action.payload.initialMatrix));
       localStorage.setItem('moveNumber', '0');
       localStorage.setItem('sudokuStartTime', action.payload.startTime.toString());
-      console.log('new gammmmmmmm');
       return {
         ...state,
         moveNumber: 0,
@@ -130,7 +126,6 @@ export const reducer = (state = initialState, action: any): StateModel => {
       localStorage.setItem('matrixHistory', JSON.stringify([]));
       localStorage.setItem('currMatrix', JSON.stringify(state.initialMatrix));
 
-      console.log('ini', state.initialMatrix);
       return {
         ...state,
         currMatrix: state.initialMatrix.map(row => [...row]),
