@@ -3,7 +3,7 @@ import { ButtonProps } from '@components/Button/Button.model';
 export interface MenuProps {
   initialMatrix: number[][];
   difficultLevel: number;
-  generateNewGame: (matrix: number[][]) => void;
+  generateNewGame: (matrix: number[][], startTime: Date) => void;
   moveDone: (row: number, col: number, value: number) => void;
   onSetShowModalSetting: (
     isEmpty: boolean,

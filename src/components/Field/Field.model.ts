@@ -3,6 +3,5 @@ export interface FieldProps {
   initialMatrix: number[][];
   currMatrix: number[][];
   matrixHistory: number[][][];
-  difficultLevel: number;
   moveDone: (row: number, col: number, value: number) => void;
 }

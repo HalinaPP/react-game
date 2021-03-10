@@ -55,7 +55,7 @@ const Game: FC<GameProps> = ({
   };
 
   const winBtnClick = () => {
-    generateNewGame(createSudokuMatrix(size, difficultLevel));
+    generateNewGame(createSudokuMatrix(size, difficultLevel), new Date());
     hideModal();
   };
 
@@ -102,51 +102,50 @@ const Game: FC<GameProps> = ({
 
   if (initialMatrix.length < 1) {
     return null;
-  } else {
-    return (
-      <aside className="game">
-        <div id="fs-container">
-          <div className="fs_section" id="game-container">
-            <div className="game-wrap">
-              <div className="game-info">
-                <Timer startTime={startTime} />
-                <div className="game-inf">
-                  {GAME_INFO.moves}: <span className="text-info">{newMove}</span>
-                </div>
-                <div className="game-info__button-container">
-                  <ButtonContainer
-                    id={GAME_INFO.buttons.undo.id}
-                    name={GAME_INFO.buttons.undo.name}
-                    audioFileName={SOUNDS.undo}
-                    handleClick={undoMove}
-                  />
-                  <ButtonContainer
-                    id={GAME_INFO.buttons.clear.id}
-                    name={GAME_INFO.buttons.clear.name}
-                    audioFileName={SOUNDS.clear}
-                    handleClick={clearField}
-                  />
-                  <ButtonContainer
-                    id={GAME_INFO.buttons.check.id}
-                    name={GAME_INFO.buttons.check.name}
-                    handleClick={checkFill}
-                  />
-                </div>
+  }
+  
+  return (
+    <aside className="game">
+      <div id="fs-container">
+        <div className="fs_section" id="game-container">
+          <div className="game-wrap">
+            <div className="game-info">
+              <Timer startTime={startTime} />
+              <div className="game-inf">
+                {GAME_INFO.moves}: <span className="text-info">{newMove}</span>
               </div>
-              <div className={messageClass}>
-                <button type="button" className="close" data-dismiss="alert" onClick={closeAlert}>
-                  &times;
-                </button>
-                {message}
+              <div className="game-info__button-container">
+                <ButtonContainer
+                  id={GAME_INFO.buttons.undo.id}
+                  name={GAME_INFO.buttons.undo.name}
+                  audioFileName={SOUNDS.undo}
+                  handleClick={undoMove}
+                />
+                <ButtonContainer
+                  id={GAME_INFO.buttons.clear.id}
+                  name={GAME_INFO.buttons.clear.name}
+                  audioFileName={SOUNDS.clear}
+                  handleClick={clearField}
+                />
+                <ButtonContainer
+                  id={GAME_INFO.buttons.check.id}
+                  name={GAME_INFO.buttons.check.name}
+                  handleClick={checkFill}
+                />
               </div>
-
-              <FieldContainer difficultLevel={difficultLevel} />
             </div>
+            <div className={messageClass}>
+              <button type="button" className="close" data-dismiss="alert" onClick={closeAlert}>
+                &times;
+              </button>
+              {message}
+            </div>
+            <FieldContainer />
           </div>
         </div>
-      </aside>
-    );
-  }
+      </div>
+    </aside>
+  );
 };
 
 export default Game;

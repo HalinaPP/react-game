@@ -1,5 +1,5 @@
 import './styles.scss';
-import React, { FC} from 'react';
+import React, { FC } from 'react';
 import { MainProps } from './Main.model';
 import { ModalContainer } from '@/containers/ModalContainer';
 import { MenuContainer } from '@/containers/MenuContainer';

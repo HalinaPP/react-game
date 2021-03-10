@@ -4,17 +4,19 @@ import { ScoreProps } from './Score.model';
 import { scoreUserData } from '@/types';
 import { SCORE_INFO } from '@/constants/text';
 
+
 const Score: FC<ScoreProps> = ({ score }) => {
-  
+  const {userName, moves,time,level} = SCORE_INFO;
+
   const getScoreItems = (currScore: scoreUserData[]) => {
     return (
       <div>
         <div className="score-head score__row">
           <div></div>
-          <div>{SCORE_INFO.userName}</div>
-          <div>{SCORE_INFO.moves}</div>
-          <div>{SCORE_INFO.time}</div>
-          <div>{SCORE_INFO.level}</div>
+          <div>{userName}</div>
+          <div>{moves}</div>
+          <div>{time}</div>
+          <div>{level}</div>
         </div>
         {currScore
           ? currScore.map((item: scoreUserData, index: number) => {

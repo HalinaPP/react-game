@@ -20,7 +20,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       body: JSX.Element,
       buttons: ButtonProps[]
     ) => dispatch(setShowModalSetting(isEmpty, header, body, buttons)),
-    generateNewGame: (initialMatrix: number[][]) => dispatch(generateNewGame(initialMatrix)),
+    generateNewGame: (initialMatrix: number[][]) =>
+      dispatch(generateNewGame(initialMatrix, new Date())),
     moveDone: (row: number, col: number, value: number) => dispatch(moveDone(row, col, value)),
   };
 };

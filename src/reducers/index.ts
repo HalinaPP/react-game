@@ -56,19 +56,11 @@ const initialState: StateModel = {
 };
 
 Object.entries(initialState).forEach(item => {
-  const el = localStorage.getItem(item[0]);
-  const objEl = ['bgSoundOn', 'handleSoundOn'];
-  const arjEl = ['matrixHistory', 'initialMatrix'];
+  //const el = localStorage.getItem(item[0]);
 
-  if (el !== null && el !== '') {
-    if (objEl.includes(el)) {
-      initialState[item[0]] = JSON.parse(el);
-    } else if (arjEl.includes(el)) {
-      initialState[item[0]] = JSON.parse(el);
-    } else {
-      initialState[item[0]] = JSON.parse(el);
-    }
-  }
+ // if (el !== null && el !== '') {
+    //initialState[item[0]] = JSON.parse(el);
+  //}
 });
 
 initialState.theme = initialState.lightTheme ? themes.light : themes.dark;
@@ -86,6 +78,7 @@ export const reducer = (state = initialState, action: any): StateModel => {
       localStorage.setItem('initialMatrix', JSON.stringify(action.payload.initialMatrix));
       localStorage.setItem('moveNumber', '0');
       localStorage.setItem('sudokuStartTime', action.payload.startTime.toString());
+
       return {
         ...state,
         moveNumber: 0,

@@ -10,7 +10,7 @@ export interface GameProps {
   initialMatrix: number[][];
   currMatrix: number[][];
   startTime: Date;
-  generateNewGame: (matrix: number[][]) => void;
+  generateNewGame: (matrix: number[][], startTime:Date) => void;
   onSetShowModalSetting: (
     isEmpty: boolean,
     header: string,

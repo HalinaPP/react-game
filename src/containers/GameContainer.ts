@@ -27,7 +27,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       body: JSX.Element,
       buttons: ButtonProps[]
     ) => dispatch(setShowModalSetting(isEmpty, header, body, buttons)),
-    generateNewGame: (initialMatrix: number[][]) => dispatch(generateNewGame(initialMatrix)),
+    generateNewGame: (initialMatrix: number[][], startTime: Date) =>
+      dispatch(generateNewGame(initialMatrix, startTime)),
     clearField: () => dispatch(clearField()),
     undoMove: () => dispatch(undoMove()),
   };

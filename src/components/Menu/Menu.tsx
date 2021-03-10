@@ -25,7 +25,7 @@ const Menu: FC<MenuProps> = ({
   const themes = useContext(LangContext);
 
   const newGame = () => {
-    generateNewGame(createSudokuMatrix(size, difficultLevel));
+    generateNewGame(createSudokuMatrix(size, difficultLevel), new Date());
   };
 
   const settings = () => {

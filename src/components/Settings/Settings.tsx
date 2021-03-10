@@ -41,7 +41,7 @@ const Settings: FC<SettingsProps> = ({
   const changeDifficultLevel = (event: React.ChangeEvent) => {
     const levelEl = event.target;
     setCurrDifficultLevel(TYPE_LEVEL[levelEl.id]);
-    generateNewGame(createSudokuMatrix(size, TYPE_LEVEL[levelEl.id]));
+    generateNewGame(createSudokuMatrix(size, TYPE_LEVEL[levelEl.id]), new Date());
     playSound(handleSoundOn.turnOn, SOUNDS.button, handleSoundOn.volume);
   };
 
@@ -73,7 +73,7 @@ const Settings: FC<SettingsProps> = ({
               className="custom-range"
               id="bgSoundOnVolume"
               onChange={event => {
-                updateSoundVolume(+event.target.value, handleSoundOn.volume * 100);
+                updateSoundVolume(Number(event.target.value) / 100, handleSoundOn.volume);
               }}
             />
           </div>
@@ -103,7 +103,7 @@ const Settings: FC<SettingsProps> = ({
               className="custom-range"
               id="handleSoundOnVolume"
               onChange={event => {
-                updateSoundVolume(bgSoundOn.volume * 100, +event.target.value);
+                updateSoundVolume(bgSoundOn.volume, Number(event.target.value) / 100);
               }}
             />
           </div>

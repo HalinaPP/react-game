@@ -27,12 +27,12 @@ export const soundMute = (bgSoundOn: boolean, handleSoundOn: boolean) => ({
 
 export const updateSoundVolume = (bgSoundVolume: number, handleSoundVolume: number) => ({
   type: ACTIONS.updateSoundVolume,
-  payload: { bgSoundVolume: bgSoundVolume / 100, handleSoundVolume: handleSoundVolume / 100 },
+  payload: { bgSoundVolume: bgSoundVolume, handleSoundVolume: handleSoundVolume },
 });
 
-export const generateNewGame = (initialMatrix: number[][]) => ({
+export const generateNewGame = (initialMatrix: number[][], startTime:Date) => ({
   type: ACTIONS.newGame,
-  payload: { initialMatrix, startTime: new Date() },
+  payload: { initialMatrix, startTime},
 });
 
 export const clearField = () => ({

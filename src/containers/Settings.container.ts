@@ -9,14 +9,21 @@ import { connect } from 'react-redux';
 import { StateModel } from '@/reducers/index';
 import Settings from '@components/Settings';
 
-const mapStateToProps = (state: StateModel) => {
+const mapStateToProps = ({
+  bgSoundOn,
+  handleSoundOn,
+  fieldBlockColorOn,
+  difficultLevel,
+  lightTheme,
+  theme,
+}: StateModel) => {
   return {
-    bgSoundOn: { turnOn: state.bgSoundOn.turnOn, volume: state.bgSoundOn.volume },
-    handleSoundOn: { turnOn: state.handleSoundOn.turnOn, volume: state.handleSoundOn.volume },
-    fieldBlockColorOn: state.fieldBlockColorOn,
-    difficultLevel: state.difficultLevel,
-    lightThemeOn: state.lightTheme,
-    theme: state.theme,
+    theme,
+    difficultLevel,
+    fieldBlockColorOn,
+    bgSoundOn: { turnOn: bgSoundOn.turnOn, volume: bgSoundOn.volume },
+    handleSoundOn: { turnOn: handleSoundOn.turnOn, volume: handleSoundOn.volume },
+    lightThemeOn: lightTheme,
   };
 };
 
@@ -28,7 +35,8 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
       dispatch(updateSoundVolume(bgSoundVolume, handleSoundVolume)),
     soundMute: (bgSoundOn: boolean, handleSoundOn: boolean) =>
       dispatch(soundMute(bgSoundOn, handleSoundOn)),
-    generateNewGame: (initialMatrix: number[][]) => dispatch(generateNewGame(initialMatrix)),
+    generateNewGame: (initialMatrix: number[][], startTime: Date) =>
+      dispatch(generateNewGame(initialMatrix, startTime)),
   };
 };
 
