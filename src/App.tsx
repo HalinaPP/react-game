@@ -12,6 +12,9 @@ export const App = () => {
   useEffect(() => {
     initLocalStarage();
     document.addEventListener('keydown', handleKeyPress);
+    return () => {
+      document.removeEventListener('keydown', handleKeyPress);
+    };
   }, []);
 
   return (

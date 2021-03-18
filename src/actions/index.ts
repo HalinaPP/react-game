@@ -30,9 +30,9 @@ export const updateSoundVolume = (bgSoundVolume: number, handleSoundVolume: numb
   payload: { bgSoundVolume: bgSoundVolume, handleSoundVolume: handleSoundVolume },
 });
 
-export const generateNewGame = (initialMatrix: number[][], startTime:Date) => ({
+export const generateNewGame = (initialMatrix: number[][], startTime: Date) => ({
   type: ACTIONS.newGame,
-  payload: { initialMatrix, startTime},
+  payload: { initialMatrix, startTime },
 });
 
 export const clearField = () => ({

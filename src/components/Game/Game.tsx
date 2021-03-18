@@ -34,7 +34,7 @@ const Game: FC<GameProps> = ({
   useEffect(() => {
     audioEl?.pause();
     setAudioEl(playSound(bgSoundOn, SOUNDS.bg, bgSoundVolume, true));
-    return function () {
+    return () => {
       audioEl?.pause();
     };
   }, []);
@@ -103,7 +103,7 @@ const Game: FC<GameProps> = ({
   if (initialMatrix.length < 1) {
     return null;
   }
-  
+
   return (
     <aside className="game">
       <div id="fs-container">

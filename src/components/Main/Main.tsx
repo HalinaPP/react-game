@@ -1,4 +1,3 @@
-import './styles.scss';
 import React, { FC } from 'react';
 import { MainProps } from './Main.model';
 import { ModalContainer } from '@/containers/ModalContainer';

@@ -1,5 +1,4 @@
 import React, { FC, useState, useEffect, useCallback } from 'react';
-import './styles.scss';
 import { FieldItemProps } from '@components/FieldItem/FieldItem.model';
 import { size } from '@/constants/constants';
 
@@ -33,7 +32,7 @@ const FieldItem: FC<FieldItemProps> = ({
     onMoveDone(Number(fieldValue));
   }, [fieldValue]);
 
-  const onCellChange = ({ target }: React.ChangeEvent<HTMLInputElement>):void => {
+  const onCellChange = ({ target }: React.ChangeEvent<HTMLInputElement>): void => {
     if ((Number(target.value) <= size * size && Number(target.value) >= 1) || target.value === '') {
       inputRef.current!.value = target.value;
       setFieldValue(target.value);

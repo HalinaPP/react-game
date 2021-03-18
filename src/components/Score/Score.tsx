@@ -4,9 +4,8 @@ import { ScoreProps } from './Score.model';
 import { scoreUserData } from '@/types';
 import { SCORE_INFO } from '@/constants/text';
 
-
 const Score: FC<ScoreProps> = ({ score }) => {
-  const {userName, moves,time,level} = SCORE_INFO;
+  const { userName, moves, time, level } = SCORE_INFO;
 
   const getScoreItems = (currScore: scoreUserData[]) => {
     return (

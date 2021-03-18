@@ -13,7 +13,6 @@ const Field: FC<FieldProps> = ({
   matrixHistory,
   moveDone,
 }) => {
-
   const getCells = (
     init: number[][],
     matrix: number[][],
@@ -27,8 +26,8 @@ const Field: FC<FieldProps> = ({
       return (
         <div className="row" key={rowIndex}>
           {row.map((curr, colIndex) => {
-            const initCellValue= init[rowIndex][colIndex];
-            
+            const initCellValue = init[rowIndex][colIndex];
+
             return (
               <FieldItem
                 key={`${rowIndex}${colIndex}`}

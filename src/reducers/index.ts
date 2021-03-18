@@ -55,14 +55,6 @@ const initialState: StateModel = {
   lightTheme: true,
 };
 
-Object.entries(initialState).forEach(item => {
-  //const el = localStorage.getItem(item[0]);
-
- // if (el !== null && el !== '') {
-    //initialState[item[0]] = JSON.parse(el);
-  //}
-});
-
 initialState.theme = initialState.lightTheme ? themes.light : themes.dark;
 
 export const reducer = (state = initialState, action: any): StateModel => {
