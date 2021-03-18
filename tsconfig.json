@@ -1,0 +1,24 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "baseUrl": "src",
+    "typeRoots": [
+      "./node_modules/@types",
+      "./src/types"
+    ],
+    "paths": {
+      "@components/*": [
+        "./components/*"
+      ],
+      "@/*": [
+        "./*"
+      ]
+    },
+    "outDir": "./build/",
+    "rootDir": "./",
+    "module": "CommonJS",
+    "target": "ES6",
+    "jsx": "react",
+    "jsxFactory": "React.createElement",
+  }
+}

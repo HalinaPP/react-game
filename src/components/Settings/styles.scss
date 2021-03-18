@@ -1,0 +1,59 @@
+@import '@/style.scss';
+
+.settings {
+  @include flex(column);
+
+  .settings_wrapper {
+    width: 80%;
+    margin: 0rem auto;
+    @include flex(column, flex-start);
+    text-align: left;
+  }
+
+  legend {
+    font-size: 3rem;
+    margin: 2rem -1rem 0;
+  }
+  .form-group {
+    margin: 0rem 2rem;
+    .sound {
+      @include flex;
+      align-items: center;
+      column-gap: 2rem;
+    }
+  }
+  fieldset.form-group {
+    margin: 2rem 0rem;
+  }
+  .custom-control-label::before,
+  .custom-control-label::after {
+    width: 2rem;
+    height: 2rem;
+    left: -2.5rem;
+    top: 0.5rem;
+    border-radius: 1.5rem;
+  }
+  .settings .custom-switch .custom-control-label::after {
+    left: -5rem;
+  }
+  .custom-switch .custom-control-label::before,
+  .custom-switch .custom-control-label::after {
+    left: -5.5rem;
+    width: 5rem;
+  }
+  .custom-switch .custom-control-label::after {
+    width: 1.9rem;
+    height: 1.9rem;
+    left: -4.5rem;
+  }
+  .custom-control-label {
+    left: 2.5rem;
+  }
+
+  .theme-pad {
+    padding-right: 5rem;
+  }
+}
+.switch-theme {
+  padding-left: 0rem;
+}

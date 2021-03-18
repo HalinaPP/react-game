@@ -1,0 +1,79 @@
+$sky: #bee5eb;
+$yellow: #ffeeba;
+$coral: #f5c6cb;
+$lilac: #ccccff;
+$white: #fff;
+$mint: #c3e6cb;
+$blue: #6ccae4;
+$pink: #e1c1d6;
+$orange: #ffba74;
+
+.field {
+  .row {
+    margin: 0;
+    &:last-child .col {
+      border-bottom-width: 1px;
+    }
+  }
+
+  .col {
+    width: 5rem;
+    height: 5rem;
+    text-align: center;
+    padding: 2rem 0;
+    border-color: #929eaa;
+    border-style: solid;
+    border-width: 1px 0 0 1px;
+
+    &:last-child {
+      border-right-width: 1px;
+    }
+
+    &.fixed {
+      font-weight: bold;
+      color: #0a7f92;
+      font-size: 2.2rem;
+    }
+
+    &.col_not-active {
+      font-weight: bold;
+      color: rgb(83, 82, 82);
+    }
+    &.block_right-border {
+      border-right-width: 0.2rem;
+    }
+    &.block_bottom-border {
+      border-bottom-width: 0.2rem;
+    }
+
+    &.col_color-bg {
+      &.bg-1 {
+        background-color: $sky;
+      }
+      &.bg-2 {
+        background-color: $yellow;
+      }
+      &.bg-3 {
+        background-color: $coral;
+      }
+      &.bg-4 {
+        background-color: $lilac;
+      }
+      &.bg-5 {
+        background-color: $white;
+      }
+      &.bg-6 {
+        background-color: $mint;
+      }
+      &.bg-7 {
+        background-color: $blue;
+      }
+      &.bg-8 {
+        background-color: $pink;
+      }
+      &.bg-9 {
+        background-color: $orange;
+      }
+    }
+  }
+}

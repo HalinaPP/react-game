@@ -1,0 +1,64 @@
+@import '@/style.scss';
+
+.game-wrap {
+  @include flex(column);
+  row-gap: 2rem;
+}
+
+.game-info {
+  @include flex(row, space-between);
+  align-items: baseline;
+  &__button-container {
+    @include flex;
+    column-gap: 1rem;
+    button {
+      width: 8rem;
+    }
+  }
+}
+
+.checkMessage-fullscreen {
+  font-size: 2.2rem;
+  display: none;
+}
+:-webkit-full-screen .game-wrap {
+  max-width: 80rem;
+  height: 100vh;
+  margin: 0 auto;
+}
+
+:-webkit-full-screen {
+  background: white;
+}
+
+:-moz-full-screen {
+  background: white;
+}
+
+:-webkit-full-screen#game-container.fs_section {
+  width: 100%;
+  left: 0;
+  top: 0;
+}
+
+:-moz-full-screen#game-container.fs_section {
+  width: 100%;
+  left: 0;
+}
+
+:-webkit-full-screen .field .col {
+  height: unset;
+}
+:-webkit-full-screen .checkMessage-fullscreen {
+  button {
+    display: none;
+  }
+  &.alert {
+    display: block;
+    padding-left: 4rem;
+    max-width: 25rem;
+    button {
+      display: block;
+    }
+  }
+}

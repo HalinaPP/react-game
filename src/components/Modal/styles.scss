@@ -1,0 +1,36 @@
+.card-header {
+  font-size: 3rem;
+}
+.modal {
+  &-dialog {
+    width: 48rem;
+    max-width: 80%;
+  }
+
+  &-content {
+    text-align: center;
+    font-size: 2.5rem;
+  }
+
+  &-footer {
+    display: flex;
+    justify-content: center;
+
+    button {
+      width: 10rem;
+    }
+  }
+}
+@media screen and (max-width: 800px) {
+  .modal-dialog-centered {
+    justify-content: center;
+  }
+  .modal-content {
+    overflow-x: hidden;
+    overflow-y: auto;
+    max-height: 100vh;
+  }
+  .modal-dialog {
+    width: 48rem;
+  }
+}

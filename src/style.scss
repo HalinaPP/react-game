@@ -1,0 +1,65 @@
+@mixin flex($direction: row, $justify: center, $align: center) {
+  display: flex;
+  flex-direction: $direction;
+  justify-content: $justify;
+  align-content: $align;
+}
+
+html {
+  font-size: 10px;
+}
+
+body {
+  font-size: 2rem;
+}
+a {
+  color: #b1b0b0;
+}
+.btn {
+  font-size: 2rem;
+  &:hover {
+    transform: scale(1.2, 1.2);
+  }
+}
+
+button {
+  cursor: pointer;
+}
+
+main {
+  height: calc(100vh - 8rem);
+  @include flex;
+  column-gap: 10rem;
+
+  aside {
+    @include flex;
+  }
+
+  .game {
+    @include flex(column);
+    row-gap: 3rem;
+  }
+}
+
+footer {
+  @include flex;
+  column-gap: 3rem;
+  padding: 2rem;
+
+  img {
+    width: 10rem;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  main {
+    margin-top: 5rem;
+    height: 100%;
+    flex-direction: column;
+    align-items: center;
+    row-gap: 3rem;
+  }
+  .game {
+    width: 90%;
+  }
+}
